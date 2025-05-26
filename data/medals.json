@@ -1,0 +1,128 @@
+[
+  {
+    "id": "FOCUSED_ON_VARIETY",
+    "name": "Focused on Variety",
+    "description": "Made dishes with all different ingredients",
+    "imagePath": "images/medals/medal_focused_on_variety.png"
+  },
+  {
+    "id": "NUTRITIONALLY_BALANCED",
+    "name": "Nutritionally Balanced",
+    "description": "Created a balanced meal with both proteins and vitamins",
+    "imagePath": "images/medals/medal_nutritionally_balanced.png"
+  },
+  {
+    "id": "BODY_BUILDER",
+    "name": "Body Builder",
+    "description": "Focused purely on protein-rich foods",
+    "imagePath": "images/medals/medal_body_builder.png"
+  },
+  {
+    "id": "HEALTHY_FLOW",
+    "name": "Healthy Flow",
+    "description": "Chose only vitamin-rich, healthy ingredients",
+    "imagePath": "images/medals/medal_super_healthy.png"
+  },
+  {
+    "id": "PASTA_MAESTRO",
+    "name": "Pasta Maestro",
+    "description": "Mastered the art of pasta making",
+    "imagePath": "images/medals/medal_pasta_maestro.png"
+  },
+  {
+    "id": "SUSHI_CHEF",
+    "name": "Sushi Chef",
+    "description": "Demonstrated excellent sushi preparation skills",
+    "imagePath": "images/medals/medal_sushi_chef.png"
+  },
+  {
+    "id": "SANDWICH_EARL",
+    "name": "Sandwich Earl",
+    "description": "Became a sandwich crafting expert",
+    "imagePath": "images/medals/medal_sandwich_earl.png"
+  },
+  {
+    "id": "TACO_ESTETA",
+    "name": "Taco Esteta",
+    "description": "Showed artistic flair in taco creation",
+    "imagePath": "images/medals/medal_taco_esteta.png"
+  },
+  {
+    "id": "CURRY_MAHARAJA",
+    "name": "Curry Maharaja",
+    "description": "Ruled the kingdom of curry cuisine",
+    "imagePath": "images/medals/medal_curry_maharaja.png"
+  },
+  {
+    "id": "SELECTIVE_EATER",
+    "name": "Selective Eater",
+    "description": "Stuck to your favorite dish throughout the game",
+    "imagePath": "images/medals/medal_selective_eater.png"
+  },
+  {
+    "id": "FISHERMAN",
+    "name": "Fisherman",
+    "description": "Caught all the finest seafood ingredients",
+    "imagePath": "images/medals/medal_fisherman.png"
+  },
+  {
+    "id": "FARMER",
+    "name": "Farmer",
+    "description": "Harvested the best vegetables for your dishes",
+    "imagePath": "images/medals/medal_farmer.png"
+  },
+  {
+    "id": "LIVESTOCK_FARMER",
+    "name": "Livestock Farmer",
+    "description": "Specialized in quality meat and dairy products",
+    "imagePath": "images/medals/medal_livestock_farmer.png"
+  },
+  {
+    "id": "HUMPTY_DUMPTY",
+    "name": "Humpty Dumpty",
+    "description": "Had an egg-cellent cooking session",
+    "imagePath": "images/medals/medal_humpty_dumpty.png"
+  },
+  {
+    "id": "MAES_TORO",
+    "name": "Maes Toro",
+    "description": "Mastered the art of tuna preparation",
+    "imagePath": "images/medals/medal_maes_toro.png"
+  },
+  {
+    "id": "POPEYE",
+    "name": "Popeye",
+    "description": "Powered up with nutritious spinach dishes",
+    "imagePath": "images/medals/medal_popeye.png"
+  },
+  {
+    "id": "COWBOY",
+    "name": "Cowboy",
+    "description": "Rode the range of meat-based cuisine",
+    "imagePath": "images/medals/medal_cowboy.png"
+  },
+  {
+    "id": "QUICK_DECISION_MAKER",
+    "name": "Quick Decision Maker",
+    "description": "Made lightning-fast cooking decisions",
+    "imagePath": "images/medals/medal_quick_decision_maker.png"
+  },
+  {
+    "id": "LAID_BACK_AND_STEADY",
+    "name": "Laid Back and Steady",
+    "description": "Took time to carefully craft each dish",
+    "imagePath": "images/medals/medal_laidback_and_steady.png"
+  },
+  {
+    "id": "UNIQUE_PALATE",
+    "name": "Unique Palate",
+    "description": "Experimented boldly with adventurous combinations",
+    "imagePath": "images/medals/medal_unique_palate.png"
+  },
+  {
+    "id": "REFINED_PALATE",
+    "name": "Refined Palate",
+    "description": "Achieved perfection with zero mistakes",
+    "imagePath": "images/medals/medal_refined_palate.png"
+  }
+]

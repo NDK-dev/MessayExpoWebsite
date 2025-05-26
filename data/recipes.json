@@ -1,0 +1,222 @@
+[
+  {
+    "id": 0,
+    "name": "Pasta Carbonara",
+    "description": "Creamy pasta with eggs, cheese, and pancetta",
+    "imagePath": "images/dishes/pasta_carbonara.png",
+    "category": "PASTA",
+    "necessaryIngredient": "SPAGHETTI",
+    "optionalIngredient": "EGG",
+    "farm": "LIVESTOCK",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 1,
+    "name": "Vongole Bianco",
+    "description": "Spaghetti with fresh clams in white wine sauce",
+    "imagePath": "images/dishes/vongole_bianco.png",
+    "category": "PASTA",
+    "necessaryIngredient": "SPAGHETTI",
+    "optionalIngredient": "SHELLFISH",
+    "farm": "SEAFOOD",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 2,
+    "name": "Pasta Napolitana",
+    "description": "Classic tomato pasta with fresh basil",
+    "imagePath": "images/dishes/pasta_napolitana.png",
+    "category": "PASTA",
+    "necessaryIngredient": "SPAGHETTI",
+    "optionalIngredient": "TOMATO",
+    "farm": "VEGETABLES",
+    "nutrition": ["VITAMINS"]
+  },
+  {
+    "id": 3,
+    "name": "Spinach Cream Pasta",
+    "description": "Creamy pasta with fresh spinach and herbs",
+    "imagePath": "images/dishes/spinach_cream_pasta.png",
+    "category": "PASTA",
+    "necessaryIngredient": "SPAGHETTI",
+    "optionalIngredient": "SPINACH",
+    "farm": "VEGETABLES",
+    "nutrition": ["VITAMINS"]
+  },
+  {
+    "id": 4,
+    "name": "Tuna Sushi",
+    "description": "Fresh tuna nigiri sushi with seasoned rice",
+    "imagePath": "images/dishes/tuna_sushi.png",
+    "category": "SUSHI",
+    "necessaryIngredient": "RICE",
+    "optionalIngredient": "TUNA",
+    "farm": "SEAFOOD",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 5,
+    "name": "Shrimp Sushi",
+    "description": "Cooked shrimp nigiri with sushi rice",
+    "imagePath": "images/dishes/shrimp_sushi.png",
+    "category": "SUSHI",
+    "necessaryIngredient": "RICE",
+    "optionalIngredient": "SHRIMP",
+    "farm": "SEAFOOD",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 6,
+    "name": "Shellfish Sushi",
+    "description": "Fresh shellfish nigiri sushi",
+    "imagePath": "images/dishes/shellfish_sushi.png",
+    "category": "SUSHI",
+    "necessaryIngredient": "RICE",
+    "optionalIngredient": "SHELLFISH",
+    "farm": "SEAFOOD",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 7,
+    "name": "Egg Sushi",
+    "description": "Sweet tamago egg sushi nigiri",
+    "imagePath": "images/dishes/egg_sushi.png",
+    "category": "SUSHI",
+    "necessaryIngredient": "RICE",
+    "optionalIngredient": "EGG",
+    "farm": "LIVESTOCK",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 8,
+    "name": "BLT Sandwich",
+    "description": "Bacon, lettuce, and tomato sandwich",
+    "imagePath": "images/dishes/blt_sandwich.png",
+    "category": "SANDWICH",
+    "necessaryIngredient": "BREAD",
+    "optionalIngredient": "TOMATO",
+    "farm": "VEGETABLES",
+    "nutrition": ["VITAMINS"]
+  },
+  {
+    "id": 9,
+    "name": "Egg Sandwich",
+    "description": "Fluffy scrambled egg sandwich",
+    "imagePath": "images/dishes/egg_sandwich.png",
+    "category": "SANDWICH",
+    "necessaryIngredient": "BREAD",
+    "optionalIngredient": "EGG",
+    "farm": "LIVESTOCK",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 10,
+    "name": "Tuna Sandwich",
+    "description": "Tuna salad sandwich with fresh vegetables",
+    "imagePath": "images/dishes/tuna_sandwich.png",
+    "category": "SANDWICH",
+    "necessaryIngredient": "BREAD",
+    "optionalIngredient": "TUNA",
+    "farm": "SEAFOOD",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 11,
+    "name": "Pork Cutlet Sandwich",
+    "description": "Crispy breaded pork cutlet sandwich",
+    "imagePath": "images/dishes/pork_cutlet_sandwich.png",
+    "category": "SANDWICH",
+    "necessaryIngredient": "BREAD",
+    "optionalIngredient": "MEAT",
+    "farm": "LIVESTOCK",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 12,
+    "name": "Chili Bean Tacos",
+    "description": "Spicy bean tacos with corn tortillas",
+    "imagePath": "images/dishes/chili_bean_tacos.png",
+    "category": "TACOS",
+    "necessaryIngredient": "CORN",
+    "optionalIngredient": "BEANS",
+    "farm": "VEGETABLES",
+    "nutrition": ["PROTEIN", "VITAMINS"]
+  },
+  {
+    "id": 13,
+    "name": "Cholizo Tacos",
+    "description": "Spicy chorizo tacos with corn tortillas",
+    "imagePath": "images/dishes/cholizo_tacos.png",
+    "category": "TACOS",
+    "necessaryIngredient": "CORN",
+    "optionalIngredient": "MEAT",
+    "farm": "LIVESTOCK",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 14,
+    "name": "Tuna Tacos",
+    "description": "Fresh tuna tacos with lime and cilantro",
+    "imagePath": "images/dishes/tuna_tacos.png",
+    "category": "TACOS",
+    "necessaryIngredient": "CORN",
+    "optionalIngredient": "TUNA",
+    "farm": "SEAFOOD",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 15,
+    "name": "Vegetable Tacos",
+    "description": "Fresh spinach and vegetable tacos",
+    "imagePath": "images/dishes/vegetable_tacos.png",
+    "category": "TACOS",
+    "necessaryIngredient": "CORN",
+    "optionalIngredient": "SPINACH",
+    "farm": "VEGETABLES",
+    "nutrition": ["VITAMINS"]
+  },
+  {
+    "id": 16,
+    "name": "Shrimp Curry",
+    "description": "Spicy shrimp curry with aromatic spices",
+    "imagePath": "images/dishes/shrimp_curry.png",
+    "category": "CURRY",
+    "necessaryIngredient": "RICE",
+    "optionalIngredient": "SHRIMP",
+    "farm": "SEAFOOD",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 17,
+    "name": "Chickpea Curry",
+    "description": "Rich and hearty chickpea curry",
+    "imagePath": "images/dishes/chickpea_curry.png",
+    "category": "CURRY",
+    "necessaryIngredient": "RICE",
+    "optionalIngredient": "BEANS",
+    "farm": "VEGETABLES",
+    "nutrition": ["PROTEIN", "VITAMINS"]
+  },
+  {
+    "id": 18,
+    "name": "Butter Chicken Curry",
+    "description": "Creamy butter chicken curry with rice",
+    "imagePath": "images/dishes/butter_chicken_curry.png",
+    "category": "CURRY",
+    "necessaryIngredient": "RICE",
+    "optionalIngredient": "MEAT",
+    "farm": "LIVESTOCK",
+    "nutrition": ["PROTEIN"]
+  },
+  {
+    "id": 19,
+    "name": "Spinach Cheese Curry",
+    "description": "Creamy spinach and cheese curry",
+    "imagePath": "images/dishes/spinach_cheese_curry.png",
+    "category": "CURRY",
+    "necessaryIngredient": "RICE",
+    "optionalIngredient": "SPINACH",
+    "farm": "VEGETABLES",
+    "nutrition": ["VITAMINS"]
+  }
+]
