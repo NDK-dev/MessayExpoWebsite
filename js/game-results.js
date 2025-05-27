@@ -125,17 +125,33 @@ class GameResults {
     createDishElement(recipe) {
         const dishItem = document.createElement('div');
         dishItem.className = 'dish-item';
-
         dishItem.innerHTML = `
-            <div class="dish-circle">
-                <img src="${recipe.imagePath}" alt="${recipe.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <span class="placeholder-text" style="display: none;">Image Not Found</span>
-            </div>
-            <div class="dish-name">${recipe.name}</div>
-        `;
-
+    <img src="${recipe.imagePath}" alt="${recipe.name}" class="dish-image">
+    <div class="dish-name">${recipe.name}</div>
+  `;
+        // Add click event to show modal
+        dishItem.addEventListener('click', () => {
+            this.showRecipeModal(recipe);
+        });
         return dishItem;
     }
+
+// Show the modal popup with recipe details
+    showRecipeModal(recipe) {
+        const modal = document.getElementById('recipe-modal');
+        document.getElementById('modal-image').src = recipe.imagePath;
+        document.getElementById('modal-image').alt = recipe.name;
+        document.getElementById('modal-title').textContent = recipe.name;
+        document.getElementById('modal-description').textContent = recipe.description || "No description available.";
+        modal.classList.add('show');
+
+        // Close modal when clicking the close button or outside modal content
+        modal.querySelector('.close-btn').onclick = () => modal.classList.remove('show');
+        modal.onclick = (e) => {
+            if (e.target === modal) modal.classList.remove('show');
+        };
+    }
+
 
     // Show message when no dishes are found
     showNoDishesMessage(container) {
