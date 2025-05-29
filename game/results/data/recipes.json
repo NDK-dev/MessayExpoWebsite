@@ -181,7 +181,7 @@
     "description": "Spicy shrimp curry with aromatic spices",
     "imagePath": "images/dishes/shrimp_curry.png",
     "category": "CURRY",
-    "necessaryIngredient": "RICE",
+    "necessaryIngredient": "HOT_PEPPER",
     "optionalIngredient": "SHRIMP",
     "farm": "SEAFOOD",
     "nutrition": ["PROTEIN"]
@@ -192,7 +192,7 @@
     "description": "Rich and hearty chickpea curry",
     "imagePath": "images/dishes/chickpea_curry.png",
     "category": "CURRY",
-    "necessaryIngredient": "RICE",
+    "necessaryIngredient": "HOT_PEPPER",
     "optionalIngredient": "BEANS",
     "farm": "VEGETABLES",
     "nutrition": ["PROTEIN", "VITAMINS"]
@@ -203,7 +203,7 @@
     "description": "Creamy butter chicken curry with rice",
     "imagePath": "images/dishes/butter_chicken_curry.png",
     "category": "CURRY",
-    "necessaryIngredient": "RICE",
+    "necessaryIngredient": "HOT_PEPPER",
     "optionalIngredient": "MEAT",
     "farm": "LIVESTOCK",
     "nutrition": ["PROTEIN"]
@@ -214,7 +214,7 @@
     "description": "Creamy spinach and cheese curry",
     "imagePath": "images/dishes/spinach_cheese_curry.png",
     "category": "CURRY",
-    "necessaryIngredient": "RICE",
+    "necessaryIngredient": "HOT_PEPPER",
     "optionalIngredient": "SPINACH",
     "farm": "VEGETABLES",
     "nutrition": ["VITAMINS"]

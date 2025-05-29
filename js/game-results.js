@@ -141,13 +141,103 @@ class GameResults {
         return dishItem;
     }
 
+    // Convert ingredient names to display-friendly format
+    getIngredientDisplayName(ingredient) {
+        const displayNameMap = {
+            'SPAGHETTI': 'Spaghetti',
+            'RICE': 'Rice',
+            'BREAD': 'Bread',
+            'CORN': 'Corn',
+            'EGG': 'Egg',
+            'SHELLFISH': 'Shellfish',
+            'TOMATO': 'Tomato',
+            'SPINACH': 'Spinach',
+            'TUNA': 'Tuna',
+            'SHRIMP': 'Shrimp',
+            'MEAT': 'Meat',
+            'BEANS': 'Beans',
+            'HOT_PEPPER': 'Hot Pepper'
+        };
+
+        return displayNameMap[ingredient] || ingredient.toLowerCase().replace('_', ' ');
+    }
+
+    // Convert ingredient names to file-friendly format
+    getIngredientImagePath(ingredient) {
+        const ingredientMap = {
+            'SPAGHETTI': 'spaghetti',
+            'RICE': 'rice',
+            'BREAD': 'bread',
+            'CORN': 'corn',
+            'EGG': 'egg',
+            'SHELLFISH': 'shellfish',
+            'TOMATO': 'tomato',
+            'SPINACH': 'spinach',
+            'TUNA': 'tuna',
+            'SHRIMP': 'shrimp',
+            'MEAT': 'meat',
+            'BEANS': 'beans',
+            'HOT_PEPPER': 'hot_pepper'
+        };
+
+        const fileName = ingredientMap[ingredient] || ingredient.toLowerCase();
+        return `images/ingredients/${fileName}.png`;
+    }
+
+    // Create ingredients HTML for modal
+    createIngredientsHTML(recipe) {
+        const necessaryIngredient = recipe.necessaryIngredient;
+        const optionalIngredient = recipe.optionalIngredient;
+
+        let ingredientsHTML = '';
+
+        // Primary ingredient
+        if (necessaryIngredient) {
+            ingredientsHTML += `
+                <div class="ingredient-item">
+                    <img src="${this.getIngredientImagePath(necessaryIngredient)}" 
+                         alt="${necessaryIngredient}" 
+                         class="ingredient-image"
+                         onerror="this.style.display='none';">
+                    <div class="ingredient-label">${this.getIngredientDisplayName(necessaryIngredient)}</div>
+                </div>
+            `;
+        }
+
+        // Plus icon
+        if (necessaryIngredient && optionalIngredient) {
+            ingredientsHTML += '<div class="plus-icon">+</div>';
+        }
+
+        // Secondary ingredient
+        if (optionalIngredient) {
+            ingredientsHTML += `
+                <div class="ingredient-item">
+                    <img src="${this.getIngredientImagePath(optionalIngredient)}" 
+                         alt="${optionalIngredient}" 
+                         class="ingredient-image"
+                         onerror="this.style.display='none';">
+                    <div class="ingredient-label">${this.getIngredientDisplayName(optionalIngredient)}</div>
+                </div>
+            `;
+        }
+
+        return ingredientsHTML;
+    }
+
     // Show the modal popup with recipe details
     showRecipeModal(recipe) {
         const modal = document.getElementById('recipe-modal');
+        const modalIngredientsContainer = document.getElementById('modal-ingredients');
+
         document.getElementById('modal-image').src = recipe.imagePath;
         document.getElementById('modal-image').alt = recipe.name;
         document.getElementById('modal-title').textContent = recipe.name;
         document.getElementById('modal-description').textContent = recipe.description || "No description available.";
+
+        // Add ingredients
+        modalIngredientsContainer.innerHTML = this.createIngredientsHTML(recipe);
+
         modal.classList.add('show');
 
         // Close modal when clicking the close button or outside modal content
@@ -160,10 +250,16 @@ class GameResults {
     // Show the modal popup with medal details
     showMedalModal(medal) {
         const modal = document.getElementById('recipe-modal');
+        const modalIngredientsContainer = document.getElementById('modal-ingredients');
+
         document.getElementById('modal-image').src = medal.imagePath;
         document.getElementById('modal-image').alt = medal.name;
         document.getElementById('modal-title').textContent = medal.name;
         document.getElementById('modal-description').textContent = medal.description || "Congratulations on earning this medal!";
+
+        // Clear ingredients for medals (they don't have ingredients)
+        modalIngredientsContainer.innerHTML = '';
+
         modal.classList.add('show');
 
         // Close modal when clicking the close button or outside modal content
