@@ -18,6 +18,14 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* Remove all touch highlights on mobile */
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         body {
             font-family: 'AppleGothic', sans-serif;
@@ -194,7 +202,7 @@
             max-width: 600px;
             height: auto;
             max-height: 60vh;
-            min-height: 500px;
+            min-height: 400px;
             text-align: center;
             position: relative;
             margin: auto;
