@@ -126,17 +126,22 @@ class GameResults {
         const dishItem = document.createElement('div');
         dishItem.className = 'dish-item';
         dishItem.innerHTML = `
-    <img src="${recipe.imagePath}" alt="${recipe.name}" class="dish-image">
-    <div class="dish-name">${recipe.name}</div>
-  `;
+            <div class="dish-circle">
+                <img src="${recipe.imagePath}" alt="${recipe.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="placeholder-text" style="display: none;">Dish Image</span>
+            </div>
+            <div class="dish-name">${recipe.name}</div>
+        `;
+
         // Add click event to show modal
         dishItem.addEventListener('click', () => {
             this.showRecipeModal(recipe);
         });
+
         return dishItem;
     }
 
-// Show the modal popup with recipe details
+    // Show the modal popup with recipe details
     showRecipeModal(recipe) {
         const modal = document.getElementById('recipe-modal');
         document.getElementById('modal-image').src = recipe.imagePath;
@@ -152,6 +157,21 @@ class GameResults {
         };
     }
 
+    // Show the modal popup with medal details
+    showMedalModal(medal) {
+        const modal = document.getElementById('recipe-modal');
+        document.getElementById('modal-image').src = medal.imagePath;
+        document.getElementById('modal-image').alt = medal.name;
+        document.getElementById('modal-title').textContent = medal.name;
+        document.getElementById('modal-description').textContent = medal.description || "Congratulations on earning this medal!";
+        modal.classList.add('show');
+
+        // Close modal when clicking the close button or outside modal content
+        modal.querySelector('.close-btn').onclick = () => modal.classList.remove('show');
+        modal.onclick = (e) => {
+            if (e.target === modal) modal.classList.remove('show');
+        };
+    }
 
     // Show message when no dishes are found
     showNoDishesMessage(container) {
@@ -293,6 +313,11 @@ class GameResults {
             </div>
             <div class="medal-name">${medal.name}</div>
         `;
+
+        // Add click event to show modal for medal
+        medalItem.addEventListener('click', () => {
+            this.showMedalModal(medal);
+        });
 
         return medalItem;
     }
