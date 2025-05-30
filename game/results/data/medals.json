@@ -2,127 +2,127 @@
   {
     "id": "FOCUSED_ON_VARIETY",
     "name": "Focused on Variety",
-    "description": "Made dishes with all different ingredients",
+    "description": "So, many ingredients! Your table has become colorful!",
     "imagePath": "images/medals/medal_focused_on_variety.png"
   },
   {
     "id": "NUTRITIONALLY_BALANCED",
     "name": "Nutritionally Balanced",
-    "description": "Created a balanced meal with both proteins and vitamins",
+    "description": "Balanced meal: Carbs, Protein, and Vitamins",
     "imagePath": "images/medals/medal_nutritionally_balanced.png"
   },
   {
     "id": "BODY_BUILDER",
     "name": "Body Builder",
-    "description": "Focused purely on protein-rich foods",
+    "description": "You're swole from all that muscle food!",
     "imagePath": "images/medals/medal_body_builder.png"
   },
   {
     "id": "HEALTHY_FLOW",
     "name": "Healthy Flow",
-    "description": "Chose only vitamin-rich, healthy ingredients",
+    "description": "With all those veggies, your blood must be super smooth!",
     "imagePath": "images/medals/medal_super_healthy.png"
   },
   {
     "id": "PASTA_MAESTRO",
     "name": "Pasta Maestro",
-    "description": "Mastered the art of pasta making",
+    "description": "The paste wizard is born!",
     "imagePath": "images/medals/medal_pasta_maestro.png"
   },
   {
     "id": "SUSHI_CHEF",
     "name": "Sushi Chef",
-    "description": "Demonstrated excellent sushi preparation skills",
+    "description": "A true artisan who has mastered sushi!",
     "imagePath": "images/medals/medal_sushi_chef.png"
   },
   {
     "id": "SANDWICH_EARL",
     "name": "Sandwich Earl",
-    "description": "Became a sandwich crafting expert",
+    "description": "Even Mr. Sandwich (John Montagu) would be surprised-what a noble palate!",
     "imagePath": "images/medals/medal_sandwich_earl.png"
   },
   {
     "id": "TACO_ESTETA",
     "name": "Taco Esteta",
-    "description": "Showed artistic flair in taco creation",
+    "description": "A gourmet of tacos. You wear that sombrero well!",
     "imagePath": "images/medals/medal_taco_esteta.png"
   },
   {
     "id": "CURRY_MAHARAJA",
     "name": "Curry Maharaja",
-    "description": "Ruled the kingdom of curry cuisine",
+    "description": "You've built a kingdom of aromatic species!",
     "imagePath": "images/medals/medal_curry_maharaja.png"
   },
   {
     "id": "SELECTIVE_EATER",
     "name": "Selective Eater",
-    "description": "Stuck to your favorite dish throughout the game",
+    "description": "That dedication to single-mindedly pursuing one flavor-so admirable!",
     "imagePath": "images/medals/medal_selective_eater.png"
   },
   {
     "id": "FISHERMAN",
     "name": "Fisherman",
-    "description": "Caught all the finest seafood ingredients",
+    "description": "A true fisherman who knows all the blessings of the sea!",
     "imagePath": "images/medals/medal_fisherman.png"
   },
   {
     "id": "FARMER",
     "name": "Farmer",
-    "description": "Harvested the best vegetables for your dishes",
+    "description": "The strength of a farmer who lives with the soil has reaches your table!",
     "imagePath": "images/medals/medal_farmer.png"
   },
   {
     "id": "LIVESTOCK_FARMER",
     "name": "Livestock Farmer",
-    "description": "Specialized in quality meat and dairy products",
+    "description": "A livestock farmer raising animals with a lots of love!",
     "imagePath": "images/medals/medal_livestock_farmer.png"
   },
   {
     "id": "HUMPTY_DUMPTY",
     "name": "Humpty Dumpty",
-    "description": "Had an egg-cellent cooking session",
+    "description": "An egg lover that would surprise even the always-smiling Humpty Dumpty!",
     "imagePath": "images/medals/medal_humpty_dumpty.png"
   },
   {
     "id": "MAES_TORO",
-    "name": "Maes Toro",
-    "description": "Mastered the art of tuna preparation",
+    "name": "Maes'Toro",
+    "description": "Maes'Toro, master of tuna, wins thunderous applause again today!",
     "imagePath": "images/medals/medal_maes_toro.png"
   },
   {
     "id": "POPEYE",
     "name": "Popeye",
-    "description": "Powered up with nutritious spinach dishes",
+    "description": "Like power-packed Popeye, your nutrition is fully charged!",
     "imagePath": "images/medals/medal_popeye.png"
   },
   {
     "id": "COWBOY",
     "name": "Cowboy",
-    "description": "Rode the range of meat-based cuisine",
+    "description": "Like a cowboy riding the wilds, an adventurer in pursuit of freedom and flavor!",
     "imagePath": "images/medals/medal_cowboy.png"
   },
   {
     "id": "QUICK_DECISION_MAKER",
     "name": "Quick Decision Maker",
-    "description": "Made lightning-fast cooking decisions",
+    "description": "Amazing decision-making speed! You never hesitate, even in a pinch!",
     "imagePath": "images/medals/medal_quick_decision_maker.png"
   },
   {
     "id": "LAID_BACK_AND_STEADY",
     "name": "Laid Back and Steady",
-    "description": "Took time to carefully craft each dish",
+    "description": "Controlling life at your own pace-now that's cool!",
     "imagePath": "images/medals/medal_laidback_and_steady.png"
   },
   {
     "id": "UNIQUE_PALATE",
     "name": "Unique Palate",
-    "description": "Experimented boldly with adventurous combinations",
+    "description": "Your sense of taste is one of a kind!",
     "imagePath": "images/medals/medal_unique_palate.png"
   },
   {
     "id": "REFINED_PALATE",
     "name": "Refined Palate",
-    "description": "Achieved perfection with zero mistakes",
+    "description": "Oh, traveler with a refined palate, your tongue is truly first-class!",
     "imagePath": "images/medals/medal_refined_palate.png"
   }
 ]

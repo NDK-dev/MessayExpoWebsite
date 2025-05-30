@@ -2,7 +2,7 @@
   {
     "id": 0,
     "name": "Pasta Carbonara",
-    "description": "Creamy pasta with eggs, cheese, and pancetta",
+    "description": "A rich, creamy pasta with bacon and cheese.",
     "imagePath": "images/dishes/pasta_carbonara.png",
     "category": "PASTA",
     "necessaryIngredient": "SPAGHETTI",
@@ -13,7 +13,7 @@
   {
     "id": 1,
     "name": "Vongole Bianco",
-    "description": "Spaghetti with fresh clams in white wine sauce",
+    "description": "A simple pasta bursting with the flavor of clams.",
     "imagePath": "images/dishes/vongole_bianco.png",
     "category": "PASTA",
     "necessaryIngredient": "SPAGHETTI",
@@ -24,7 +24,7 @@
   {
     "id": 2,
     "name": "Pasta Napolitana",
-    "description": "Classic tomato pasta with fresh basil",
+    "description": "A pasta with the perfect bland of tomato sweetness and sausage flavor.",
     "imagePath": "images/dishes/pasta_napolitana.png",
     "category": "PASTA",
     "necessaryIngredient": "SPAGHETTI",
@@ -35,7 +35,7 @@
   {
     "id": 3,
     "name": "Spinach Cream Pasta",
-    "description": "Creamy pasta with fresh spinach and herbs",
+    "description": "A creamy pasta with the aroma of spinach and bacon.",
     "imagePath": "images/dishes/spinach_cream_pasta.png",
     "category": "PASTA",
     "necessaryIngredient": "SPAGHETTI",
@@ -46,7 +46,7 @@
   {
     "id": 4,
     "name": "Tuna Sushi",
-    "description": "Fresh tuna nigiri sushi with seasoned rice",
+    "description": "Sushi made with fresh tuna.",
     "imagePath": "images/dishes/tuna_sushi.png",
     "category": "SUSHI",
     "necessaryIngredient": "RICE",
@@ -57,7 +57,7 @@
   {
     "id": 5,
     "name": "Shrimp Sushi",
-    "description": "Cooked shrimp nigiri with sushi rice",
+    "description": "Sushi made with plump shrimp.",
     "imagePath": "images/dishes/shrimp_sushi.png",
     "category": "SUSHI",
     "necessaryIngredient": "RICE",
@@ -68,7 +68,7 @@
   {
     "id": 6,
     "name": "Shellfish Sushi",
-    "description": "Fresh shellfish nigiri sushi",
+    "description": "Sushi made with fresh, crunchy shellfish.",
     "imagePath": "images/dishes/shellfish_sushi.png",
     "category": "SUSHI",
     "necessaryIngredient": "RICE",
@@ -79,7 +79,7 @@
   {
     "id": 7,
     "name": "Egg Sushi",
-    "description": "Sweet tamago egg sushi nigiri",
+    "description": "Sushi made with fluffy, slightly sweet omelet.",
     "imagePath": "images/dishes/egg_sushi.png",
     "category": "SUSHI",
     "necessaryIngredient": "RICE",
@@ -90,7 +90,7 @@
   {
     "id": 8,
     "name": "BLT Sandwich",
-    "description": "Bacon, lettuce, and tomato sandwich",
+    "description": "A luxurious sandwich with bacon, lettuce, and tomato.",
     "imagePath": "images/dishes/blt_sandwich.png",
     "category": "SANDWICH",
     "necessaryIngredient": "BREAD",
@@ -101,7 +101,7 @@
   {
     "id": 9,
     "name": "Egg Sandwich",
-    "description": "Fluffy scrambled egg sandwich",
+    "description": "A sandwich with fluffy, creamy egg filling.",
     "imagePath": "images/dishes/egg_sandwich.png",
     "category": "SANDWICH",
     "necessaryIngredient": "BREAD",
@@ -112,7 +112,7 @@
   {
     "id": 10,
     "name": "Tuna Sandwich",
-    "description": "Tuna salad sandwich with fresh vegetables",
+    "description": "A sandwich with rich, creamy tuna filling.",
     "imagePath": "images/dishes/tuna_sandwich.png",
     "category": "SANDWICH",
     "necessaryIngredient": "BREAD",
@@ -123,7 +123,7 @@
   {
     "id": 11,
     "name": "Pork Cutlet Sandwich",
-    "description": "Crispy breaded pork cutlet sandwich",
+    "description": "A sandwich with a crispy, extra-thick pork cutlet.",
     "imagePath": "images/dishes/pork_cutlet_sandwich.png",
     "category": "SANDWICH",
     "necessaryIngredient": "BREAD",
@@ -134,7 +134,7 @@
   {
     "id": 12,
     "name": "Chili Bean Tacos",
-    "description": "Spicy bean tacos with corn tortillas",
+    "description": "A taco packed with the rich flavor of beans.",
     "imagePath": "images/dishes/chili_bean_tacos.png",
     "category": "TACOS",
     "necessaryIngredient": "CORN",
@@ -145,7 +145,7 @@
   {
     "id": 13,
     "name": "Cholizo Tacos",
-    "description": "Spicy chorizo tacos with corn tortillas",
+    "description": "A spicy taco with cholizo sausage.",
     "imagePath": "images/dishes/cholizo_tacos.png",
     "category": "TACOS",
     "necessaryIngredient": "CORN",
@@ -156,7 +156,7 @@
   {
     "id": 14,
     "name": "Tuna Tacos",
-    "description": "Fresh tuna tacos with lime and cilantro",
+    "description": "A taco with the perfect match of tuna and avocado.",
     "imagePath": "images/dishes/tuna_tacos.png",
     "category": "TACOS",
     "necessaryIngredient": "CORN",
@@ -167,7 +167,7 @@
   {
     "id": 15,
     "name": "Vegetable Tacos",
-    "description": "Fresh spinach and vegetable tacos",
+    "description": "A healthy taco with spinach dough and plenty of vegetables.",
     "imagePath": "images/dishes/vegetable_tacos.png",
     "category": "TACOS",
     "necessaryIngredient": "CORN",
@@ -178,7 +178,7 @@
   {
     "id": 16,
     "name": "Shrimp Curry",
-    "description": "Spicy shrimp curry with aromatic spices",
+    "description": "A curry with the rich flavor of shrimp.",
     "imagePath": "images/dishes/shrimp_curry.png",
     "category": "CURRY",
     "necessaryIngredient": "HOT_PEPPER",
@@ -189,7 +189,7 @@
   {
     "id": 17,
     "name": "Chickpea Curry",
-    "description": "Rich and hearty chickpea curry",
+    "description": "Rich and flavorful spicy chickpea curry.",
     "imagePath": "images/dishes/chickpea_curry.png",
     "category": "CURRY",
     "necessaryIngredient": "HOT_PEPPER",
@@ -200,7 +200,7 @@
   {
     "id": 18,
     "name": "Butter Chicken Curry",
-    "description": "Creamy butter chicken curry with rice",
+    "description": "A fragrant curry with the aroma of butter.",
     "imagePath": "images/dishes/butter_chicken_curry.png",
     "category": "CURRY",
     "necessaryIngredient": "HOT_PEPPER",
@@ -211,7 +211,7 @@
   {
     "id": 19,
     "name": "Spinach Cheese Curry",
-    "description": "Creamy spinach and cheese curry",
+    "description": "An Indian-style curry with the rich aroma of spinach and cheese.",
     "imagePath": "images/dishes/spinach_cheese_curry.png",
     "category": "CURRY",
     "necessaryIngredient": "HOT_PEPPER",
