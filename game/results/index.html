@@ -186,22 +186,45 @@
             z-index: 1000;
             left: 0; top: 0;
             width: 100vw; height: 100vh;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             justify-content: center;
             align-items: center;
+            animation: modalFadeIn 0.3s ease-out;
         }
         .modal.show {
             display: flex;
         }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                backdrop-filter: blur(0px);
+                -webkit-backdrop-filter: blur(0px);
+            }
+            to {
+                opacity: 1;
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+            }
+        }
+
         .modal-content {
-            background: #fff;
-            border-radius: 18px;
-            padding: 24px 20px 20px 20px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 32px 24px 24px 24px;
+            box-shadow:
+                    0 8px 32px rgba(0, 0, 0, 0.15),
+                    0 4px 16px rgba(0, 0, 0, 0.1),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.8);
             width: 90vw;
             max-width: 600px;
             height: auto;
-            max-height: 60vh;
+            max-height: 70vh;
             min-height: 400px;
             text-align: center;
             position: relative;
@@ -211,15 +234,46 @@
             justify-content: flex-start;
             align-items: center;
             overflow-y: auto;
+            animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: scale(0.8) translateY(40px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
         .close-btn {
             position: absolute;
             right: 16px;
-            top: 10px;
-            font-size: 2em;
-            color: #888;
+            top: 12px;
+            width: 32px;
+            height: 32px;
+            font-size: 18px;
+            color: rgba(0, 0, 0, 0.7);
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.2s ease;
         }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.8);
+            color: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
         #modal-image {
             width: 80%;
             height: 30vh;
@@ -228,16 +282,24 @@
             display: block;
             border-radius: 10px;
             object-fit: contain;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
+
         #modal-title {
             margin: 10px 0 5px 0;
-            font-size: 1.4em;
+            font-size: 1.5em;
             font-weight: bold;
+            color: rgba(0, 0, 0, 0.9);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
         }
+
         #modal-description {
             font-size: 1em;
             margin: 0;
-            color: #444;
+            color: rgba(0, 0, 0, 0.8);
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
         }
 
         /* Ingredients section in modal */
@@ -254,24 +316,41 @@
             flex-direction: column;
             align-items: center;
             gap: 8px;
+            padding: 8px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.2s ease;
         }
+
+        .ingredient-item:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
         .ingredient-image {
             width: 60px;
             height: 60px;
-            border-radius: 10px;
-            border: 2px solid #ddd;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
             object-fit: cover;
-            background: #f8f9fa;
+            background: rgba(248, 249, 250, 0.8);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         .ingredient-label {
             font-size: 0.85em;
-            color: #666;
+            color: rgba(0, 0, 0, 0.8);
             text-transform: capitalize;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+            font-weight: 500;
         }
         .plus-icon {
             font-size: 1.5em;
-            color: #888;
+            color: rgba(0, 0, 0, 0.6);
             margin: 0 5px;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
         }
 
         /* Medals Section */
@@ -465,6 +544,27 @@
             .celebration-button:hover {
                 transform: scale(1.05);
             }
+            .modal-content {
+                width: 95vw;
+                max-height: 80vh;
+                padding: 24px 16px 16px 16px;
+            }
+        }
+
+        /* Custom scrollbar for modal content */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
@@ -595,13 +695,35 @@
     document.querySelector('.celebration-button').addEventListener('click', () => {
         playSound();
     });
+
+    // Demo function to show modal (you can remove this)
+    function showModal() {
+        const modal = document.getElementById('recipe-modal');
+        document.getElementById('modal-title').textContent = 'Delicious Recipe';
+        document.getElementById('modal-description').textContent = 'This is a sample description of an amazing dish with glassmorphic modal effect!';
+        document.getElementById('modal-image').src = 'https://via.placeholder.com/400x250/ff6b6b/white?text=Sample+Dish';
+        modal.classList.add('show');
+    }
+
+    // Add click event to show modal (demo purposes)
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add demo click event to dishes section
+        setTimeout(() => {
+            const dishesSection = document.querySelector('.dishes-section');
+            if (dishesSection) {
+                dishesSection.style.cursor = 'pointer';
+                dishesSection.addEventListener('click', showModal);
+                dishesSection.title = 'Click to see glassmorphic modal demo';
+            }
+        }, 1000);
+    });
 </script>
 <script src="../../js/game-results.js"></script>
 
 <!-- Recipe Popup Modal -->
 <div id="recipe-modal" class="modal">
     <div class="modal-content">
-        <span class="close-btn">&times;</span>
+        <span class="close-btn" onclick="document.getElementById('recipe-modal').classList.remove('show')">&times;</span>
         <img id="modal-image" src="" alt="" />
         <h2 id="modal-title"></h2>
         <div id="modal-ingredients" class="modal-ingredients"></div>
