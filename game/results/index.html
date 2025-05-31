@@ -695,28 +695,6 @@
     document.querySelector('.celebration-button').addEventListener('click', () => {
         playSound();
     });
-
-    // Demo function to show modal (you can remove this)
-    function showModal() {
-        const modal = document.getElementById('recipe-modal');
-        document.getElementById('modal-title').textContent = 'Delicious Recipe';
-        document.getElementById('modal-description').textContent = 'This is a sample description of an amazing dish with glassmorphic modal effect!';
-        document.getElementById('modal-image').src = 'https://via.placeholder.com/400x250/ff6b6b/white?text=Sample+Dish';
-        modal.classList.add('show');
-    }
-
-    // Add click event to show modal (demo purposes)
-    document.addEventListener('DOMContentLoaded', function() {
-        // Add demo click event to dishes section
-        setTimeout(() => {
-            const dishesSection = document.querySelector('.dishes-section');
-            if (dishesSection) {
-                dishesSection.style.cursor = 'pointer';
-                dishesSection.addEventListener('click', showModal);
-                dishesSection.title = 'Click to see glassmorphic modal demo';
-            }
-        }, 1000);
-    });
 </script>
 <script src="../../js/game-results.js"></script>
 
