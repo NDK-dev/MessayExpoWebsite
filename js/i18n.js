@@ -467,7 +467,7 @@ class I18nManager {
         "description": "Discover how Messay can empower communication for you or your loved ones!",
         "form": {
           "email_placeholder": "Enter your email",
-          "submit": "Submit",
+          "Go to Contact Form": "Go to Contact Form",
           "success": "Thank you! Your submission has been received!",
           "error": "Oops! Something went wrong while submitting the form.",
           "recaptcha_error": "Please complete the reCAPTCHA verification."
@@ -948,7 +948,7 @@ class I18nManager {
         "description": "Messayをはじめとする弊社のサービスについて、なんでもお問い合わせください！",
         "form": {
           "email_placeholder": "メールアドレスを入力してください",
-          "submit": "送信",
+          "Go to Contact Form": "お問い合わせフォームへ",
           "success": "ありがとうございます！お問い合わせを受け付けました！",
           "error": "申し訳ありません！フォームの送信中にエラーが発生しました。",
           "recaptcha_error": "reCAPTCHA認証を完了してください。"
