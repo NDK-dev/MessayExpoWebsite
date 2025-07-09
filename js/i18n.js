@@ -775,7 +775,7 @@ class I18nManager {
         "error": "Error",
         "close": "Close",
         "open": "Open",
-        "submit": "Submit",
+        "Go to Contact Form": "Go to Contact Form",
         "cancel": "Cancel"
       },
       "validation": {
@@ -1261,7 +1261,7 @@ class I18nManager {
         "error": "エラー",
         "close": "閉じる",
         "open": "開く",
-        "submit": "送信",
+        "Go to Contact Form": "お問い合わせフォームへ",
         "cancel": "キャンセル"
       },
       "validation": {
