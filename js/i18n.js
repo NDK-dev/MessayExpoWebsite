@@ -486,7 +486,7 @@ class I18nManager {
           "expo": "EXPO 2025",
           "apps": "Our Apps"
         },
-        "copyright": "NDK Ink. © 2025 All Rights Reserved."
+        "copyright": "Nissin Denki Kohsaku Co., Ltd.© 2025 All Rights Reserved"
       },
       "game": {
         "meta": {
@@ -817,8 +817,8 @@ class I18nManager {
           "title": "視線で<span class=\"italics\">話す</span>",
           "description": "Messayは視線と顔の動きだけで操作できるアプリです。視線と顔の動きで選択・入力されたメッセージを合成音声で読み上げます。",
           "popup": {
-            "title": "視線で",
-            "subtitle": "話す"
+            "title": "Speak",
+            "subtitle": "by Sight"
           }
         },
         "mezic": {
@@ -826,8 +826,8 @@ class I18nManager {
           "title": "ハンズフリーで<span class=\"italics\">スマホを操作</span>",
           "description": "Mezicは視線と顔の動きを使ってスマートフォン全体を操作できるようにするアクセシビリティツールのアプリです。",
           "popup": {
-            "title": "手を使わず",
-            "subtitle": "スワイプ"
+            "title": "Smart",
+            "subtitle": "Swipe"
           }
         },
         "mdk": {
@@ -835,8 +835,8 @@ class I18nManager {
           "title": "MESSAY <span class=\"italics\">開発キット</span>",
           "description": "Messay Development Kit（MDK）は、Messayで使用される視線・顔トラッキングを利用した操作を、独自のアプリに簡単に統合するためのSDKです。",
           "popup": {
-            "title": "簡単に",
-            "subtitle": "統合"
+            "title": "Easy",
+            "subtitle": "Integration"
           }
         }
       },
@@ -848,8 +848,8 @@ class I18nManager {
         },
         "countries": {
           "prefix": "",
-          "number": "170以上",
-          "suffix": "の国でダウンロード"
+          "number": "170ヶ国",
+          "suffix": "以上でダウンロード"
         },
         "retention": {
           "prefix": "顧客維持率",
@@ -859,7 +859,7 @@ class I18nManager {
       },
       "achievements": {
         "heading": "実績",
-        "title": "掲載実績...",
+        "title": "出展実績",
         "description": "CESやVivaTechなどの主要な技術展示会に参加し、革新的なアクセシビリティ技術として認められました。",
         "ces": {
           "title": "CES 2024で紹介",
@@ -948,7 +948,7 @@ class I18nManager {
         "description": "Messayをはじめとする弊社のサービスについて、なんでもお問い合わせください！",
         "form": {
           "email_placeholder": "メールアドレスを入力してください",
-          "Go to Contact Form": "お問い合わせフォームへ",
+          "Go to Contact Form": "お問い合わせページへ移動",
           "success": "ありがとうございます！お問い合わせを受け付けました！",
           "error": "申し訳ありません！フォームの送信中にエラーが発生しました。",
           "recaptcha_error": "reCAPTCHA認証を完了してください。"
@@ -967,35 +967,35 @@ class I18nManager {
           "expo": "万博 2025",
           "apps": "私たちのアプリ"
         },
-        "copyright": "NDK株式会社 © 2025 All Rights Reserved."
+        "copyright": "日新電機工作株式会社 © 2025 All Rights Reserved."
       },
       "game": {
         "meta": {
-          "title": "Messay 視線でお買い物ゲーム",
-          "description": "大阪関西万博2025で、視線トラッキング技術を使った未来のショッピングを体験しましょう！"
+          "title": "Messay Eye Shopping Game",
+          "description": "大阪万博で、視線トラッキング技術を使った未来のお買い物を体験しましょう！"
         },
         "hero": {
-          "subtitle": "未来の技術",
-          "title": "視線でショッピング",
+          "subtitle": "万博展示",
+          "title": "視線でお買い物ゲーム",
           "intro": {
-            "title": "お買い物の未来を垣間見ましょう",
-            "description": "目の動きはまだまだ活用されていない情報源であり、体が動かせない患者様でも目だけは動かし続けられると言われています。従来の視線トラッキングには高価な機材が必要でしたが、2050年にはカメラを内蔵するあらゆるデバイスで視線トラッキングが利用可能に。体が動かせない方のコミュニケーション手段としてはもちろん、手や音声での操作と同じ感覚で、視線での操作を日常生活の中で当たり前に使っているかもしれません。本展示では、視線での操作が日常化した未来を体験できる「視線でお買い物ゲーム」をご用意しています。"
+            "title": "お買い物の未来を体験",
+            "description": "視線での操作が日常化した未来を体験「視線でお買い物ゲーム」。体が動かなくても、目は動く──そこに眠る力が、私たちの未来を変えるかもしれません。かつては高価な機材が必要だった視線トラッキングも、2050年には手や声と並ぶ当たり前の操作手段に。この展示では、そんな未来を垣間見ることができます。"
           }
         },
         "howToOperate": {
-          "title": "操作方法は？",
+          "title": "操作方法",
           "steps": {
             "choose": {
-              "title": "選択",
-              "description": "目を動かすと、カーソルが視線に追従します。"
+              "title": "カーソル操作",
+              "description": "目を動かすと、カーソルが視線に追従します。（顔は動かさない。）"
             },
             "select": {
               "title": "決定",
-              "description": "まばたきでアイテムを選択します。"
+              "description": "ゆっくりとまばたきしてアイテムを決定します。"
             },
             "nextPage": {
               "title": "ページめくり",
-              "description": "目を右(左)に大きく動かすと、動かした方向のページに移動します。"
+              "description": "右(左)の画面外に目を大きく動かすと、動かした方向のページに移動します。"
             }
           }
         },
@@ -1261,7 +1261,7 @@ class I18nManager {
         "error": "エラー",
         "close": "閉じる",
         "open": "開く",
-        "Go to Contact Form": "お問い合わせフォームへ",
+        "Go to Contact Form": "お問い合わせページへ移動",
         "cancel": "キャンセル"
       },
       "validation": {
