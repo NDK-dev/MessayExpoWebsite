@@ -523,7 +523,7 @@ class I18nManager {
           "list": [
             "🎯 Choose ingredients for 3 dishes.",
             "🎯 Each dish consists of 2 ingredients.",
-            "🎯 One ingredient is main and another one is optional.",
+            "🎯 Select the correct main ingredient.",
             "🎯 Win medals based on the dishes you make."
           ]
         },
@@ -1004,7 +1004,7 @@ class I18nManager {
           "list": [
             "🎯 3つの料理のための食材を選んでいただきます。",
             "🎯 各料理は2つの食材で構成されます。",
-            "🎯 1つは必須の食材、もう1つはお好みの食材です。",
+            "🎯 正しい主原料を選ぶ ",
             "🎯 つくった料理に基づいて、メダルを獲得できます。"
           ]
         },
