@@ -4049,23 +4049,23 @@ blockquote {
   border: 1px #000;
   border-radius: 30px;
   flex-flow: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   width: 100%;
   max-width: 950px;
-  margin: auto auto 17px;
+  margin: auto auto auto;
   padding-top: 20px;
   padding-bottom: 20px;
   display: flex;
-  box-shadow: 0 -1px 12px 1px #0003;
 }
 
 .lynx-block-center {
   text-align: center;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   display: flex;
+  align-self: center;
 }
 
 .lynx-heading {
@@ -4098,6 +4098,56 @@ blockquote {
   margin-top: 14px;
 }
 
+.ingredients-selection-grid {
+  display: grid; /* Makes the children grid items */
+  grid-template-columns: 1fr 1fr; /* Creates two columns of equal width */
+  grid-column-gap: 20px; /* Adds space between the columns (adjust as needed) */
+  justify-items: center; /* Centers each image within its own grid cell horizontally */
+  align-items: center; /* Aligns each image to the top of its grid cell vertically */
+  width: auto;
+  height: auto;
+  justify-content: center;
+  justify-items: center;
+}
+
+@media screen and (max-width: 420px) {
+  .ingredients-selection-grid {
+    flex-direction: row; /* Stacks images vertically on mobile */
+    align-items: center;
+    justify-items: center;/* Centers stacked images horizontally */
+    gap: 5px; /* Adjust vertical space between stacked images */
+    height: 100%;
+    width: 100%; /* Full width on mobile */
+  }
+
+  .rule-image-p3 {
+    max-width: 100%; /* Allows images to take up more width when stacked */
+    /* You might want to adjust max-width further based on your design */
+  }
+}
+
+.image-container {
+  text-align: center;
+  margin-top: 30px;
+  width: Auto;
+  height: Auto;
+  align-items: center;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.correct-label {
+  color: #22c55e;
+}
+
+.wrong-label {
+  color: #ef4444;
+}
+
 .lynx-features {
   text-align: center;
   flex-direction: column;
@@ -4127,17 +4177,73 @@ blockquote {
 
 .lynx-icon-features {
   width: 100px;
-  height: 64px;
+  height: 100px;
   display: block;
   overflow: visible;
 }
 
+.lynx-icon-features-special {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  overflow: hidden;
+}
+
+.lynx-icon-features-rules {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  overflow: hidden;
+}
+
+.rule-image {
+  width: 50%; /* Fixed width */
+  height: 50%; /* Fixed height */
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  object-fit: cover;
+  align-self: center; /* Add this line to center the image */
+  display: flex;
+  flex-direction: row;
+}
+
+.rule-image-p3 {
+  width: auto; /* Fixed width */
+  height: auto; /* Fixed height */
+  margin-left: 5px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  align-self: center;
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .lynx-block-features {
   background-color: var(--lynx--white);
+  width: auto;
+  height: Auto;
   border-radius: 30px;
   margin-bottom: 26px;
   padding: 28px;
   box-shadow: 0 40px 40px -10px #1f202214;
+}
+
+.lynx-block-features-special {
+  background-color: var(--transparent);
+  width: auto;
+  height: auto;
+  border-radius: 30px;
+  margin-bottom: 26px;
+  padding: 28px;
+}
+
+@media (max-width: 767px) {
+  .lynx-block-features-special {
+    display: none;
+  }
 }
 
 .bold-text-2, .bold-text-3, .bold-text-4 {
@@ -4158,7 +4264,7 @@ blockquote {
 
 .features-list {
   text-align: left;
-  background-color: #459f6f;
+  background-color: rgba(69, 159, 111, 0);
   border-bottom: 1px #e4ebf3;
   border-radius: 30px;
   order: 1;
@@ -4166,6 +4272,9 @@ blockquote {
   position: relative;
   box-shadow: 0 0 13px 5px #0003;
 }
+
+
+
 
 .container-2 {
   width: 100%;
@@ -4225,7 +4334,7 @@ blockquote {
 }
 
 .features-block-two {
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 16px;
   display: flex;
@@ -4239,35 +4348,37 @@ blockquote {
 }
 
 .features-block-two-copy {
-  justify-content: flex-start;
+  justify-content: flex-end;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 16px;
   display: flex;
 }
 
 .paragraph {
-  color: var(--light-gray);
-  text-align: left;
+  color: #41683c;
+  text-align: center;
   background-color: #41383700;
   order: 0;
   font-family: Caviardreams, Times New Roman, sans-serif;
   font-size: 2vw;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .paragraph-2 {
-  color: var(--light-gray);
+  color: #41683c;
   text-align: center;
   font-family: Caviardreams, Times New Roman, sans-serif;
   font-size: 2vw;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .paragraph-3, .paragraph-4 {
-  color: var(--light-gray);
+  color: #41683c;
+  text-align: center;
   font-family: Caviardreams, Times New Roman, sans-serif;
   font-size: 2vw;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .rt-category-cards-text {
@@ -5423,7 +5534,7 @@ blockquote {
   }
 
   .features-list {
-    background-color: #53be61;
+    background-color: rgba(83, 190, 97, 0);
     margin-left: 22px;
     margin-right: 22px;
     transition: transform .2s;
@@ -8436,6 +8547,7 @@ blockquote {
 
   .lynx-content {
     padding-left: 0;
+    align-self: center;
   }
 
   .lynx-heading {
@@ -8470,6 +8582,7 @@ blockquote {
     justify-content: flex-start;
     align-items: flex-start;
     margin-bottom: 30px;
+    display: flex;
   }
 
   .features-image-2 {
@@ -8481,11 +8594,26 @@ blockquote {
     justify-content: flex-start;
     align-items: flex-start;
     margin-bottom: 30px;
+    display: flex;
+  }
+
+  .rule-image {
+    width: 100%; /* Fixed width */
+    height: 100%; /* Fixed height */
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    object-fit: cover;
+    align-self: center; /* Add this line to center the image */
+    display: flex;
+    flex-direction: row;
   }
 
   .paragraph, .paragraph-2, .paragraph-3, .paragraph-4 {
     font-size: 3.5vw;
-    font-weight: 700;
+    font-weight: 900;
+    text-align: center;
   }
 
   .rt-number-block-2 {
@@ -9170,4 +9298,480 @@ blockquote {
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+/* ===== RULES SECTION REMAKE - MINIMAL VERSION ===== */
+
+/* Ensure parent elements don't interfere with centering */
+@media screen and (max-width: 767px) {
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Override any potential parent container issues */
+  .section {
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .lynx-content {
+    width: 100% !important;
+    margin: 0 auto !important;
+    max-width: none !important;
+    box-sizing: border-box;
+  }
+}
+
+/* Main container */
+.features-list {
+  background-color: transparent;
+  border-radius: 20px;
+  padding: 60px 30px;
+  margin: 20px auto;
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.2s ease;
+  box-sizing: border-box;
+}
+
+/* Container adjustments */
+.container-2 {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.features-wrapper-two {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Override any parent container issues on mobile */
+@media screen and (max-width: 767px) {
+  .container-2 {
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .features-wrapper-two {
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+  }
+}
+
+.features-right {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  width: 100%;
+  max-width: none;
+  margin-bottom: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Individual rule items */
+.features-block-two-copy {
+  background: transparent;
+  border-radius: 0;
+  padding: 20px;
+  margin-bottom: 0;
+  transition: transform 0.3s ease;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.features-block-two-copy:hover {
+  transform: translateY(-2px);
+}
+
+/* Rule text styling */
+.paragraph,
+.paragraph-2,
+.paragraph-3,
+.paragraph-4 {
+  color: #41683c;
+  text-align: center;
+  font-family: 'Caviardreams', 'Times New Roman', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  line-height: 1.4;
+  background-color: transparent;
+  order: 0;
+}
+
+/* Simple rule images (rules 1 & 2) */
+.rule-image {
+  max-width: 380px;
+  width: 100%;
+  height: auto;
+  margin: 20px auto;
+  border-radius: 0;
+  object-fit: cover;
+  align-self: center;
+  display: block;
+}
+
+/* Complex rules container (rules 3 & 4) */
+.ingredients-selection-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 25px;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: start;
+  justify-content: center;
+  justify-items: center;
+}
+
+/* Image containers for comparison */
+.image-container {
+  text-align: center;
+  background: transparent;
+  border-radius: 0;
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 0;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.image-container:hover {
+  transform: translateY(-2px);
+}
+
+.image-container:has(.correct-label) {
+  border: none;
+  background: transparent;
+}
+
+.image-container:has(.wrong-label) {
+  border: none;
+  background: transparent;
+}
+
+/* Labels */
+.label {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 15px;
+  padding: 3px 8px;
+  border-radius: 0;
+  display: inline-block;
+  min-height: auto;
+}
+
+.correct-label {
+  color: #16a34a;
+  background: transparent;
+}
+
+.wrong-label {
+  color: #dc2626;
+  background: transparent;
+}
+
+/* Comparison images */
+.rule-image-p3 {
+  max-width: 250px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 0;
+  object-fit: cover;
+  display: block;
+  align-self: center;
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* Large tablets and small desktops */
+@media screen and (max-width: 1200px) {
+  .features-list {
+    padding: 50px 25px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .paragraph, .paragraph-2, .paragraph-3, .paragraph-4 {
+    font-size: 1.7rem;
+  }
+
+  .rule-image-p3 {
+    max-width: 220px;
+  }
+
+  .rule-image {
+    max-width: 350px;
+  }
+
+  .ingredients-selection-grid {
+    gap: 12px;
+  }
+}
+
+/* Tablets */
+@media screen and (max-width: 991px) {
+  .features-list {
+    padding: 40px 20px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .paragraph, .paragraph-2, .paragraph-3, .paragraph-4 {
+    font-size: 1.5rem;
+  }
+
+  .ingredients-selection-grid {
+    gap: 10px;
+    max-width: 500px;
+  }
+
+  .rule-image-p3 {
+    max-width: 200px;
+  }
+
+  .rule-image {
+    max-width: 320px;
+  }
+
+  .features-block-two-copy {
+    padding: 20px;
+  }
+}
+
+/* Mobile landscape and small tablets */
+@media screen and (max-width: 767px) {
+  .features-list {
+    padding: 30px 15px;
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    left: 0 !important;
+    right: 0 !important;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .paragraph, .paragraph-2, .paragraph-3, .paragraph-4 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+
+  .features-block-two-copy {
+    padding: 15px;
+  }
+
+  .ingredients-selection-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    max-width: 320px;
+  }
+
+  .rule-image-p3 {
+    max-width: 240px;
+  }
+
+  .rule-image {
+    max-width: 280px;
+  }
+
+  .image-container {
+    max-width: 280px;
+  }
+}
+
+/* Mobile portrait */
+@media screen and (max-width: 479px) {
+  .features-list {
+    padding: 20px 10px;
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    left: 0 !important;
+    right: 0 !important;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .paragraph, .paragraph-2, .paragraph-3, .paragraph-4 {
+    font-size: 1.1rem;
+    font-weight: 900;
+  }
+
+  .features-block-two-copy {
+    padding: 10px;
+  }
+
+  .label {
+    font-size: 16px;
+  }
+
+  .rule-image-p3 {
+    max-width: 220px;
+  }
+
+  .rule-image {
+    max-width: 260px;
+  }
+
+  .ingredients-selection-grid {
+    max-width: 280px;
+    gap: 10px;
+  }
+
+  .image-container {
+    padding: 8px;
+    max-width: 250px;
+  }
+}
+
+/* Animation for better UX */
+.features-block-two-copy {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.features-block-two-copy:nth-child(1) { animation-delay: 0.1s; }
+.features-block-two-copy:nth-child(2) { animation-delay: 0.2s; }
+.features-block-two-copy:nth-child(3) { animation-delay: 0.3s; }
+.features-block-two-copy:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Remove conflicting old styles and ensure proper mobile centering */
+.features-right {
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 0;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Additional mobile centering for very small devices */
+@media screen and (max-width: 360px) {
+  .features-list {
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 10px 5px;
+    left: 0 !important;
+    right: 0 !important;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .container-2 {
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 5px !important;
+    max-width: none !important;
+    box-sizing: border-box;
+  }
+
+  .features-wrapper-two {
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+  }
+
+  .ingredients-selection-grid {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
+  .rule-image {
+    max-width: 240px;
+  }
+
+  .rule-image-p3 {
+    max-width: 200px;
+  }
+}
+
+/* Fix any remaining mobile issues */
+@media screen and (max-width: 420px) {
+  .features-list {
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 15px 5px;
+    left: 0 !important;
+    right: 0 !important;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .container-2 {
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 5px !important;
+    max-width: none !important;
+    box-sizing: border-box;
+  }
+
+  .features-wrapper-two {
+    width: 100% !important;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+  }
+
+  .ingredients-selection-grid {
+    display: grid; /* Ensure it stays as grid */
+    grid-template-columns: 1fr;
+    grid-column-gap: 8px;
+    grid-row-gap: 8px;
+    align-items: center;
+    justify-items: center;
+    gap: 8px;
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* Fix the lynx-content padding inconsistency */
+@media screen and (max-width: 479px) {
+  .lynx-content {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* Additional padding fix for very small devices */
+@media screen and (max-width: 420px) {
+  .lynx-content {
+    padding: 20px 0 !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
 }
