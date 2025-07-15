@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-translate="page.title">Your Dishes</title>
+    <title>Your Dishes</title>
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
@@ -12,7 +12,6 @@
     <meta name="twitter:creator" content="@ndk_messay">
     <meta name="twitter:title" content="Your Dishes - Cooking Game Results">
     <meta name="twitter:description" content="Check out my amazing dishes and medals from the cooking game!">
-    <meta name="description" content="Check out my amazing dishes and medals from the cooking game!">
 
     <style>
         * {
@@ -460,39 +459,6 @@
         .celebration-button:active {
             transform: scale(0.95);
         }
-
-        /* Language Selector Styles */
-        .language-selector-widget {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-        }
-
-        .language-select {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #000;
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-        }
-
-        .language-select:hover {
-            background: rgba(255, 255, 255, 1);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .language-select:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.3);
-        }
-
         /* Confetti Container */
         .confetti-container {
             position: fixed;
@@ -584,15 +550,6 @@
                 max-height: 80vh;
                 padding: 24px 16px 16px 16px;
             }
-            .language-selector-widget {
-                top: 10px;
-                left: 10px;
-            }
-
-            .language-select {
-                padding: 6px 8px;
-                font-size: 12px;
-            }
         }
 
         /* Custom scrollbar for modal content */
@@ -621,6 +578,7 @@
             <select id="language-select" class="language-select">
                 <option value="en">🇺🇸 English</option>
                 <option value="ja">🇯🇵 日本語</option>
+                
             </select>
         </div>
 
@@ -628,25 +586,23 @@
         <p class="user-id" data-translate="header.user_id" data-param-userId="Loading...">Loading...</p>
 
         <div class="celebration-people">
-            <img src="images/celebration/Celebration%20Banner.png"
-                 alt="Celebration Image"
-                 data-translate-alt="header.celebration_banner">
-            <div class="image-placeholder" data-translate="header.celebration_banner">Celebration Banner</div>
+            <img src="images/celebration/Celebration%20Banner.png" alt="Celebration Image">
+            <div class="image-placeholder">Celebration Banner</div>
         </div>
     </div>
 
     <!-- Dishes Section -->
     <div class="dishes-section">
         <div class="dishes-grid">
-            <div class="loading" data-translate="dishes.loading">Loading your delicious dishes</div>
+            <div class="loading">Loading your delicious dishes</div>
         </div>
     </div>
 
     <!-- Medals Section -->
     <div class="medals-section">
-        <h2 class="medals-title" data-translate="medals.title">Medals You Achieved!</h2>
+        <h2 class="medals-title">Medals You Achieved!</h2>
         <div class="medals-grid">
-            <div class="loading" data-translate="medals.loading">Calculating your achievements</div>
+            <div class="loading">Calculating your achievements</div>
         </div>
     </div>
 </div>
@@ -675,9 +631,9 @@
 <div style="height: 60px;"></div>
 
 <!-- Include scripts in the correct order -->
-<script src="js/localization.js"></script>
-<script src="js/game-results.js"></script>
-<script src="js/localized-game-results.js"></script>
+<script src="src/game/results/js/localization.js"></script>
+<script src="../../js/game-results.js"></script>
+<script src="src/game/results/js/localized-game-results.js"></script>
 
 <!-- Simple Language Selector Handler (Fallback) -->
 <script>
@@ -754,7 +710,6 @@
             document.body.classList.remove('confetti-active');
         }, 4000);
     }
-
     function createBurstConfetti(colors, shapes, originX, originY, container) {
         const confetti = document.createElement('div');
         const shape = shapes[Math.floor(Math.random() * shapes.length)];
@@ -799,17 +754,29 @@
             }
         }, 4000);
     }
-
     // Add celebration sound effect simulation
     function playSound() {
         console.log('🎉 BOOM! Confetti explosion! 🎉');
     }
-
     // Call playSound when confetti launches
     document.querySelector('.celebration-button').addEventListener('click', () => {
         playSound();
     });
 </script>
+<script src="../../js/game-results.js"></script>
+
+<!-- Recipe Popup Modal -->
+<div id="recipe-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="document.getElementById('recipe-modal').classList.remove('show')">&times;</span>
+        <img id="modal-image" src="" alt="" />
+        <h2 id="modal-title"></h2>
+        <div id="modal-ingredients" class="modal-ingredients"></div>
+        <p id="modal-description"></p>
+    </div>
+</div>
+
+<div style="height: 60px;"></div>
 
 </body>
 </html>
