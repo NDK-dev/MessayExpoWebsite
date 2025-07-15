@@ -1,0 +1,224 @@
+{
+  "page": {
+    "title": "あなたの料理 - クッキングゲーム結果",
+    "description": "クッキングゲームで作った素晴らしい料理とメダルをチェックしよう！",
+    "twitter_title": "あなたの料理 - クッキングゲーム結果",
+    "twitter_description": "クッキングゲームで作った素晴らしい料理とメダルをチェックしよう！"
+  },
+  "header": {
+    "title": "あなたの料理",
+    "user_id": "あなたのID: {{userId}}",
+    "celebration_banner": "お祝いバナー"
+  },
+  "dishes": {
+    "loading": "美味しい料理を読み込み中",
+    "no_dishes": "料理が見つかりません",
+    "no_results": "結果なし",
+    "dish_image": "料理画像"
+  },
+  "medals": {
+    "title": "獲得したメダル！",
+    "loading": "実績を計算中",
+    "no_medals": "メダルを獲得していません",
+    "keep_trying": "頑張って続けよう！",
+    "medal_image": "メダル画像",
+    "congratulations": "このメダルの獲得おめでとうございます！"
+  },
+  "modal": {
+    "close": "×",
+    "no_description": "説明がありません。",
+    "ingredients": "材料"
+  },
+  "ingredients": {
+    "SPAGHETTI": "スパゲッティ",
+    "RICE": "ライス",
+    "BREAD": "パン",
+    "CORN": "コーン",
+    "EGG": "卵",
+    "SHELLFISH": "貝類",
+    "TOMATO": "トマト",
+    "SPINACH": "ほうれん草",
+    "TUNA": "マグロ",
+    "SHRIMP": "エビ",
+    "MEAT": "肉",
+    "BEANS": "豆",
+    "HOT_PEPPER": "唐辛子"
+  },
+  "errors": {
+    "init_failed": "ゲーム結果の読み込みに失敗しました。もう一度お試しください。",
+    "data_load_failed": "データファイルの取得に失敗しました",
+    "general_error": "エラー"
+  },
+  "time": {
+    "seconds": "{{seconds}}秒",
+    "minutes_seconds": "{{minutes}}分{{seconds}}秒"
+  },
+  "recipes": {
+    "0": {
+      "name": "パスタカルボナーラ",
+      "description": "ベーコンとチーズで作るリッチでクリーミーなパスタ。"
+    },
+    "1": {
+      "name": "ボンゴレビアンコ",
+      "description": "あさりの旨味たっぷりのシンプルなパスタ。"
+    },
+    "2": {
+      "name": "パスタナポリタン",
+      "description": "トマトの甘みとソーセージの風味が絶妙にブレンドしたパスタ。"
+    },
+    "3": {
+      "name": "ほうれん草クリームパスタ",
+      "description": "ほうれん草とベーコンの香りが広がるクリーミーなパスタ。"
+    },
+    "4": {
+      "name": "マグロ寿司",
+      "description": "新鮮なマグロで作った寿司。"
+    },
+    "5": {
+      "name": "エビ寿司",
+      "description": "ぷりぷりのエビで作った寿司。"
+    },
+    "6": {
+      "name": "貝類寿司",
+      "description": "新鮮でコリコリとした貝類で作った寿司。"
+    },
+    "7": {
+      "name": "玉子寿司",
+      "description": "ふわふわで少し甘い玉子焼きで作った寿司。"
+    },
+    "8": {
+      "name": "BLTサンドイッチ",
+      "description": "ベーコン、レタス、トマトの豪華なサンドイッチ。"
+    },
+    "9": {
+      "name": "卵サンドイッチ",
+      "description": "ふわふわでクリーミーな卵フィリングのサンドイッチ。"
+    },
+    "10": {
+      "name": "ツナサンドイッチ",
+      "description": "濃厚でクリーミーなツナフィリングのサンドイッチ。"
+    },
+    "11": {
+      "name": "トンカツサンドイッチ",
+      "description": "サクサクで分厚いトンカツのサンドイッチ。"
+    },
+    "12": {
+      "name": "チリビーンタコス",
+      "description": "豆の濃厚な風味がたっぷり詰まったタコス。"
+    },
+    "13": {
+      "name": "チョリソタコス",
+      "description": "チョリソソーセージの辛いタコス。"
+    },
+    "14": {
+      "name": "ツナタコス",
+      "description": "ツナとアボカドの完璧なマッチングのタコス。"
+    },
+    "15": {
+      "name": "ベジタブルタコス",
+      "description": "ほうれん草生地とたっぷり野菜のヘルシーなタコス。"
+    },
+    "16": {
+      "name": "エビカレー",
+      "description": "エビの濃厚な風味のカレー。"
+    },
+    "17": {
+      "name": "ひよこ豆カレー",
+      "description": "濃厚で風味豊かなスパイシーひよこ豆カレー。"
+    },
+    "18": {
+      "name": "バターチキンカレー",
+      "description": "バターの香りが立つ芳醇なカレー。"
+    },
+    "19": {
+      "name": "ほうれん草チーズカレー",
+      "description": "ほうれん草とチーズの濃厚な香りのインド風カレー。"
+    }
+  },
+  "medals": {
+    "FOCUSED_ON_VARIETY": {
+      "name": "バラエティ重視",
+      "description": "こんなにたくさんの食材！あなたのテーブルがカラフルになりました！"
+    },
+    "NUTRITIONALLY_BALANCED": {
+      "name": "栄養バランス",
+      "description": "バランスの取れた食事：炭水化物、タンパク質、ビタミン"
+    },
+    "BODY_BUILDER": {
+      "name": "ボディビルダー",
+      "description": "筋肉食品でムキムキになりましたね！"
+    },
+    "HEALTHY_FLOW": {
+      "name": "ヘルシーフロー",
+      "description": "野菜がたっぷりで、血液がサラサラになりそう！"
+    },
+    "PASTA_MAESTRO": {
+      "name": "パスタマエストロ",
+      "description": "パスタの魔法使いの誕生です！"
+    },
+    "SUSHI_CHEF": {
+      "name": "寿司職人",
+      "description": "寿司を極めた真の職人！"
+    },
+    "SANDWICH_EARL": {
+      "name": "サンドイッチ伯爵",
+      "description": "サンドイッチ氏（ジョン・モンタギュー）もびっくり—なんて気品ある舌！"
+    },
+    "TACO_ESTETA": {
+      "name": "タコス美食家",
+      "description": "タコスの美食家。そのソンブレロがよく似合う！"
+    },
+    "CURRY_MAHARAJA": {
+      "name": "カレー王",
+      "description": "香りスパイスの王国を築きましたね！"
+    },
+    "SELECTIVE_EATER": {
+      "name": "偏食家",
+      "description": "一つの味を一途に追求するその献身—とても立派です！"
+    },
+    "FISHERMAN": {
+      "name": "漁師",
+      "description": "海の恵みをすべて知る真の漁師！"
+    },
+    "FARMER": {
+      "name": "農家",
+      "description": "土と共に生きる農家の力があなたのテーブルに届きました！"
+    },
+    "LIVESTOCK_FARMER": {
+      "name": "畜産農家",
+      "description": "愛情たっぷりに動物を育てる畜産農家！"
+    },
+    "HUMPTY_DUMPTY": {
+      "name": "ハンプティ・ダンプティ",
+      "description": "いつも笑顔のハンプティ・ダンプティもびっくりする卵好き！"
+    },
+    "MAES_TORO": {
+      "name": "マエス・トロ",
+      "description": "マグロの達人マエス・トロ、今日も雷鳴のような拍手を勝ち取る！"
+    },
+    "POPEYE": {
+      "name": "ポパイ",
+      "description": "パワフルなポパイのように、栄養満点チャージ完了！"
+    },
+    "COWBOY": {
+      "name": "カウボーイ",
+      "description": "荒野を駆けるカウボーイのように、自由と味を追求する冒険者！"
+    },
+    "QUICK_DECISION_MAKER": {
+      "name": "瞬間判断力",
+      "description": "驚くべき判断スピード！ピンチでも迷いなし！"
+    },
+    "LAID_BACK_AND_STEADY": {
+      "name": "マイペース",
+      "description": "自分のペースで人生をコントロール—それがクール！"
+    },
+    "UNIQUE_PALATE": {
+      "name": "独特な舌",
+      "description": "あなたの味覚は唯一無二！"
+    },
+    "REFINED_PALATE": {
+      "name": "洗練された舌",
+      "description": "ああ、洗練された舌を持つ旅人よ、あなたの舌は真に一流です！"
+    }
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "page": {
+    "title": "Your Dishes - Cooking Game Results",
+    "description": "Check out my amazing dishes and medals from the cooking game!",
+    "twitter_title": "Your Dishes - Cooking Game Results",
+    "twitter_description": "Check out my amazing dishes and medals from the cooking game!"
+  },
+  "header": {
+    "title": "Your Dishes",
+    "user_id": "Your ID: {{userId}}",
+    "celebration_banner": "Celebration Banner"
+  },
+  "dishes": {
+    "loading": "Loading your delicious dishes",
+    "no_dishes": "No dishes found",
+    "no_results": "No Results",
+    "dish_image": "Dish Image"
+  },
+  "medals": {
+    "title": "Medals You Achieved!",
+    "loading": "Calculating your achievements",
+    "no_medals": "No medals earned",
+    "keep_trying": "Keep trying!",
+    "medal_image": "Medal Image",
+    "congratulations": "Congratulations on earning this medal!"
+  },
+  "modal": {
+    "close": "×",
+    "no_description": "No description available.",
+    "ingredients": "Ingredients"
+  },
+  "ingredients": {
+    "SPAGHETTI": "Spaghetti",
+    "RICE": "Rice",
+    "BREAD": "Bread",
+    "CORN": "Corn",
+    "EGG": "Egg",
+    "SHELLFISH": "Shellfish",
+    "TOMATO": "Tomato",
+    "SPINACH": "Spinach",
+    "TUNA": "Tuna",
+    "SHRIMP": "Shrimp",
+    "MEAT": "Meat",
+    "BEANS": "Beans",
+    "HOT_PEPPER": "Hot Pepper"
+  },
+  "errors": {
+    "init_failed": "Failed to load game results. Please try again.",
+    "data_load_failed": "Failed to fetch data files",
+    "general_error": "Error"
+  },
+  "time": {
+    "seconds": "{{seconds}} seconds",
+    "minutes_seconds": "{{minutes}}m {{seconds}}s"
+  },
+  "recipes": {
+    "0": {
+      "name": "Pasta Carbonara",
+      "description": "A rich, creamy pasta with bacon and cheese."
+    },
+    "1": {
+      "name": "Vongole Bianco",
+      "description": "A simple pasta bursting with the flavor of clams."
+    },
+    "2": {
+      "name": "Pasta Napolitana",
+      "description": "A pasta with the perfect blend of tomato sweetness and sausage flavor."
+    },
+    "3": {
+      "name": "Spinach Cream Pasta",
+      "description": "A creamy pasta with the aroma of spinach and bacon."
+    },
+    "4": {
+      "name": "Tuna Sushi",
+      "description": "Sushi made with fresh tuna."
+    },
+    "5": {
+      "name": "Shrimp Sushi",
+      "description": "Sushi made with plump shrimp."
+    },
+    "6": {
+      "name": "Shellfish Sushi",
+      "description": "Sushi made with fresh, crunchy shellfish."
+    },
+    "7": {
+      "name": "Egg Sushi",
+      "description": "Sushi made with fluffy, slightly sweet omelet."
+    },
+    "8": {
+      "name": "BLT Sandwich",
+      "description": "A luxurious sandwich with bacon, lettuce, and tomato."
+    },
+    "9": {
+      "name": "Egg Sandwich",
+      "description": "A sandwich with fluffy, creamy egg filling."
+    },
+    "10": {
+      "name": "Tuna Sandwich",
+      "description": "A sandwich with rich, creamy tuna filling."
+    },
+    "11": {
+      "name": "Pork Cutlet Sandwich",
+      "description": "A sandwich with a crispy, extra-thick pork cutlet."
+    },
+    "12": {
+      "name": "Chili Bean Tacos",
+      "description": "A taco packed with the rich flavor of beans."
+    },
+    "13": {
+      "name": "Chorizo Tacos",
+      "description": "A spicy taco with chorizo sausage."
+    },
+    "14": {
+      "name": "Tuna Tacos",
+      "description": "A taco with the perfect match of tuna and avocado."
+    },
+    "15": {
+      "name": "Vegetable Tacos",
+      "description": "A healthy taco with spinach dough and plenty of vegetables."
+    },
+    "16": {
+      "name": "Shrimp Curry",
+      "description": "A curry with the rich flavor of shrimp."
+    },
+    "17": {
+      "name": "Chickpea Curry",
+      "description": "Rich and flavorful spicy chickpea curry."
+    },
+    "18": {
+      "name": "Butter Chicken Curry",
+      "description": "A fragrant curry with the aroma of butter."
+    },
+    "19": {
+      "name": "Spinach Cheese Curry",
+      "description": "An Indian-style curry with the rich aroma of spinach and cheese."
+    }
+  },
+  "medals": {
+    "FOCUSED_ON_VARIETY": {
+      "name": "Focused on Variety",
+      "description": "So many ingredients! Your table has become colorful!"
+    },
+    "NUTRITIONALLY_BALANCED": {
+      "name": "Nutritionally Balanced",
+      "description": "Balanced meal: Carbs, Protein, and Vitamins"
+    },
+    "BODY_BUILDER": {
+      "name": "Body Builder",
+      "description": "You're swole from all that muscle food!"
+    },
+    "HEALTHY_FLOW": {
+      "name": "Healthy Flow",
+      "description": "With all those veggies, your blood must be super smooth!"
+    },
+    "PASTA_MAESTRO": {
+      "name": "Pasta Maestro",
+      "description": "The pasta wizard is born!"
+    },
+    "SUSHI_CHEF": {
+      "name": "Sushi Chef",
+      "description": "A true artisan who has mastered sushi!"
+    },
+    "SANDWICH_EARL": {
+      "name": "Sandwich Earl",
+      "description": "Even Mr. Sandwich (John Montagu) would be surprised—what a noble palate!"
+    },
+    "TACO_ESTETA": {
+      "name": "Taco Esteta",
+      "description": "A gourmet of tacos. You wear that sombrero well!"
+    },
+    "CURRY_MAHARAJA": {
+      "name": "Curry Maharaja",
+      "description": "You've built a kingdom of aromatic spices!"
+    },
+    "SELECTIVE_EATER": {
+      "name": "Selective Eater",
+      "description": "That dedication to single-mindedly pursuing one flavor—so admirable!"
+    },
+    "FISHERMAN": {
+      "name": "Fisherman",
+      "description": "A true fisherman who knows all the blessings of the sea!"
+    },
+    "FARMER": {
+      "name": "Farmer",
+      "description": "The strength of a farmer who lives with the soil has reached your table!"
+    },
+    "LIVESTOCK_FARMER": {
+      "name": "Livestock Farmer",
+      "description": "A livestock farmer raising animals with lots of love!"
+    },
+    "HUMPTY_DUMPTY": {
+      "name": "Humpty Dumpty",
+      "description": "An egg lover that would surprise even the always-smiling Humpty Dumpty!"
+    },
+    "MAES_TORO": {
+      "name": "Maes'Toro",
+      "description": "Maes'Toro, master of tuna, wins thunderous applause again today!"
+    },
+    "POPEYE": {
+      "name": "Popeye",
+      "description": "Like power-packed Popeye, your nutrition is fully charged!"
+    },
+    "COWBOY": {
+      "name": "Cowboy",
+      "description": "Like a cowboy riding the wilds, an adventurer in pursuit of freedom and flavor!"
+    },
+    "QUICK_DECISION_MAKER": {
+      "name": "Quick Decision Maker",
+      "description": "Amazing decision-making speed! You never hesitate, even in a pinch!"
+    },
+    "LAID_BACK_AND_STEADY": {
+      "name": "Laid Back and Steady",
+      "description": "Controlling life at your own pace—now that's cool!"
+    },
+    "UNIQUE_PALATE": {
+      "name": "Unique Palate",
+      "description": "Your sense of taste is one of a kind!"
+    },
+    "REFINED_PALATE": {
+      "name": "Refined Palate",
+      "description": "Oh, traveler with a refined palate, your tongue is truly first-class!"
+    }
+  }
+}
