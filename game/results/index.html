@@ -49,6 +49,20 @@
             margin-bottom: 40px;
             position: relative;
         }
+        .language-selector-widget {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+        }
+        .language-select {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 2px solid #000;
+            background-color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
         .title {
             font-size: 3.5rem;
             font-weight: bold;
@@ -578,7 +592,6 @@
             <select id="language-select" class="language-select">
                 <option value="en">🇺🇸 English</option>
                 <option value="ja">🇯🇵 日本語</option>
-                
             </select>
         </div>
 
@@ -587,22 +600,22 @@
 
         <div class="celebration-people">
             <img src="images/celebration/Celebration%20Banner.png" alt="Celebration Image">
-            <div class="image-placeholder">Celebration Banner</div>
+            <div class="image-placeholder" data-translate="header.celebration_banner">Celebration Banner</div>
         </div>
     </div>
 
     <!-- Dishes Section -->
     <div class="dishes-section">
         <div class="dishes-grid">
-            <div class="loading">Loading your delicious dishes</div>
+            <div class="loading" data-translate="dishes.loading">Loading your delicious dishes</div>
         </div>
     </div>
 
     <!-- Medals Section -->
     <div class="medals-section">
-        <h2 class="medals-title">Medals You Achieved!</h2>
+        <h2 class="medals-title" data-translate="medalsSection.title">Medals You Achieved!</h2>
         <div class="medals-grid">
-            <div class="loading">Calculating your achievements</div>
+            <div class="loading" data-translate="medals.loading">Calculating your achievements</div>
         </div>
     </div>
 </div>
@@ -618,9 +631,7 @@
 <!-- Recipe Popup Modal -->
 <div id="recipe-modal" class="modal">
     <div class="modal-content">
-        <span class="close-btn"
-              data-translate="modal.close"
-              onclick="document.getElementById('recipe-modal').classList.remove('show')">&times;</span>
+        <span class="close-btn" data-translate="modal.close">&times;</span>
         <img id="modal-image" src="" alt="" />
         <h2 id="modal-title"></h2>
         <div id="modal-ingredients" class="modal-ingredients"></div>
@@ -631,45 +642,8 @@
 <div style="height: 60px;"></div>
 
 <!-- Include scripts in the correct order -->
-<script src="src/game/results/js/localization.js"></script>
-<script src="../../js/game-results.js"></script>
-<script src="src/game/results/js/localized-game-results.js"></script>
-
-<!-- Simple Language Selector Handler (Fallback) -->
-<script>
-    // Simple language selector that works even if other scripts fail
-    document.addEventListener('DOMContentLoaded', function() {
-        const languageSelect = document.getElementById('language-select');
-
-        // Set initial language from localStorage or browser
-        const savedLang = localStorage.getItem('game-results-language') ||
-            navigator.language.split('-')[0] || 'en';
-
-        if (languageSelect) {
-            // Set the saved language as selected
-            languageSelect.value = savedLang;
-
-            // Handle language change
-            languageSelect.addEventListener('change', function(e) {
-                const selectedLang = e.target.value;
-                localStorage.setItem('game-results-language', selectedLang);
-
-                // Update HTML lang attribute
-                document.documentElement.lang = selectedLang;
-
-                // If localization manager exists, use it
-                if (window.localizationManager && window.localizationManager.changeLanguage) {
-                    window.localizationManager.changeLanguage(selectedLang);
-                } else {
-                    // Fallback: reload page with language parameter
-                    const url = new URL(window.location);
-                    url.searchParams.set('lang', selectedLang);
-                    window.location.href = url.toString();
-                }
-            });
-        }
-    });
-</script>
+<script src="js/results-localization.js"></script>
+<script src="js/game-results.js"></script>
 
 <!-- Confetti Animation Script -->
 <script>
@@ -763,20 +737,8 @@
         playSound();
     });
 </script>
-<script src="../../js/game-results.js"></script>
 
-<!-- Recipe Popup Modal -->
-<div id="recipe-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="document.getElementById('recipe-modal').classList.remove('show')">&times;</span>
-        <img id="modal-image" src="" alt="" />
-        <h2 id="modal-title"></h2>
-        <div id="modal-ingredients" class="modal-ingredients"></div>
-        <p id="modal-description"></p>
-    </div>
-</div>
-
-<div style="height: 60px;"></div>
+<script src="/js/game-results.js"></script>
 
 </body>
 </html>
