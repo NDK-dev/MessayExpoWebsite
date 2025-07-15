@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Dishes</title>
+    <title data-translate="page.title">Your Dishes</title>
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
@@ -12,6 +12,7 @@
     <meta name="twitter:creator" content="@ndk_messay">
     <meta name="twitter:title" content="Your Dishes - Cooking Game Results">
     <meta name="twitter:description" content="Check out my amazing dishes and medals from the cooking game!">
+    <meta name="description" content="Check out my amazing dishes and medals from the cooking game!">
 
     <style>
         * {
@@ -459,6 +460,39 @@
         .celebration-button:active {
             transform: scale(0.95);
         }
+
+        /* Language Selector Styles */
+        .language-selector-widget {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .language-select {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #000;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .language-select:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .language-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.3);
+        }
+
         /* Confetti Container */
         .confetti-container {
             position: fixed;
@@ -550,6 +584,15 @@
                 max-height: 80vh;
                 padding: 24px 16px 16px 16px;
             }
+            .language-selector-widget {
+                top: 10px;
+                left: 10px;
+            }
+
+            .language-select {
+                padding: 6px 8px;
+                font-size: 12px;
+            }
         }
 
         /* Custom scrollbar for modal content */
@@ -573,27 +616,40 @@
 <div class="container">
     <!-- Header Section -->
     <div class="header">
-        <h1 class="title">Your Dishes</h1>
-        <p class="user-id">Loading...</p>
+        <!-- Language Selector -->
+        <div class="language-selector-widget">
+            <select id="language-select" class="language-select">
+                <option value="en">🇺🇸 English</option>
+                <option value="ja">🇯🇵 日本語</option>
+                <option value="es">🇪🇸 Español</option>
+                <option value="fr">🇫🇷 Français</option>
+                <option value="de">🇩🇪 Deutsch</option>
+            </select>
+        </div>
+
+        <h1 class="title" data-translate="header.title">Your Dishes</h1>
+        <p class="user-id" data-translate="header.user_id" data-param-userId="Loading...">Loading...</p>
 
         <div class="celebration-people">
-            <img src="images/celebration/Celebration%20Banner.png" alt="Celebration Image">
-            <div class="image-placeholder">Celebration Banner</div>
+            <img src="images/celebration/Celebration%20Banner.png"
+                 alt="Celebration Image"
+                 data-translate-alt="header.celebration_banner">
+            <div class="image-placeholder" data-translate="header.celebration_banner">Celebration Banner</div>
         </div>
     </div>
 
     <!-- Dishes Section -->
     <div class="dishes-section">
         <div class="dishes-grid">
-            <div class="loading">Loading your delicious dishes</div>
+            <div class="loading" data-translate="dishes.loading">Loading your delicious dishes</div>
         </div>
     </div>
 
     <!-- Medals Section -->
     <div class="medals-section">
-        <h2 class="medals-title">Medals You Achieved!</h2>
+        <h2 class="medals-title" data-translate="medals.title">Medals You Achieved!</h2>
         <div class="medals-grid">
-            <div class="loading">Calculating your achievements</div>
+            <div class="loading" data-translate="medals.loading">Calculating your achievements</div>
         </div>
     </div>
 </div>
@@ -606,6 +662,63 @@
     🎉
 </div>
 
+<!-- Recipe Popup Modal -->
+<div id="recipe-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn"
+              data-translate="modal.close"
+              onclick="document.getElementById('recipe-modal').classList.remove('show')">&times;</span>
+        <img id="modal-image" src="" alt="" />
+        <h2 id="modal-title"></h2>
+        <div id="modal-ingredients" class="modal-ingredients"></div>
+        <p id="modal-description"></p>
+    </div>
+</div>
+
+<div style="height: 60px;"></div>
+
+<!-- Include scripts in the correct order -->
+<script src="src/game/results/js/localization.js"></script>
+<script src="../../js/game-results.js"></script>
+<script src="src/game/results/js/localized-game-results.js"></script>
+
+<!-- Simple Language Selector Handler (Fallback) -->
+<script>
+    // Simple language selector that works even if other scripts fail
+    document.addEventListener('DOMContentLoaded', function() {
+        const languageSelect = document.getElementById('language-select');
+
+        // Set initial language from localStorage or browser
+        const savedLang = localStorage.getItem('game-results-language') ||
+            navigator.language.split('-')[0] || 'en';
+
+        if (languageSelect) {
+            // Set the saved language as selected
+            languageSelect.value = savedLang;
+
+            // Handle language change
+            languageSelect.addEventListener('change', function(e) {
+                const selectedLang = e.target.value;
+                localStorage.setItem('game-results-language', selectedLang);
+
+                // Update HTML lang attribute
+                document.documentElement.lang = selectedLang;
+
+                // If localization manager exists, use it
+                if (window.localizationManager && window.localizationManager.changeLanguage) {
+                    window.localizationManager.changeLanguage(selectedLang);
+                } else {
+                    // Fallback: reload page with language parameter
+                    const url = new URL(window.location);
+                    url.searchParams.set('lang', selectedLang);
+                    window.location.href = url.toString();
+                }
+            });
+        }
+    });
+</script>
+
+<!-- Confetti Animation Script -->
 <script>
     function launchConfetti() {
         const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7', '#fd79a8', '#00cec9', '#fdcb6e', '#e17055', '#00b894'];
@@ -644,6 +757,7 @@
             document.body.classList.remove('confetti-active');
         }, 4000);
     }
+
     function createBurstConfetti(colors, shapes, originX, originY, container) {
         const confetti = document.createElement('div');
         const shape = shapes[Math.floor(Math.random() * shapes.length)];
@@ -688,29 +802,17 @@
             }
         }, 4000);
     }
+
     // Add celebration sound effect simulation
     function playSound() {
         console.log('🎉 BOOM! Confetti explosion! 🎉');
     }
+
     // Call playSound when confetti launches
     document.querySelector('.celebration-button').addEventListener('click', () => {
         playSound();
     });
 </script>
-<script src="../../js/game-results.js"></script>
-
-<!-- Recipe Popup Modal -->
-<div id="recipe-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="document.getElementById('recipe-modal').classList.remove('show')">&times;</span>
-        <img id="modal-image" src="" alt="" />
-        <h2 id="modal-title"></h2>
-        <div id="modal-ingredients" class="modal-ingredients"></div>
-        <p id="modal-description"></p>
-    </div>
-</div>
-
-<div style="height: 60px;"></div>
 
 </body>
 </html>
