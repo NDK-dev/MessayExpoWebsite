@@ -1,4 +1,4 @@
-// game-results.js - Main logic for parsing URL and displaying game results
+// game-results.js - Main logic with integrated translations
 
 class GameResults {
     constructor() {
@@ -10,19 +10,238 @@ class GameResults {
             remainingTime: 0,
             errorCount: 0
         };
+
+        // Localization
+        this.currentLanguage = 'en';
+        this.translations = this.getEmbeddedTranslations();
+
+        this.init();
+    }
+
+    // Get embedded translations
+    getEmbeddedTranslations() {
+        return {
+            en: {
+                header: {
+                    title: "Your Dishes",
+                    user_id: "Your ID: {userId}",
+                    celebration_banner: "Celebration Banner"
+                },
+                dishes: {
+                    loading: "Loading your delicious dishes"
+                },
+                medalsSection: {
+                    title: "Medals You Achieved!",
+                    loading: "Calculating your achievements"
+                },
+                modal: {
+                    close: "×"
+                },
+                messages: {
+                    noDishes: "No dishes found",
+                    noMedals: "No medals earned",
+                    keepTrying: "Keep trying!",
+                    noDescription: "No description available."
+                },
+                recipes: {
+                    0: { name: "Pasta Carbonara", description: "A rich, creamy pasta dish with bacon, eggs, and cheese." },
+                    1: { name: "Vongole Bianco", description: "A simple pasta bursting with the flavor of clams." },
+                    2: { name: "Pasta Napolitana", description: "A pasta with the perfect blend of tomato sweetness and sausage flavor." },
+                    3: { name: "Spinach Cream Pasta", description: "A creamy pasta with the aroma of spinach and bacon." },
+                    4: { name: "Tuna Sushi", description: "Sushi made with fresh tuna." },
+                    5: { name: "Shrimp Sushi", description: "Sushi made with plump shrimp." },
+                    6: { name: "Shellfish Sushi", description: "Sushi made with fresh, crunchy shellfish." },
+                    7: { name: "Egg Sushi", description: "Sushi made with fluffy, slightly sweet omelet." },
+                    8: { name: "BLT Sandwich", description: "A luxurious sandwich with bacon, lettuce, and tomato." },
+                    9: { name: "Egg Sandwich", description: "A sandwich with fluffy, creamy egg filling." },
+                    10: { name: "Tuna Sandwich", description: "A sandwich with rich, creamy tuna filling." },
+                    11: { name: "Pork Cutlet Sandwich", description: "A sandwich with a crispy, extra-thick pork cutlet." },
+                    12: { name: "Chili Bean Tacos", description: "A taco packed with the rich flavor of beans." },
+                    13: { name: "Chorizo Tacos", description: "A spicy taco with chorizo sausage." },
+                    14: { name: "Tuna Tacos", description: "A taco with the perfect match of tuna and avocado." },
+                    15: { name: "Vegetable Tacos", description: "A healthy taco with spinach dough and plenty of vegetables." },
+                    16: { name: "Shrimp Curry", description: "A curry with the rich flavor of shrimp." },
+                    17: { name: "Chickpea Curry", description: "Rich and flavorful spicy chickpea curry." },
+                    18: { name: "Butter Chicken Curry", description: "A fragrant curry with the aroma of butter." },
+                    19: { name: "Spinach Cheese Curry", description: "An Indian-style curry with the rich aroma of spinach and cheese." }
+                },
+                medals: {
+                    FOCUSED_ON_VARIETY: { name: "Focused on Variety", description: "So many ingredients! Your table has become colorful!" },
+                    NUTRITIONALLY_BALANCED: { name: "Nutritionally Balanced", description: "Balanced meal: Carbs, Protein, and Vitamins" },
+                    BODY_BUILDER: { name: "Body Builder", description: "You're swole from all that muscle food!" },
+                    HEALTHY_FLOW: { name: "Healthy Flow", description: "With all those veggies, your blood must be super smooth!" },
+                    PASTA_MAESTRO: { name: "Pasta Maestro", description: "The pasta wizard is born!" },
+                    SUSHI_CHEF: { name: "Sushi Chef", description: "A true artisan who has mastered sushi!" },
+                    SANDWICH_EARL: { name: "Sandwich Earl", description: "Even Mr. Sandwich (John Montagu) would be surprised-what a noble palate!" },
+                    TACO_ESTETA: { name: "Taco Esteta", description: "A gourmet of tacos. You wear that sombrero well!" },
+                    CURRY_MAHARAJA: { name: "Curry Maharaja", description: "You've built a kingdom of aromatic spices!" },
+                    SELECTIVE_EATER: { name: "Selective Eater", description: "That dedication to single-mindedly pursuing one flavor-so admirable!" },
+                    FISHERMAN: { name: "Fisherman", description: "A true fisherman who knows all the blessings of the sea!" },
+                    FARMER: { name: "Farmer", description: "The strength of a farmer who lives with the soil has reached your table!" },
+                    LIVESTOCK_FARMER: { name: "Livestock Farmer", description: "A livestock farmer raising animals with lots of love!" },
+                    HUMPTY_DUMPTY: { name: "Humpty Dumpty", description: "An egg lover that would surprise even the always-smiling Humpty Dumpty!" },
+                    MAES_TORO: { name: "Maes'Toro", description: "Maes'Toro, master of tuna, wins thunderous applause again today!" },
+                    POPEYE: { name: "Popeye", description: "Like power-packed Popeye, your nutrition is fully charged!" },
+                    COWBOY: { name: "Cowboy", description: "Like a cowboy riding the wilds, an adventurer in pursuit of freedom and flavor!" },
+                    QUICK_DECISION_MAKER: { name: "Quick Decision Maker", description: "Amazing decision-making speed! You never hesitate, even in a pinch!" },
+                    LAID_BACK_AND_STEADY: { name: "Laid Back and Steady", description: "Controlling life at your own pace-now that's cool!" },
+                    UNIQUE_PALATE: { name: "Unique Palate", description: "Your sense of taste is one of a kind!" },
+                    REFINED_PALATE: { name: "Refined Palate", description: "Oh, traveler with a refined palate, your tongue is truly first-class!" }
+                },
+                ingredients: {
+                    SPAGHETTI: 'Spaghetti', RICE: 'Rice', BREAD: 'Bread', CORN: 'Corn', EGG: 'Egg',
+                    SHELLFISH: 'Shellfish', TOMATO: 'Tomato', SPINACH: 'Spinach', TUNA: 'Tuna',
+                    SHRIMP: 'Shrimp', MEAT: 'Meat', BEANS: 'Beans', HOT_PEPPER: 'Hot Pepper'
+                }
+            },
+            ja: {
+                header: {
+                    title: "あなたの料理",
+                    user_id: "あなたのID: {userId}",
+                    celebration_banner: "お祝いバナー"
+                },
+                dishes: {
+                    loading: "美味しい料理を読み込み中"
+                },
+                medalsSection: {
+                    title: "獲得したメダル！",
+                    loading: "成果を計算中"
+                },
+                modal: {
+                    close: "×"
+                },
+                messages: {
+                    noDishes: "料理が見つかりません",
+                    noMedals: "メダルを獲得していません",
+                    keepTrying: "頑張って！",
+                    noDescription: "説明がありません。"
+                },
+                recipes: {
+                    0: { name: "カルボナーラパスタ", description: "卵とチーズ、ベーコンがからむ濃厚パスタ" },
+                    1: { name: "ボンゴレ・ビアンコ", description: "あさりの旨味がたっぷりのシンプルなパスタ" },
+                    2: { name: "ナポリタン", description: "トマトの甘みとウィンナーの旨味が絶妙なパスタ" },
+                    3: { name: "ほうれん草のクリームパスタ", description: "ほうれん草とベーコンの風味が香るクリーミーなパスタ" },
+                    4: { name: "マグロのお寿司", description: "新鮮なマグロを使ったお寿司" },
+                    5: { name: "エビのお寿司", description: "ぷりぷりのエビを使ったお寿司" },
+                    6: { name: "貝のお寿司", description: "新鮮なコリコリの貝を使ったお寿司" },
+                    7: { name: "卵のお寿司", description: "甘い、ふわふわ卵焼きのお寿司" },
+                    8: { name: "BLTサンド", description: "ベーコン、レタス、トマトの豪華なサンドイッチ" },
+                    9: { name: "たまごサンド", description: "ふわふわの卵フィリングがたっぷり入ったサンドイッチ" },
+                    10: { name: "ツナマヨサンド", description: "ツナとマヨネーズの相性抜群なサンドイッチ" },
+                    11: { name: "トンカツサンド", description: "サクサクの極厚トンカツが入ったサンドイッチ" },
+                    12: { name: "チリビーンズタコス", description: "豆の旨味がぎゅっと詰まったタコス" },
+                    13: { name: "チョリソータコス", description: "スパイシーなチョリソーのタコス" },
+                    14: { name: "ツナとアボカドのタコス", description: "ツナとアボカドの相性抜群のタコス" },
+                    15: { name: "野菜たっぷりタコス", description: "ほうれん草が練り込まれた生地に、野菜がのったヘルシータコス" },
+                    16: { name: "海老カレー", description: "海老の旨味がたっぷりのカレー" },
+                    17: { name: "ひよこ豆のカレー", description: "ひよこ豆たっぷりのスパイシーカレー" },
+                    18: { name: "バターチキンカレー", description: "バターの風味が香ばしいチキンカレー" },
+                    19: { name: "ほうれん草とチーズのカレー", description: "ほうれん草とチーズの香り豊かなインド風カレー" }
+                },
+                medals: {
+                    FOCUSED_ON_VARIETY: { name: "バリエーション重視", description: "食材たっぷり！食卓がカラフルになったね！" },
+                    NUTRITIONALLY_BALANCED: { name: "栄養バランスばっちり", description: "炭水化物とタンパク質、ビタミンのバランスの取れたいい食事" },
+                    BODY_BUILDER: { name: "ボディビルダー", description: "筋肉を育てるための食事でムキムキだ！" },
+                    HEALTHY_FLOW: { name: "スーパーヘルシー", description: "たっぷりの野菜できみの血液はさらさらだね！" },
+                    PASTA_MAESTRO: { name: "パスタマエストロ", description: "パスタの魔法使い、ここに誕生！" },
+                    SUSHI_CHEF: { name: "寿司職人", description: "寿司を極めた真の職人！" },
+                    SANDWICH_EARL: { name: "サンドイッチ伯爵", description: "サンドイッチ伯爵もびっくりな、貴族の味覚だね！" },
+                    TACO_ESTETA: { name: "タコスエスティータ", description: "タコスの美食家。ソンブレロがよく似合う！" },
+                    CURRY_MAHARAJA: { name: "カレーマハラジャ", description: "香りたつスパイスの王国をきみが築いた！" },
+                    SELECTIVE_EATER: { name: "一途な人", description: "一途に１つの味を追い求めるその姿勢、ステキ！" },
+                    FISHERMAN: { name: "漁師", description: "海のめぐみを知り尽くした真の漁師！" },
+                    FARMER: { name: "農家", description: "土とともに生きる農家の力、食卓に届いた！" },
+                    LIVESTOCK_FARMER: { name: "畜産家", description: "愛情たっぷりに育てる畜産家！" },
+                    HUMPTY_DUMPTY: { name: "ハンプティ・ダンプティ", description: "まんまるスマイルのハンプティ・ダンプティもびっくりな卵好き" },
+                    MAES_TORO: { name: "マエス'トロ'", description: "トロを極めしマエス'トロ'、今日も拍手喝采！" },
+                    POPEYE: { name: "ポパイ", description: "パワー満点ポパイのごとく、栄養チャージ完了！" },
+                    COWBOY: { name: "カウボーイ", description: "荒野を駆けるカウボーイのごとく、自由と味を追い求める冒険者！" },
+                    QUICK_DECISION_MAKER: { name: "すばやい決断", description: "すばらしくスピーディな決断力！ピンチでも迷わない！" },
+                    LAID_BACK_AND_STEADY: { name: "のんびりマイペース", description: "自分のペースで人生をコントロールできる人ってかっこいい。" },
+                    UNIQUE_PALATE: { name: "ユニークな味覚", description: "きみだけの味覚センス、唯一無二！" },
+                    REFINED_PALATE: { name: "たしかな味覚", description: "洗練された味覚の旅人よ。その舌はまさに一流！" }
+                },
+                ingredients: {
+                    SPAGHETTI: 'スパゲッティ', RICE: 'ご飯', BREAD: 'パン', CORN: 'コーン', EGG: '卵',
+                    SHELLFISH: '貝', TOMATO: 'トマト', SPINACH: 'ほうれん草', TUNA: 'マグロ',
+                    SHRIMP: 'エビ', MEAT: '肉', BEANS: '豆', HOT_PEPPER: '唐辛子'
+                }
+            }
+        };
+    }
+
+    // Translation method
+    t(key, params = {}) {
+        const keys = key.split('.');
+        let value = this.translations[this.currentLanguage];
+
+        for (const k of keys) {
+            value = value?.[k];
+            if (value === undefined) break;
+        }
+
+        if (value === undefined) return key;
+
+        // Replace parameters like {userId}
+        return value.replace(/\{(\w+)\}/g, (match, param) => {
+            return params[param] !== undefined ? params[param] : match;
+        });
+    }
+
+    // Switch language
+    switchLanguage(lang) {
+        if (lang === this.currentLanguage) return;
+
+        this.currentLanguage = lang;
+
+        // Update dropdown
+        const languageSelect = document.getElementById('language-select');
+        if (languageSelect) {
+            languageSelect.value = lang;
+        }
+
+        // Apply translations and re-render
+        this.applyTranslations();
+        this.displayResults();
+    }
+
+    // Apply translations to static elements
+    applyTranslations() {
+        const elements = document.querySelectorAll('[data-translate]');
+
+        elements.forEach(element => {
+            const key = element.getAttribute('data-translate');
+            const paramUserId = element.getAttribute('data-param-userId');
+
+            let params = {};
+            if (paramUserId) {
+                params.userId = this.currentResults.userId;
+            }
+
+            const translatedText = this.t(key, params);
+            element.textContent = translatedText;
+        });
     }
 
     // Initialize the application
     async init() {
+        console.log('Starting game results initialization');
+
         try {
-            // Load data files
+            // Load data
             await this.loadData();
+            console.log('Data loaded successfully');
 
             // Parse URL parameters
             this.parseURLParameters();
+            console.log('URL parameters parsed:', this.currentResults);
+
+            // Set up language selector
+            this.setupLanguageSelector();
 
             // Display results
             this.displayResults();
+            console.log('Results displayed');
 
         } catch (error) {
             console.error('Error initializing game results:', error);
@@ -30,20 +249,70 @@ class GameResults {
         }
     }
 
-    // Load recipes and medals data from JSON files
+    // Setup language selector
+    setupLanguageSelector() {
+        const languageSelect = document.getElementById('language-select');
+        if (languageSelect) {
+            languageSelect.addEventListener('change', (e) => {
+                this.switchLanguage(e.target.value);
+            });
+
+            // Set initial language
+            this.currentLanguage = languageSelect.value || 'en';
+        }
+    }
+
+    // Load recipes and medals data
     async loadData() {
         try {
-            const [recipesResponse, medalsResponse] = await Promise.all([
-                fetch('./data/recipes.json'),
-                fetch('./data/medals.json')
-            ]);
+            // Load recipes data directly
+            this.recipes = [
+                { "id": 0, "name": "Pasta Carbonara", "description": "A rich, creamy pasta with bacon and cheese.", "imagePath": "images/dishes/pasta_carbonara.png", "category": "PASTA", "necessaryIngredient": "SPAGHETTI", "optionalIngredient": "EGG", "farm": "LIVESTOCK", "nutrition": ["PROTEIN"] },
+                { "id": 1, "name": "Vongole Bianco", "description": "A simple pasta bursting with the flavor of clams.", "imagePath": "images/dishes/vongole_bianco.png", "category": "PASTA", "necessaryIngredient": "SPAGHETTI", "optionalIngredient": "SHELLFISH", "farm": "SEAFOOD", "nutrition": ["PROTEIN"] },
+                { "id": 2, "name": "Pasta Napolitana", "description": "A pasta with the perfect bland of tomato sweetness and sausage flavor.", "imagePath": "images/dishes/pasta_napolitana.png", "category": "PASTA", "necessaryIngredient": "SPAGHETTI", "optionalIngredient": "TOMATO", "farm": "VEGETABLES", "nutrition": ["VITAMINS"] },
+                { "id": 3, "name": "Spinach Cream Pasta", "description": "A creamy pasta with the aroma of spinach and bacon.", "imagePath": "images/dishes/spinach_cream_pasta.png", "category": "PASTA", "necessaryIngredient": "SPAGHETTI", "optionalIngredient": "SPINACH", "farm": "VEGETABLES", "nutrition": ["VITAMINS"] },
+                { "id": 4, "name": "Tuna Sushi", "description": "Sushi made with fresh tuna.", "imagePath": "images/dishes/tuna_sushi.png", "category": "SUSHI", "necessaryIngredient": "RICE", "optionalIngredient": "TUNA", "farm": "SEAFOOD", "nutrition": ["PROTEIN"] },
+                { "id": 5, "name": "Shrimp Sushi", "description": "Sushi made with plump shrimp.", "imagePath": "images/dishes/shrimp_sushi.png", "category": "SUSHI", "necessaryIngredient": "RICE", "optionalIngredient": "SHRIMP", "farm": "SEAFOOD", "nutrition": ["PROTEIN"] },
+                { "id": 6, "name": "Shellfish Sushi", "description": "Sushi made with fresh, crunchy shellfish.", "imagePath": "images/dishes/shellfish_sushi.png", "category": "SUSHI", "necessaryIngredient": "RICE", "optionalIngredient": "SHELLFISH", "farm": "SEAFOOD", "nutrition": ["PROTEIN"] },
+                { "id": 7, "name": "Egg Sushi", "description": "Sushi made with fluffy, slightly sweet omelet.", "imagePath": "images/dishes/egg_sushi.png", "category": "SUSHI", "necessaryIngredient": "RICE", "optionalIngredient": "EGG", "farm": "LIVESTOCK", "nutrition": ["PROTEIN"] },
+                { "id": 8, "name": "BLT Sandwich", "description": "A luxurious sandwich with bacon, lettuce, and tomato.", "imagePath": "images/dishes/blt_sandwich.png", "category": "SANDWICH", "necessaryIngredient": "BREAD", "optionalIngredient": "TOMATO", "farm": "VEGETABLES", "nutrition": ["VITAMINS"] },
+                { "id": 9, "name": "Egg Sandwich", "description": "A sandwich with fluffy, creamy egg filling.", "imagePath": "images/dishes/egg_sandwich.png", "category": "SANDWICH", "necessaryIngredient": "BREAD", "optionalIngredient": "EGG", "farm": "LIVESTOCK", "nutrition": ["PROTEIN"] },
+                { "id": 10, "name": "Tuna Sandwich", "description": "A sandwich with rich, creamy tuna filling.", "imagePath": "images/dishes/tuna_sandwich.png", "category": "SANDWICH", "necessaryIngredient": "BREAD", "optionalIngredient": "TUNA", "farm": "SEAFOOD", "nutrition": ["PROTEIN"] },
+                { "id": 11, "name": "Pork Cutlet Sandwich", "description": "A sandwich with a crispy, extra-thick pork cutlet.", "imagePath": "images/dishes/pork_cutlet_sandwich.png", "category": "SANDWICH", "necessaryIngredient": "BREAD", "optionalIngredient": "MEAT", "farm": "LIVESTOCK", "nutrition": ["PROTEIN"] },
+                { "id": 12, "name": "Chili Bean Tacos", "description": "A taco packed with the rich flavor of beans.", "imagePath": "images/dishes/chili_bean_tacos.png", "category": "TACOS", "necessaryIngredient": "CORN", "optionalIngredient": "BEANS", "farm": "VEGETABLES", "nutrition": ["PROTEIN", "VITAMINS"] },
+                { "id": 13, "name": "Cholizo Tacos", "description": "A spicy taco with cholizo sausage.", "imagePath": "images/dishes/cholizo_tacos.png", "category": "TACOS", "necessaryIngredient": "CORN", "optionalIngredient": "MEAT", "farm": "LIVESTOCK", "nutrition": ["PROTEIN"] },
+                { "id": 14, "name": "Tuna Tacos", "description": "A taco with the perfect match of tuna and avocado.", "imagePath": "images/dishes/tuna_tacos.png", "category": "TACOS", "necessaryIngredient": "CORN", "optionalIngredient": "TUNA", "farm": "SEAFOOD", "nutrition": ["PROTEIN"] },
+                { "id": 15, "name": "Vegetable Tacos", "description": "A healthy taco with spinach dough and plenty of vegetables.", "imagePath": "images/dishes/vegetable_tacos.png", "category": "TACOS", "necessaryIngredient": "CORN", "optionalIngredient": "SPINACH", "farm": "VEGETABLES", "nutrition": ["VITAMINS"] },
+                { "id": 16, "name": "Shrimp Curry", "description": "A curry with the rich flavor of shrimp.", "imagePath": "images/dishes/shrimp_curry.png", "category": "CURRY", "necessaryIngredient": "HOT_PEPPER", "optionalIngredient": "SHRIMP", "farm": "SEAFOOD", "nutrition": ["PROTEIN"] },
+                { "id": 17, "name": "Chickpea Curry", "description": "Rich and flavorful spicy chickpea curry.", "imagePath": "images/dishes/chickpea_curry.png", "category": "CURRY", "necessaryIngredient": "HOT_PEPPER", "optionalIngredient": "BEANS", "farm": "VEGETABLES", "nutrition": ["PROTEIN", "VITAMINS"] },
+                { "id": 18, "name": "Butter Chicken Curry", "description": "A fragrant curry with the aroma of butter.", "imagePath": "images/dishes/butter_chicken_curry.png", "category": "CURRY", "necessaryIngredient": "HOT_PEPPER", "optionalIngredient": "MEAT", "farm": "LIVESTOCK", "nutrition": ["PROTEIN"] },
+                { "id": 19, "name": "Spinach Cheese Curry", "description": "An Indian-style curry with the rich aroma of spinach and cheese.", "imagePath": "images/dishes/spinach_cheese_curry.png", "category": "CURRY", "necessaryIngredient": "HOT_PEPPER", "optionalIngredient": "SPINACH", "farm": "VEGETABLES", "nutrition": ["VITAMINS"] }
+            ];
 
-            if (!recipesResponse.ok || !medalsResponse.ok) {
-                throw new Error('Failed to fetch data files');
-            }
-
-            this.recipes = await recipesResponse.json();
-            this.medals = await medalsResponse.json();
+            // Load medals data
+            this.medals = [
+                { "id": "FOCUSED_ON_VARIETY", "name": "Focused on Variety", "description": "So, many ingredients! Your table has become colorful!", "imagePath": "images/medals/medal_focused_on_variety.png" },
+                { "id": "NUTRITIONALLY_BALANCED", "name": "Nutritionally Balanced", "description": "Balanced meal: Carbs, Protein, and Vitamins", "imagePath": "images/medals/medal_nutritionally_balanced.png" },
+                { "id": "BODY_BUILDER", "name": "Body Builder", "description": "You're swole from all that muscle food!", "imagePath": "images/medals/medal_body_builder.png" },
+                { "id": "HEALTHY_FLOW", "name": "Healthy Flow", "description": "With all those veggies, your blood must be super smooth!", "imagePath": "images/medals/medal_super_healthy.png" },
+                { "id": "PASTA_MAESTRO", "name": "Pasta Maestro", "description": "The paste wizard is born!", "imagePath": "images/medals/medal_pasta_maestro.png" },
+                { "id": "SUSHI_CHEF", "name": "Sushi Chef", "description": "A true artisan who has mastered sushi!", "imagePath": "images/medals/medal_sushi_chef.png" },
+                { "id": "SANDWICH_EARL", "name": "Sandwich Earl", "description": "Even Mr. Sandwich (John Montagu) would be surprised-what a noble palate!", "imagePath": "images/medals/medal_sandwich_earl.png" },
+                { "id": "TACO_ESTETA", "name": "Taco Esteta", "description": "A gourmet of tacos. You wear that sombrero well!", "imagePath": "images/medals/medal_taco_esteta.png" },
+                { "id": "CURRY_MAHARAJA", "name": "Curry Maharaja", "description": "You've built a kingdom of aromatic species!", "imagePath": "images/medals/medal_curry_maharaja.png" },
+                { "id": "SELECTIVE_EATER", "name": "Selective Eater", "description": "That dedication to single-mindedly pursuing one flavor-so admirable!", "imagePath": "images/medals/medal_selective_eater.png" },
+                { "id": "FISHERMAN", "name": "Fisherman", "description": "A true fisherman who knows all the blessings of the sea!", "imagePath": "images/medals/medal_fisherman.png" },
+                { "id": "FARMER", "name": "Farmer", "description": "The strength of a farmer who lives with the soil has reaches your table!", "imagePath": "images/medals/medal_farmer.png" },
+                { "id": "LIVESTOCK_FARMER", "name": "Livestock Farmer", "description": "A livestock farmer raising animals with a lots of love!", "imagePath": "images/medals/medal_livestock_farmer.png" },
+                { "id": "HUMPTY_DUMPTY", "name": "Humpty Dumpty", "description": "An egg lover that would surprise even the always-smiling Humpty Dumpty!", "imagePath": "images/medals/medal_humpty_dumpty.png" },
+                { "id": "MAES_TORO", "name": "Maes'Toro", "description": "Maes'Toro, master of tuna, wins thunderous applause again today!", "imagePath": "images/medals/medal_maes_toro.png" },
+                { "id": "POPEYE", "name": "Popeye", "description": "Like power-packed Popeye, your nutrition is fully charged!", "imagePath": "images/medals/medal_popeye.png" },
+                { "id": "COWBOY", "name": "Cowboy", "description": "Like a cowboy riding the wilds, an adventurer in pursuit of freedom and flavor!", "imagePath": "images/medals/medal_cowboy.png" },
+                { "id": "QUICK_DECISION_MAKER", "name": "Quick Decision Maker", "description": "Amazing decision-making speed! You never hesitate, even in a pinch!", "imagePath": "images/medals/medal_quick_decision_maker.png" },
+                { "id": "LAID_BACK_AND_STEADY", "name": "Laid Back and Steady", "description": "Controlling life at your own pace-now that's cool!", "imagePath": "images/medals/medal_laidback_and_steady.png" },
+                { "id": "UNIQUE_PALATE", "name": "Unique Palate", "description": "Your sense of taste is one of a kind!", "imagePath": "images/medals/medal_unique_palate.png" },
+                { "id": "REFINED_PALATE", "name": "Refined Palate", "description": "Oh, traveler with a refined palate, your tongue is truly first-class!", "imagePath": "images/medals/medal_refined_palate.png" }
+            ];
 
         } catch (error) {
             console.error('Error loading data:', error);
@@ -53,53 +322,113 @@ class GameResults {
 
     // Parse URL parameters to extract game results
     parseURLParameters() {
-        const urlParams = new URLSearchParams(window.location.search);
+        console.log('🔍 DETAILED URL PARSING DEBUG');
+        console.log('window.location.href:', window.location.href);
+        console.log('window.location.search:', window.location.search);
+        console.log('window.location.search length:', window.location.search.length);
 
-        // Extract parameters
-        this.currentResults.userId = urlParams.get('id') || 'Unknown';
+        // Try manual parsing first
+        const searchString = window.location.search;
+        console.log('Raw search string:', JSON.stringify(searchString));
+
+        // Check if we have any search parameters at all
+        if (searchString.length === 0) {
+            console.error('❌ NO SEARCH PARAMETERS FOUND!');
+            console.log('Current full URL:', window.location.href);
+            console.log('Expected format: yourpage.html?id=TestUser&dishes=0,4,16&time=45&count=1');
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        console.log('URLSearchParams object:', urlParams);
+
+        // Debug each parameter individually
+        console.log('🎯 Testing each parameter:');
+        const idParam = urlParams.get('id');
+        console.log('  id parameter:', JSON.stringify(idParam));
+        console.log('  id parameter type:', typeof idParam);
+        console.log('  id parameter === null:', idParam === null);
 
         const dishesParam = urlParams.get('dishes');
+        console.log('  dishes parameter:', JSON.stringify(dishesParam));
+
+        const timeParam = urlParams.get('time');
+        console.log('  time parameter:', JSON.stringify(timeParam));
+
+        const countParam = urlParams.get('count');
+        console.log('  count parameter:', JSON.stringify(countParam));
+
+        // Show all available parameters
+        console.log('🗂️ All available parameters:');
+        let paramCount = 0;
+        for (let [key, value] of urlParams.entries()) {
+            console.log(`  ${key}: "${value}"`);
+            paramCount++;
+        }
+        console.log(`Total parameters found: ${paramCount}`);
+
+        // Alternative parsing method
+        console.log('🔄 Alternative parsing test:');
+        if (window.location.search.length > 0) {
+            const params = new URLSearchParams(window.location.search.substring(1));
+            console.log('Alternative id:', params.get('id'));
+        }
+
+        // Manual string parsing as backup
+        if (window.location.search.includes('id=')) {
+            const match = window.location.search.match(/[?&]id=([^&]*)/);
+            console.log('Manual regex match for id:', match ? match[1] : 'no match');
+        }
+
+        // Extract parameters
+        this.currentResults.userId = idParam || 'Unknown';
+        console.log('🎯 FINAL userId set to:', this.currentResults.userId);
+
         this.currentResults.dishIds = dishesParam ?
             dishesParam.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id)) : [];
+        console.log('🎯 FINAL dishIds set to:', this.currentResults.dishIds);
 
-        this.currentResults.remainingTime = parseInt(urlParams.get('time')) || 0;
-        this.currentResults.errorCount = parseInt(urlParams.get('count')) || 0;
+        this.currentResults.remainingTime = parseInt(timeParam) || 0;
+        this.currentResults.errorCount = parseInt(countParam) || 0;
 
-        // Validate parameters
+        console.log('🏁 FINAL RESULTS:', this.currentResults);
+        console.log('=== END URL PARSING DEBUG ===');
+
         if (this.currentResults.dishIds.length === 0) {
-            console.warn('No valid dish IDs found in URL');
+            console.warn('⚠️ No valid dish IDs found');
         }
     }
 
-    // Display the game results on the webpage
+    // Display the game results
     displayResults() {
+        console.log('Displaying results for dishes:', this.currentResults.dishIds);
+
+        // Apply translations to static elements
+        this.applyTranslations();
+
         // Update user ID
         this.updateUserId();
 
-        // Display dishes
+        // Display dishes and medals
         this.displayDishes();
-
-        // Calculate and display medals
         this.displayMedals();
     }
 
-    // Update user ID in the header
+    // Update user ID with translation
     updateUserId() {
         const userIdElement = document.querySelector('.user-id');
         if (userIdElement) {
-            userIdElement.textContent = `Your ID: ${this.currentResults.userId}`;
+            const translatedText = this.t('header.user_id', { userId: this.currentResults.userId });
+            userIdElement.textContent = translatedText;
         }
     }
 
-    // Display the dishes made by the player
+    // Display dishes
     displayDishes() {
         const dishesGrid = document.querySelector('.dishes-grid');
         if (!dishesGrid) return;
 
-        // Clear existing dishes
         dishesGrid.innerHTML = '';
 
-        // Get recipe objects for the dish IDs
         const playerRecipes = this.getPlayerRecipes();
 
         if (playerRecipes.length === 0) {
@@ -107,33 +436,36 @@ class GameResults {
             return;
         }
 
-        // Create dish elements
         playerRecipes.forEach(recipe => {
             const dishElement = this.createDishElement(recipe);
             dishesGrid.appendChild(dishElement);
         });
     }
 
-    // Get recipe objects based on dish IDs from URL
+    // Get player recipes
     getPlayerRecipes() {
         return this.currentResults.dishIds
             .map(dishId => this.recipes.find(recipe => recipe.id === dishId))
             .filter(recipe => recipe !== undefined);
     }
 
-    // Create HTML element for a single dish
+    // Create dish element with localized content
     createDishElement(recipe) {
         const dishItem = document.createElement('div');
         dishItem.className = 'dish-item';
+
+        // Get localized name and description
+        const localizedRecipe = this.translations[this.currentLanguage].recipes[recipe.id];
+        const dishName = localizedRecipe ? localizedRecipe.name : recipe.name;
+
         dishItem.innerHTML = `
             <div class="dish-circle">
-                <img src="${recipe.imagePath}" alt="${recipe.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <img src="${recipe.imagePath}" alt="${dishName}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <span class="placeholder-text" style="display: none;">Dish Image</span>
             </div>
-            <div class="dish-name">${recipe.name}</div>
+            <div class="dish-name">${dishName}</div>
         `;
 
-        // Add click event to show modal
         dishItem.addEventListener('click', () => {
             this.showRecipeModal(recipe);
         });
@@ -141,83 +473,66 @@ class GameResults {
         return dishItem;
     }
 
-    // Convert ingredient names to display-friendly format
-    getIngredientDisplayName(ingredient) {
-        const displayNameMap = {
-            'SPAGHETTI': 'Spaghetti',
-            'RICE': 'Rice',
-            'BREAD': 'Bread',
-            'CORN': 'Corn',
-            'EGG': 'Egg',
-            'SHELLFISH': 'Shellfish',
-            'TOMATO': 'Tomato',
-            'SPINACH': 'Spinach',
-            'TUNA': 'Tuna',
-            'SHRIMP': 'Shrimp',
-            'MEAT': 'Meat',
-            'BEANS': 'Beans',
-            'HOT_PEPPER': 'Hot Pepper'
-        };
+    // Show recipe modal with localized content
+    showRecipeModal(recipe) {
+        const modal = document.getElementById('recipe-modal');
+        const modalIngredientsContainer = document.getElementById('modal-ingredients');
 
-        return displayNameMap[ingredient] || ingredient.toLowerCase().replace('_', ' ');
+        // Get localized content
+        const localizedRecipe = this.translations[this.currentLanguage].recipes[recipe.id];
+        const dishName = localizedRecipe ? localizedRecipe.name : recipe.name;
+        const dishDescription = localizedRecipe ? localizedRecipe.description : recipe.description;
+
+        document.getElementById('modal-image').src = recipe.imagePath;
+        document.getElementById('modal-image').alt = dishName;
+        document.getElementById('modal-title').textContent = dishName;
+        document.getElementById('modal-description').textContent = dishDescription || this.t('messages.noDescription');
+
+        // Add ingredients
+        modalIngredientsContainer.innerHTML = this.createIngredientsHTML(recipe);
+
+        modal.classList.add('show');
+
+        // Close modal handlers
+        modal.querySelector('.close-btn').onclick = () => modal.classList.remove('show');
+        modal.onclick = (e) => {
+            if (e.target === modal) modal.classList.remove('show');
+        };
     }
 
-    // Convert ingredient names to file-friendly format
-    getIngredientImagePath(ingredient) {
-        const ingredientMap = {
-            'SPAGHETTI': 'spaghetti',
-            'RICE': 'rice',
-            'BREAD': 'bread',
-            'CORN': 'corn',
-            'EGG': 'egg',
-            'SHELLFISH': 'shellfish',
-            'TOMATO': 'tomato',
-            'SPINACH': 'spinach',
-            'TUNA': 'tuna',
-            'SHRIMP': 'shrimp',
-            'MEAT': 'meat',
-            'BEANS': 'beans',
-            'HOT_PEPPER': 'hot_pepper'
-        };
-
-        const fileName = ingredientMap[ingredient] || ingredient.toLowerCase();
-        return `images/ingredients/${fileName}.png`;
-    }
-
-    // Create ingredients HTML for modal
+    // Create ingredients HTML with translations
     createIngredientsHTML(recipe) {
         const necessaryIngredient = recipe.necessaryIngredient;
         const optionalIngredient = recipe.optionalIngredient;
 
         let ingredientsHTML = '';
 
-        // Primary ingredient
         if (necessaryIngredient) {
+            const displayName = this.t(`ingredients.${necessaryIngredient}`);
             ingredientsHTML += `
                 <div class="ingredient-item">
                     <img src="${this.getIngredientImagePath(necessaryIngredient)}" 
                          alt="${necessaryIngredient}" 
                          class="ingredient-image"
                          onerror="this.style.display='none';">
-                    <div class="ingredient-label">${this.getIngredientDisplayName(necessaryIngredient)}</div>
+                    <div class="ingredient-label">${displayName}</div>
                 </div>
             `;
         }
 
-        // Plus icon
         if (necessaryIngredient && optionalIngredient) {
             ingredientsHTML += '<div class="plus-icon">+</div>';
         }
 
-        // Secondary ingredient
         if (optionalIngredient) {
+            const displayName = this.t(`ingredients.${optionalIngredient}`);
             ingredientsHTML += `
                 <div class="ingredient-item">
                     <img src="${this.getIngredientImagePath(optionalIngredient)}" 
                          alt="${optionalIngredient}" 
                          class="ingredient-image"
                          onerror="this.style.display='none';">
-                    <div class="ingredient-label">${this.getIngredientDisplayName(optionalIngredient)}</div>
+                    <div class="ingredient-label">${displayName}</div>
                 </div>
             `;
         }
@@ -225,71 +540,39 @@ class GameResults {
         return ingredientsHTML;
     }
 
-    // Show the modal popup with recipe details
-    showRecipeModal(recipe) {
-        const modal = document.getElementById('recipe-modal');
-        const modalIngredientsContainer = document.getElementById('modal-ingredients');
-
-        document.getElementById('modal-image').src = recipe.imagePath;
-        document.getElementById('modal-image').alt = recipe.name;
-        document.getElementById('modal-title').textContent = recipe.name;
-        document.getElementById('modal-description').textContent = recipe.description || "No description available.";
-
-        // Add ingredients
-        modalIngredientsContainer.innerHTML = this.createIngredientsHTML(recipe);
-
-        modal.classList.add('show');
-
-        // Close modal when clicking the close button or outside modal content
-        modal.querySelector('.close-btn').onclick = () => modal.classList.remove('show');
-        modal.onclick = (e) => {
-            if (e.target === modal) modal.classList.remove('show');
+    // Get ingredient image path
+    getIngredientImagePath(ingredient) {
+        const ingredientMap = {
+            'SPAGHETTI': 'spaghetti', 'RICE': 'rice', 'BREAD': 'bread', 'CORN': 'corn',
+            'EGG': 'egg', 'SHELLFISH': 'shellfish', 'TOMATO': 'tomato', 'SPINACH': 'spinach',
+            'TUNA': 'tuna', 'SHRIMP': 'shrimp', 'MEAT': 'meat', 'BEANS': 'beans', 'HOT_PEPPER': 'hot_pepper'
         };
+
+        const fileName = ingredientMap[ingredient] || ingredient.toLowerCase();
+        return `images/ingredients/${fileName}.png`;
     }
 
-    // Show the modal popup with medal details
-    showMedalModal(medal) {
-        const modal = document.getElementById('recipe-modal');
-        const modalIngredientsContainer = document.getElementById('modal-ingredients');
-
-        document.getElementById('modal-image').src = medal.imagePath;
-        document.getElementById('modal-image').alt = medal.name;
-        document.getElementById('modal-title').textContent = medal.name;
-        document.getElementById('modal-description').textContent = medal.description || "Congratulations on earning this medal!";
-
-        // Clear ingredients for medals (they don't have ingredients)
-        modalIngredientsContainer.innerHTML = '';
-
-        modal.classList.add('show');
-
-        // Close modal when clicking the close button or outside modal content
-        modal.querySelector('.close-btn').onclick = () => modal.classList.remove('show');
-        modal.onclick = (e) => {
-            if (e.target === modal) modal.classList.remove('show');
-        };
-    }
-
-    // Show message when no dishes are found
+    // Show no dishes message
     showNoDishesMessage(container) {
+        const noDishesText = this.t('messages.noDishes');
+        const keepTryingText = this.t('messages.keepTrying');
+
         container.innerHTML = `
             <div class="dish-item">
                 <div class="dish-circle">
-                    <span class="placeholder-text">No dishes found</span>
+                    <span class="placeholder-text">${noDishesText}</span>
                 </div>
-                <div class="dish-name">No Results</div>
+                <div class="dish-name">${keepTryingText}</div>
             </div>
         `;
     }
 
-    // Calculate and display medals earned
+    // Display medals
     displayMedals() {
         const medalsGrid = document.querySelector('.medals-grid');
         if (!medalsGrid) return;
 
-        // Calculate earned medals
         const earnedMedals = this.calculateEarnedMedals();
-
-        // Clear existing medals
         medalsGrid.innerHTML = '';
 
         if (earnedMedals.length === 0) {
@@ -297,14 +580,13 @@ class GameResults {
             return;
         }
 
-        // Create medal elements
         earnedMedals.forEach(medal => {
             const medalElement = this.createMedalElement(medal);
             medalsGrid.appendChild(medalElement);
         });
     }
 
-    // Calculate which medals the player has earned
+    // Calculate earned medals
     calculateEarnedMedals() {
         const playerRecipes = this.getPlayerRecipes();
         const { remainingTime, errorCount } = this.currentResults;
@@ -314,7 +596,7 @@ class GameResults {
         });
     }
 
-    // Check if a specific medal condition is met
+    // Check medal conditions
     checkMedalCondition(medal, recipes, remainingTime, errorCount) {
         const hasEnoughRecipes = recipes.length >= 2;
 
@@ -397,20 +679,23 @@ class GameResults {
         }
     }
 
-    // Create HTML element for a single medal
+    // Create medal element with localized content
     createMedalElement(medal) {
         const medalItem = document.createElement('div');
         medalItem.className = 'medal-item';
 
+        // Get localized medal name
+        const localizedMedal = this.translations[this.currentLanguage].medals[medal.id];
+        const medalName = localizedMedal ? localizedMedal.name : medal.name;
+
         medalItem.innerHTML = `
             <div class="medal-circle">
-                <img src="${medal.imagePath}" alt="${medal.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <img src="${medal.imagePath}" alt="${medalName}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <span class="placeholder-text" style="display: none;">Medal Image</span>
             </div>
-            <div class="medal-name">${medal.name}</div>
+            <div class="medal-name">${medalName}</div>
         `;
 
-        // Add click event to show modal for medal
         medalItem.addEventListener('click', () => {
             this.showMedalModal(medal);
         });
@@ -418,14 +703,44 @@ class GameResults {
         return medalItem;
     }
 
-    // Show message when no medals are earned
+    // Show medal modal with localized content
+    showMedalModal(medal) {
+        const modal = document.getElementById('recipe-modal');
+        const modalIngredientsContainer = document.getElementById('modal-ingredients');
+
+        // Get localized content
+        const localizedMedal = this.translations[this.currentLanguage].medals[medal.id];
+        const medalName = localizedMedal ? localizedMedal.name : medal.name;
+        const medalDescription = localizedMedal ? localizedMedal.description : medal.description;
+
+        document.getElementById('modal-image').src = medal.imagePath;
+        document.getElementById('modal-image').alt = medalName;
+        document.getElementById('modal-title').textContent = medalName;
+        document.getElementById('modal-description').textContent = medalDescription || "Congratulations on earning this medal!";
+
+        // Clear ingredients for medals
+        modalIngredientsContainer.innerHTML = '';
+
+        modal.classList.add('show');
+
+        // Close modal handlers
+        modal.querySelector('.close-btn').onclick = () => modal.classList.remove('show');
+        modal.onclick = (e) => {
+            if (e.target === modal) modal.classList.remove('show');
+        };
+    }
+
+    // Show no medals message
     showNoMedalsMessage(container) {
+        const noMedalsText = this.t('messages.noMedals');
+        const keepTryingText = this.t('messages.keepTrying');
+
         container.innerHTML = `
             <div class="medal-item">
                 <div class="medal-circle">
-                    <span class="placeholder-text">No medals earned</span>
+                    <span class="placeholder-text">${noMedalsText}</span>
                 </div>
-                <div class="medal-name">Keep trying!</div>
+                <div class="medal-name">${keepTryingText}</div>
             </div>
         `;
     }
@@ -444,21 +759,30 @@ class GameResults {
     }
 }
 
-// Initialize the application when the page loads
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    const gameResults = new GameResults();
-    gameResults.init();
+    window.gameResults = new GameResults();
 });
 
 // Debug function to test with sample data
 function testWithSampleData() {
-    // Example: test URL would be ?id=12345&dishes=0,4,16&time=45&count=1
-    // This represents: Pasta Carbonara, Tuna Sushi, Shrimp Curry with 45 seconds remaining and 1 error
-    window.history.replaceState({}, '', `${window.location.pathname}?id=12345&dishes=0,4,16&time=45&count=1`);
+    console.log('🎮 Setting up test data...');
+    window.history.replaceState({}, '', `${window.location.pathname}?id=TestUser&dishes=0,4,16&time=45&count=1`);
+    console.log('✅ URL updated to:', window.location.href);
+    console.log('🔄 Reloading page...');
     location.reload();
 }
 
-// Export for potential use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = GameResults;
+// Helper function to show current URL status
+function checkURLStatus() {
+    console.log('=== URL STATUS CHECK ===');
+    console.log('Current URL:', window.location.href);
+    console.log('Has parameters:', window.location.search.length > 0);
+
+    const urlParams = new URLSearchParams(window.location.search);
+    console.log('Parameters found:');
+    for (let [key, value] of urlParams.entries()) {
+        console.log(`  ${key}: ${value}`);
+    }
+    console.log('=== END STATUS CHECK ===');
 }
