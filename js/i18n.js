@@ -498,7 +498,10 @@ class I18nManager {
           "title": "sHOP USING YOUR GAZE",
           "intro": {
             "title": "The Future of Shopping is Watching You",
-            "description": "Eye movement remains an underutilized source of information and is one of the few functions that patients with limited mobility can retain. Traditional eye-tracking required expensive equipment, but by 2050, it will be available on any device with a built-in camera. Eye control may become as natural as using hands or voice, not only as a communication tool for those with mobility impairments but also in everyday life. This exhibit features a \"Eye Control Shopping\" offering a glimpse into a future where eye control is an everyday convenience."
+            "description": "Experience a Future Where Eye-Control is the Norm: “Look to Buy” Game\n" +
+                "Even if your body doesn’t move, your eyes still can — and that hidden potential will change our future.\n" +
+                "Once requiring expensive equipment, eye tracking is becoming as common as using hands or voice by 2050.\n" +
+                "This exhibit offers a glimpse into that future, where controlling devices with your gaze is part of everyday life."
           }
         },
         "howToOperate": {
@@ -790,7 +793,7 @@ class I18nManager {
   getEmbeddedJapaneseTranslations() {
     return {
       "meta": {
-        "title": "Messay 視線トラッキング",
+        "title": "Messay Eye Tracking",
         "description": "私たちのアプリは、ALS、筋ジストロフィー、その他の重篤な疾患を患う寝たきりの患者様とそのご家族、介護者の日常生活を改善するために開発されました。"
       },
       "nav": {
@@ -802,7 +805,7 @@ class I18nManager {
       },
       "hero": {
         "brand": "Messay Tech",
-        "title": "モバイル<br><span class=\"italics\">視線トラッキング</span>",
+        "title": "Mobile <br><span class=\"italics\">Eye Tracking</span>",
         "description": "私たちのアプリは、ALS、筋ジストロフィー、その他の重篤な疾患を患う寝たきりの患者様とそのご家族、介護者の日常生活を改善するために開発されました。",
         "button": "詳細を見る"
       },
@@ -852,7 +855,7 @@ class I18nManager {
           "suffix": "以上でダウンロード"
         },
         "retention": {
-          "prefix": "顧客維持率",
+          "prefix": "",
           "number": "92<sup>%</sup>",
           "suffix": "App Storeでの継続率"
         }
@@ -911,7 +914,7 @@ class I18nManager {
         "subheading": "大阪万博ヘルスケアパビリオン（リボーンチャレンジブース）に出展いたします。",
         "event": "EXPO 2025",
         "title": "大阪関西万博 2025",
-        "dates": "2025年7月29日から8月4日まで<br>大阪万博2025ヘルスケアパビリオンでお会いしましょう",
+        "dates": "2025年7月29日から8月4日まで<br>ヘルスケアパビリオン・リボーンチャレンジブースにて",
         "pavilion": {
           "title": "パビリオン情報",
           "description": "大阪万博2025で、私たちの革新的なモバイル視線トラッキング技術をご体験ください。私たちのブースでは、視線トラッキングを活用したお買い物ゲームを展示しています。",
@@ -919,7 +922,7 @@ class I18nManager {
         },
         "location": {
           "title": "場所はこちら",
-          "description": "東ゲート入口近くの、大阪ヘルスケアパビリオンです。",
+          "description": "大阪ヘルスケアパビリオンのリボーンチャレンジブースにて展示しております。",
           "button": "地図を見る"
         },
         "button": "EXPO 2025"
@@ -1004,7 +1007,7 @@ class I18nManager {
           "list": [
             "🎯 3つの料理のための食材を選んでいただきます。",
             "🎯 各料理は2つの食材で構成されます。",
-            "🎯 正しい主原料を選ぶ ",
+            "🎯 正しいメイン食材を選ぶ ",
             "🎯 つくった料理に基づいて、メダルを獲得できます。"
           ]
         },
