@@ -3,7 +3,7 @@
 class LocalizationManager {
     constructor() {
         this.currentLanguage = 'en';
-        this.supportedLanguages = ['en', 'es', 'fr', 'de', 'ja'];
+        this.supportedLanguages = ['en', 'ja'];
         this.translations = {};
         this.fallbackLanguage = 'en';
         this.isInitialized = false;
@@ -258,9 +258,6 @@ class LocalizationManager {
     getLanguageDisplayName(lang) {
         const displayNames = {
             'en': '🇺🇸 English',
-            'es': '🇪🇸 Español',
-            'fr': '🇫🇷 Français',
-            'de': '🇩🇪 Deutsch',
             'ja': '🇯🇵 日本語'
         };
         return displayNames[lang] || lang.toUpperCase();
