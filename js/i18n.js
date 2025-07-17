@@ -372,7 +372,7 @@ class I18nManager {
         },
         "retention": {
           "prefix": "Customer Retention",
-          "number": "92<sup>%</sup>",
+          "number": "92%",
           "suffix": "Subscription Ratio on App Store"
         }
       },
@@ -381,7 +381,7 @@ class I18nManager {
         "title": "FEATURED IN...",
         "description": "Featured at major tech exhibitions including CES 2024 and VivaTech 2023, recognized for innovation in accessibility technology.",
         "ces": {
-          "title": "Featured in CES 2024",
+          "title": "Featured in CES 2025",
           "description": "Showcased our eye-tracking technology among global tech leaders in Las Vegas"
         },
         "vivatech": {
@@ -851,12 +851,12 @@ class I18nManager {
         },
         "countries": {
           "prefix": "",
-          "number": "170ヶ国",
-          "suffix": "以上でダウンロード"
+          "number": "170+",
+          "suffix": "ヶ国以上でダウンロード"
         },
         "retention": {
           "prefix": "",
-          "number": "92<sup>%</sup>",
+          "number": "92%",
           "suffix": "App Storeでの継続率"
         }
       },
@@ -865,7 +865,7 @@ class I18nManager {
         "title": "出展実績",
         "description": "CESやVivaTechなどの主要な技術展示会に参加し、革新的なアクセシビリティ技術として認められました。",
         "ces": {
-          "title": "CES 2024で紹介",
+          "title": "CES 2025で紹介",
           "description": "ラスベガスで、世界の先端技術が集まる中で弊社の視線トラッキング技術を紹介しました。"
         },
         "vivatech": {
