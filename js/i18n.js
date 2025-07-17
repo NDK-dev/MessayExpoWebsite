@@ -597,8 +597,8 @@ class I18nManager {
               },
               "meat": {
                 "main": "Hot Pepper",
-                "secondary": "Shrimp",
-                "result": "Shrimp Curry"
+                "secondary": "Chicken",
+                "result": "Butter Chicken Curry"
               }
             }
           },
@@ -608,7 +608,7 @@ class I18nManager {
               "tomato": {
                 "main": "Bread",
                 "secondary": "Tomato",
-                "result": "Egg Sandwich"
+                "result": "BLT Sandwich"
               },
               "egg": {
                 "main": "Bread",
