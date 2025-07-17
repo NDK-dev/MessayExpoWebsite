@@ -537,7 +537,7 @@ class I18nManager {
             "dishes": {
               "redClam": {
                 "main": "Rice",
-                "secondary": "Red Clam",
+                "secondary": "Clam",
                 "result": "Red Clam Sushi"
               },
               "egg": {
@@ -597,7 +597,7 @@ class I18nManager {
               },
               "meat": {
                 "main": "Hot Pepper",
-                "secondary": "Chicken",
+                "secondary": "Meat",
                 "result": "Butter Chicken Curry"
               }
             }
@@ -622,7 +622,7 @@ class I18nManager {
               },
               "pork": {
                 "main": "Bread",
-                "secondary": "Pork",
+                "secondary": "Meat",
                 "result": "Tonkatsu Sandwich"
               }
             }
@@ -642,7 +642,7 @@ class I18nManager {
               },
               "clams": {
                 "main": "Pasta",
-                "secondary": "Clams",
+                "secondary": "Clam",
                 "result": "Vongole Bianco"
               },
               "spinach": {
