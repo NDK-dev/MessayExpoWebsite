@@ -9557,7 +9557,7 @@ blockquote {
 }
 
 /* Mobile landscape and small tablets */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 600px) {
   .features-list {
     padding: 30px 15px;
     margin: 0 auto !important;
