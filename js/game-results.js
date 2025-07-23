@@ -408,11 +408,11 @@ class GameResults {
 
             if (isIOS) {
                 // iOS Instagram URL schemes
-                instagramUrl = 'instagram://camera'; // Opens to camera/story creation
+                instagramUrl = 'https://www.instagram.com/stories/feed?share_url=${encodeURIComponent(url)}&title=${encodeURIComponent(shareText)}`;'; // Opens to camera/story creation
                 // Alternative: 'instagram://app' or 'instagram://user?username=self'
             } else if (isAndroid) {
                 // Android Instagram intent
-                instagramUrl = 'intent://camera';
+                instagramUrl = `intent://share?text=${encodeURIComponent(shareText + ' ' + url)}#Intent;package=com.instagram.android;scheme=https;end`;
                 // Alternative: 'instagram://camera'
             }
 
