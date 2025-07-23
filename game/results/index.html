@@ -676,6 +676,35 @@
             color: #2d3436;
             line-height: 1.4;
         }
+
+        /* Footer Section */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+        }
+
+        .home-button {
+            background: #c1e4c3;
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 15px 30px;
+            text-decoration: none;
+            color: #2d3436;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 8px 8px 0px 0px rgb(0, 0, 0);
+        }
+
+        .home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 12px 12px 0px 0px rgb(0, 0, 0);
+        }
+
         /* Error Message */
         .error-message {
             text-align: center;
@@ -819,6 +848,10 @@
             .share-option {
                 padding: 25px 20px;
             }
+            .footer {
+                padding: 20px;
+                margin-top: 40px;
+            }
         }
 
         /* Custom scrollbar for modal content */
@@ -881,6 +914,14 @@
             <div class="loading" data-translate="medals.loading">Calculating your achievements</div>
         </div>
     </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <a href="https://expo.messay.ndk-group.co.jp" class="home-button">
+            <span>🏠</span>
+            <span>Back to Home</span>
+        </a>
+    </footer>
 </div>
 
 <!-- Share Modal -->
