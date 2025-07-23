@@ -1,4 +1,4 @@
-// game-results.js - Main logic with integrated translations and internationalized sharing
+// game-results.js - Main logic with integrated translations and fixed Instagram sharing
 
 class GameResults {
     constructor() {
@@ -53,8 +53,8 @@ class GameResults {
                     success_message: "Copied to clipboard! 📋",
                     share_text: "🍽️ Check out my dishes and medals that I achieved in the #EyeTracking Shopping Game at the Reborn Challenge Booth of the Osaka Healthcare Pavilion! #Expo2025 ",
                     instagram_copy_text: "🍽️ Check out my dishes and medals that I achieved in the #EyeTracking Shopping Game at the Reborn Challenge Booth of the Osaka Healthcare Pavilion! #Expo2025 ",
-                    instagram_instruction_mobile: "Create a new post in the Instagram app and paste the copied text!",
-                    instagram_instruction_desktop: "Please open Instagram on your mobile device, create a new post, and paste the text. The text has been copied to your clipboard!"
+                    instagram_instruction_mobile: "Text copied to clipboard!\n\n📱 Open Instagram app:\n1. Create a new post\n2. Paste the text in caption\n3. Add a screenshot of this results page",
+                    instagram_instruction_desktop: "Text copied to clipboard!\n\n📱 Please open Instagram on your mobile device:\n1. Create a new post\n2. Paste the copied text\n3. Add a screenshot of this page"
                 },
                 recipes: {
                     0: { name: "Pasta Carbonara", description: "A rich, creamy pasta dish with bacon, eggs, and cheese." },
@@ -142,8 +142,8 @@ class GameResults {
                         "\n" +
                         "私のつくった料理はこちら",
                     instagram_copy_text: "🍽️ 大阪ヘルスケアパビリオンのリボーンチャレンジブースで、「視線でお買い物ゲーム」を体験しました #Expo2025 #eyetracking 私のつくった料理はこちら",
-                    instagram_instruction_mobile: "Instagramアプリで新しい投稿を作成し、コピーしたテキストを貼り付けてください！",
-                    instagram_instruction_desktop: "モバイルデバイスでInstagramアプリを開き、新しい投稿を作成してテキストを貼り付けてください。テキストはクリップボードにコピーされました！"
+                    instagram_instruction_mobile: "テキストをコピーしました！\n\n📱 Instagramアプリを開いて:\n1. 新しい投稿を作成\n2. キャプションにペースト\n3. この結果画面のスクリーンショットを追加",
+                    instagram_instruction_desktop: "テキストをコピーしました！\n\n📱 モバイルデバイスでInstagramアプリを開き:\n1. 新しい投稿を作成\n2. コピーしたテキストを貼り付け\n3. この画面のスクリーンショットを追加"
                 },
                 recipes: {
                     0: { name: "カルボナーラパスタ", description: "卵とチーズ、ベーコンがからむ濃厚パスタ" },
@@ -342,7 +342,7 @@ class GameResults {
         }, 2000);
     }
 
-    // Social media sharing functions with internationalization
+    // FIXED Instagram sharing functionality
     shareToInstagram() {
         const shareText = this.t('share.instagram_copy_text');
         const currentUrl = window.location.href;
@@ -352,12 +352,182 @@ class GameResults {
             this.showSuccessMessage();
             this.closeShareModal();
 
-            // Try multiple Instagram opening strategies
+            // Try to open Instagram with improved approach
             this.openInstagramApp(currentUrl, shareText);
         }).catch(() => {
             // If clipboard fails, still try to open Instagram
             this.closeShareModal();
             this.openInstagramApp(currentUrl, shareText);
+        });
+    }
+
+    // Improved Instagram app opening method
+    openInstagramApp(url, text) {
+        const userAgent = navigator.userAgent;
+        const isIOS = /iPad|iPhone|iPod/.test(userAgent);
+        const isAndroid = /Android/.test(userAgent);
+        const isMobile = isIOS || isAndroid;
+
+        if (isMobile) {
+            // Strategy: Use simple app schemes that actually work
+            let instagramUrl;
+
+            if (isIOS) {
+                // iOS: Use the basic Instagram app scheme
+                instagramUrl = 'instagram://app';
+            } else if (isAndroid) {
+                // Android: Use the package-based intent
+                instagramUrl = 'intent://instagram.com/#Intent;package=com.instagram.android;scheme=https;end';
+            }
+
+            // Try to open Instagram app
+            this.tryOpenApp(instagramUrl, text);
+
+        } else {
+            // Desktop fallback
+            this.instagramFallback(text);
+        }
+    }
+
+    // Helper method to try opening the app with fallback
+    tryOpenApp(appUrl, text) {
+        const startTime = Date.now();
+        const timeout = 2000; // 2 seconds
+
+        // Track if user left the page (app opened)
+        let appOpened = false;
+
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                appOpened = true;
+                clearTimeout(fallbackTimer);
+                document.removeEventListener('visibilitychange', handleVisibilityChange);
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        // Set up fallback timer
+        const fallbackTimer = setTimeout(() => {
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+            if (!appOpened) {
+                this.instagramFallback(text);
+            }
+        }, timeout);
+
+        // Try to open the app
+        try {
+            // Method 1: Try window.location (works better on iOS)
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                window.location.href = appUrl;
+            } else {
+                // Method 2: Try window.open (works better on Android)
+                const newWindow = window.open(appUrl, '_blank');
+                // Check if window opened (indicates app didn't launch)
+                setTimeout(() => {
+                    if (newWindow && !newWindow.closed) {
+                        newWindow.close();
+                        if (!appOpened) {
+                            this.instagramFallback(text);
+                        }
+                    }
+                }, 1000);
+            }
+        } catch (error) {
+            console.log('Error opening Instagram app:', error);
+            this.instagramFallback(text);
+        }
+    }
+
+    // Improved fallback when Instagram app can't be opened
+    instagramFallback(text) {
+        const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        if (isMobile) {
+            // On mobile, open Instagram website
+            const instagramWebUrl = 'https://www.instagram.com/';
+            window.open(instagramWebUrl, '_blank');
+
+            // Show helpful instruction
+            setTimeout(() => {
+                const message = this.t('share.instagram_instruction_mobile');
+                this.showCustomMessage(message, 6000);
+            }, 1000);
+        } else {
+            // On desktop, just show instructions
+            const message = this.t('share.instagram_instruction_desktop');
+            this.showCustomMessage(message, 5000);
+        }
+    }
+
+    // Enhanced custom message display
+    showCustomMessage(message, duration = 3000) {
+        // Remove any existing messages first
+        const existingMessages = document.querySelectorAll('.custom-share-message');
+        existingMessages.forEach(msg => msg.remove());
+
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'custom-share-message';
+        messageDiv.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #c1e4c3;
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 25px 30px;
+            box-shadow: 10px 10px 0px 0px rgb(0, 0, 0);
+            z-index: 2000;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #2d3436;
+            max-width: 85vw;
+            text-align: center;
+            line-height: 1.6;
+            white-space: pre-line;
+            animation: slideInScale 0.3s ease-out;
+        `;
+
+        // Add animation styles if not already present
+        if (!document.getElementById('custom-message-styles')) {
+            const style = document.createElement('style');
+            style.id = 'custom-message-styles';
+            style.textContent = `
+                @keyframes slideInScale {
+                    from {
+                        opacity: 0;
+                        transform: translate(-50%, -50%) scale(0.8) translateY(20px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translate(-50%, -50%) scale(1) translateY(0);
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        messageDiv.textContent = message;
+        document.body.appendChild(messageDiv);
+
+        // Auto remove after duration
+        setTimeout(() => {
+            if (document.body.contains(messageDiv)) {
+                messageDiv.style.animation = 'slideInScale 0.3s ease-out reverse';
+                setTimeout(() => {
+                    if (document.body.contains(messageDiv)) {
+                        document.body.removeChild(messageDiv);
+                    }
+                }, 300);
+            }
+        }, duration);
+
+        // Allow manual close by clicking
+        messageDiv.addEventListener('click', () => {
+            if (document.body.contains(messageDiv)) {
+                document.body.removeChild(messageDiv);
+            }
         });
     }
 
@@ -393,135 +563,6 @@ class GameResults {
                 }
             }
         });
-    }
-
-    // Enhanced Instagram app opening with multiple strategies
-    openInstagramApp(url, text) {
-        const userAgent = navigator.userAgent;
-        const isIOS = /iPad|iPhone|iPod/.test(userAgent);
-        const isAndroid = /Android/.test(userAgent);
-        const isMobile = isIOS || isAndroid;
-
-        if (isMobile) {
-            // Strategy 1: Try Instagram's direct URL scheme first
-            let instagramUrl;
-
-            if (isIOS) {
-                // iOS Instagram URL schemes
-                instagramUrl = 'https://www.instagram.com/stories/feed?share_url=${encodeURIComponent(url)}&title=${encodeURIComponent(shareText)}`;'; // Opens to camera/story creation
-                // Alternative: 'instagram://app' or 'instagram://user?username=self'
-            } else if (isAndroid) {
-                // Android Instagram intent
-                instagramUrl = `intent://share?text=${encodeURIComponent(shareText + ' ' + url)}#Intent;package=com.instagram.android;scheme=https;end`;
-                // Alternative: 'instagram://camera'
-            }
-
-            // Try to open Instagram app
-            const startTime = Date.now();
-            const timeout = 1500; // 1.5 seconds
-
-            // Create a hidden iframe to test app opening
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = instagramUrl;
-            document.body.appendChild(iframe);
-
-            // Fallback timer
-            const fallbackTimer = setTimeout(() => {
-                document.body.removeChild(iframe);
-                this.instagramFallback(text);
-            }, timeout);
-
-            // Listen for page visibility changes (app opening)
-            const handleVisibilityChange = () => {
-                if (document.hidden) {
-                    // User likely switched to Instagram app
-                    clearTimeout(fallbackTimer);
-                    document.removeEventListener('visibilitychange', handleVisibilityChange);
-                    setTimeout(() => {
-                        if (document.body.contains(iframe)) {
-                            document.body.removeChild(iframe);
-                        }
-                    }, 1000);
-                }
-            };
-
-            document.addEventListener('visibilitychange', handleVisibilityChange);
-
-            // Alternative approach: Direct window.open
-            setTimeout(() => {
-                if (isIOS) {
-                    // For iOS, try different approach
-                    window.location.href = instagramUrl;
-                } else {
-                    // For Android, use window.open
-                    const newWindow = window.open(instagramUrl, '_blank');
-                    // Check if window opened successfully
-                    setTimeout(() => {
-                        if (!newWindow || newWindow.closed) {
-                            this.instagramFallback(text);
-                        }
-                    }, 500);
-                }
-            }, 100);
-
-        } else {
-            // Desktop fallback
-            this.instagramFallback(text);
-        }
-    }
-
-    // Fallback when Instagram app can't be opened
-    instagramFallback(text) {
-        const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-        if (isMobile) {
-            // On mobile, open Instagram website
-            const instagramWebUrl = 'https://www.instagram.com/';
-            window.open(instagramWebUrl, '_blank');
-
-            // Show additional instruction
-            setTimeout(() => {
-                const message = this.t('share.instagram_instruction_mobile');
-                this.showCustomMessage(message, 4000);
-            }, 1000);
-        } else {
-            // On desktop, provide instructions
-            const message = this.t('share.instagram_instruction_desktop');
-            this.showCustomMessage(message, 5000);
-        }
-    }
-
-    // Helper method to show custom messages
-    showCustomMessage(message, duration = 3000) {
-        const messageDiv = document.createElement('div');
-        messageDiv.style.cssText = `
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #c1e4c3;
-            border: 3px solid #000;
-            border-radius: 15px;
-            padding: 20px 30px;
-            box-shadow: 10px 10px 0px 0px rgb(0, 0, 0);
-            z-index: 2000;
-            font-size: 1rem;
-            font-weight: bold;
-            color: #2d3436;
-            max-width: 80vw;
-            text-align: center;
-            line-height: 1.4;
-        `;
-        messageDiv.textContent = message;
-
-        document.body.appendChild(messageDiv);
-
-        setTimeout(() => {
-            if (document.body.contains(messageDiv)) {
-                document.body.removeChild(messageDiv);
-            }
-        }, duration);
     }
 
     shareToFacebook() {
