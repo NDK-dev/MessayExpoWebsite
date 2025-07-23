@@ -1,4 +1,4 @@
-// game-results.js - Main logic with integrated translations
+// game-results.js - Main logic with integrated translations and internationalized sharing
 
 class GameResults {
     constructor() {
@@ -42,6 +42,19 @@ class GameResults {
                     noMedals: "No medals earned",
                     keepTrying: "Keep trying!",
                     noDescription: "No description available."
+                },
+                share: {
+                    button_text: "Share My Results",
+                    modal_title: "Share Your Results!",
+                    instagram: "Instagram",
+                    facebook: "Facebook",
+                    twitter: "Twitter",
+                    line: "Line",
+                    success_message: "Copied to clipboard! 📋",
+                    share_text: "🍽️ Check out my dishes and medals that I achieved in the #EyeTracking Shopping Game at the Reborn Challenge Booth of the Osaka Healthcare Pavilion! #Expo2025 ",
+                    instagram_copy_text: "🍽️ Check out my dishes and medals that I achieved in the #EyeTracking Shopping Game at the Reborn Challenge Booth of the Osaka Healthcare Pavilion! #Expo2025 ",
+                    instagram_instruction_mobile: "Create a new post in the Instagram app and paste the copied text!",
+                    instagram_instruction_desktop: "Please open Instagram on your mobile device, create a new post, and paste the text. The text has been copied to your clipboard!"
                 },
                 recipes: {
                     0: { name: "Pasta Carbonara", description: "A rich, creamy pasta dish with bacon, eggs, and cheese." },
@@ -115,6 +128,22 @@ class GameResults {
                     noMedals: "メダルを獲得していません",
                     keepTrying: "頑張って！",
                     noDescription: "説明がありません。"
+                },
+                share: {
+                    button_text: "結果をシェア",
+                    modal_title: "結果をシェアしよう！",
+                    instagram: "インスタグラム",
+                    facebook: "フェイスブック",
+                    twitter: "ツイッター",
+                    line: "ライン",
+                    success_message: "クリップボードにコピーしました！📋",
+                    share_text: "🍽️ 大阪ヘルスケアパビリオンのリボーンチャレンジブースで、「視線でお買い物ゲーム」を体験しました！ \n" +
+                        "#Expo2025 #eyetracking\n" +
+                        "\n" +
+                        "私のつくった料理はこちら",
+                    instagram_copy_text: "🍽️ 大阪ヘルスケアパビリオンのリボーンチャレンジブースで、「視線でお買い物ゲーム」を体験しました #Expo2025 #eyetracking 私のつくった料理はこちら",
+                    instagram_instruction_mobile: "Instagramアプリで新しい投稿を作成し、コピーしたテキストを貼り付けてください！",
+                    instagram_instruction_desktop: "モバイルデバイスでInstagramアプリを開き、新しい投稿を作成してテキストを貼り付けてください。テキストはクリップボードにコピーされました！"
                 },
                 recipes: {
                     0: { name: "カルボナーラパスタ", description: "卵とチーズ、ベーコンがからむ濃厚パスタ" },
@@ -239,6 +268,9 @@ class GameResults {
             // Set up language selector
             this.setupLanguageSelector();
 
+            // Set up share functionality
+            this.setupShareFunctionality();
+
             // Display results
             this.displayResults();
             console.log('Results displayed');
@@ -260,6 +292,266 @@ class GameResults {
             // Set initial language
             this.currentLanguage = languageSelect.value || 'en';
         }
+    }
+
+    // Setup share functionality
+    setupShareFunctionality() {
+        // Ensure global functions are available
+        window.shareResults = () => this.shareResults();
+        window.closeShareModal = () => this.closeShareModal();
+        window.shareToInstagram = () => this.shareToInstagram();
+        window.shareToFacebook = () => this.shareToFacebook();
+        window.shareToTwitter = () => this.shareToTwitter();
+        window.shareToLine = () => this.shareToLine();
+
+        // Set up modal event listeners
+        const shareModal = document.getElementById('share-modal');
+        if (shareModal) {
+            // Close modal when clicking outside
+            shareModal.addEventListener('click', (e) => {
+                if (e.target.id === 'share-modal') {
+                    this.closeShareModal();
+                }
+            });
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeShareModal();
+            }
+        });
+    }
+
+    // Share functionality methods
+    shareResults() {
+        const shareModal = document.getElementById('share-modal');
+        shareModal.classList.add('show');
+    }
+
+    closeShareModal() {
+        const shareModal = document.getElementById('share-modal');
+        shareModal.classList.remove('show');
+    }
+
+    showSuccessMessage() {
+        const successMessage = document.getElementById('success-message');
+        successMessage.classList.add('show');
+        setTimeout(() => {
+            successMessage.classList.remove('show');
+        }, 2000);
+    }
+
+    // Social media sharing functions with internationalization
+    shareToInstagram() {
+        const shareText = this.t('share.instagram_copy_text');
+        const currentUrl = window.location.href;
+
+        // First, copy text to clipboard
+        this.copyToClipboard(shareText).then(() => {
+            this.showSuccessMessage();
+            this.closeShareModal();
+
+            // Try multiple Instagram opening strategies
+            this.openInstagramApp(currentUrl, shareText);
+        }).catch(() => {
+            // If clipboard fails, still try to open Instagram
+            this.closeShareModal();
+            this.openInstagramApp(currentUrl, shareText);
+        });
+    }
+
+    // Helper method to copy to clipboard with better error handling
+    copyToClipboard(text) {
+        return new Promise((resolve, reject) => {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text)
+                    .then(resolve)
+                    .catch(reject);
+            } else {
+                // Fallback method for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+
+                try {
+                    const successful = document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    if (successful) {
+                        resolve();
+                    } else {
+                        reject(new Error('Copy command failed'));
+                    }
+                } catch (err) {
+                    document.body.removeChild(textArea);
+                    reject(err);
+                }
+            }
+        });
+    }
+
+    // Enhanced Instagram app opening with multiple strategies
+    openInstagramApp(url, text) {
+        const userAgent = navigator.userAgent;
+        const isIOS = /iPad|iPhone|iPod/.test(userAgent);
+        const isAndroid = /Android/.test(userAgent);
+        const isMobile = isIOS || isAndroid;
+
+        if (isMobile) {
+            // Strategy 1: Try Instagram's direct URL scheme first
+            let instagramUrl;
+
+            if (isIOS) {
+                // iOS Instagram URL schemes
+                instagramUrl = 'instagram://camera'; // Opens to camera/story creation
+                // Alternative: 'instagram://app' or 'instagram://user?username=self'
+            } else if (isAndroid) {
+                // Android Instagram intent
+                instagramUrl = 'intent://instagram.com/_u/sharing/#Intent;scheme=https;package=com.instagram.android;end';
+                // Alternative: 'instagram://camera'
+            }
+
+            // Try to open Instagram app
+            const startTime = Date.now();
+            const timeout = 1500; // 1.5 seconds
+
+            // Create a hidden iframe to test app opening
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = instagramUrl;
+            document.body.appendChild(iframe);
+
+            // Fallback timer
+            const fallbackTimer = setTimeout(() => {
+                document.body.removeChild(iframe);
+                this.instagramFallback(text);
+            }, timeout);
+
+            // Listen for page visibility changes (app opening)
+            const handleVisibilityChange = () => {
+                if (document.hidden) {
+                    // User likely switched to Instagram app
+                    clearTimeout(fallbackTimer);
+                    document.removeEventListener('visibilitychange', handleVisibilityChange);
+                    setTimeout(() => {
+                        if (document.body.contains(iframe)) {
+                            document.body.removeChild(iframe);
+                        }
+                    }, 1000);
+                }
+            };
+
+            document.addEventListener('visibilitychange', handleVisibilityChange);
+
+            // Alternative approach: Direct window.open
+            setTimeout(() => {
+                if (isIOS) {
+                    // For iOS, try different approach
+                    window.location.href = instagramUrl;
+                } else {
+                    // For Android, use window.open
+                    const newWindow = window.open(instagramUrl, '_blank');
+                    // Check if window opened successfully
+                    setTimeout(() => {
+                        if (!newWindow || newWindow.closed) {
+                            this.instagramFallback(text);
+                        }
+                    }, 500);
+                }
+            }, 100);
+
+        } else {
+            // Desktop fallback
+            this.instagramFallback(text);
+        }
+    }
+
+    // Fallback when Instagram app can't be opened
+    instagramFallback(text) {
+        const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        if (isMobile) {
+            // On mobile, open Instagram website
+            const instagramWebUrl = 'https://www.instagram.com/';
+            window.open(instagramWebUrl, '_blank');
+
+            // Show additional instruction
+            setTimeout(() => {
+                const message = this.t('share.instagram_instruction_mobile');
+                this.showCustomMessage(message, 4000);
+            }, 1000);
+        } else {
+            // On desktop, provide instructions
+            const message = this.t('share.instagram_instruction_desktop');
+            this.showCustomMessage(message, 5000);
+        }
+    }
+
+    // Helper method to show custom messages
+    showCustomMessage(message, duration = 3000) {
+        const messageDiv = document.createElement('div');
+        messageDiv.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #c1e4c3;
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 20px 30px;
+            box-shadow: 10px 10px 0px 0px rgb(0, 0, 0);
+            z-index: 2000;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #2d3436;
+            max-width: 80vw;
+            text-align: center;
+            line-height: 1.4;
+        `;
+        messageDiv.textContent = message;
+
+        document.body.appendChild(messageDiv);
+
+        setTimeout(() => {
+            if (document.body.contains(messageDiv)) {
+                document.body.removeChild(messageDiv);
+            }
+        }, duration);
+    }
+
+    shareToFacebook() {
+        const currentUrl = window.location.href;
+        const shareText = this.t('share.share_text');
+
+        const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(shareText)}`;
+
+        window.open(facebookUrl, '_blank', 'width=600,height=400');
+        this.closeShareModal();
+    }
+
+    shareToTwitter() {
+        const currentUrl = window.location.href;
+        const shareText = this.t('share.share_text');
+
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(currentUrl)}`;
+
+        window.open(twitterUrl, '_blank', 'width=600,height=400');
+        this.closeShareModal();
+    }
+
+    shareToLine() {
+        const currentUrl = window.location.href;
+        const shareText = this.t('share.share_text');
+
+        const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`;
+
+        window.open(lineUrl, '_blank', 'width=600,height=400');
+        this.closeShareModal();
     }
 
     // Load recipes and medals data
