@@ -412,7 +412,7 @@ class GameResults {
                 // Alternative: 'instagram://app' or 'instagram://user?username=self'
             } else if (isAndroid) {
                 // Android Instagram intent
-                instagramUrl = 'intent://instagram.com/_u/sharing/#Intent;scheme=https;package=com.instagram.android;end';
+                instagramUrl = 'intent://camera';
                 // Alternative: 'instagram://camera'
             }
 
