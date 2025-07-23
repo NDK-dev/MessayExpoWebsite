@@ -154,12 +154,10 @@
             transition: left 0.5s;
         }
 
-
         .share-icon {
             width: 40px;
             height: 40px;
             transition: transform 0.3s ease;
-            
         }
 
         .share-button:hover .share-icon {
@@ -171,6 +169,186 @@
             font-weight: 400;
             color: black;
             letter-spacing: 0.5px;
+        }
+
+        /* Share Modal Styles */
+        .share-modal {
+            display: none;
+            position: fixed;
+            z-index: 1500;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .share-modal.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .share-modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 25px;
+            border: 3px solid #000;
+            padding: 40px 30px;
+            box-shadow: 20px 20px 0px 0px rgb(0, 0, 0);
+            width: 90vw;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            animation: slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scale(0.8) translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .share-modal-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2d3436;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .share-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .share-option {
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 20px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 8px 8px 0px 0px rgb(0, 0, 0);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .share-option:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 12px 12px 0px 0px rgb(0, 0, 0);
+        }
+
+        .share-option:active {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 4px 4px 0px 0px rgb(0, 0, 0);
+        }
+
+        .share-option-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 5px;
+        }
+
+        .instagram-icon {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+        }
+
+        .facebook-icon {
+            background: #1877f2;
+            color: white;
+        }
+
+        .twitter-icon {
+            background: #1da1f2;
+            color: white;
+        }
+
+        .line-icon {
+            background: #06c755;
+            color: white;
+        }
+
+        .share-option-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2d3436;
+        }
+
+        .share-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            width: 35px;
+            height: 35px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #666;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #000;
+            transition: all 0.2s ease;
+        }
+
+        .share-modal-close:hover {
+            background: #f8f9fa;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #c1e4c3;
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 20px 30px;
+            box-shadow: 10px 10px 0px 0px rgb(0, 0, 0);
+            z-index: 2000;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2d3436;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .success-message.show {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         /* Hide placeholder text when image loads successfully */
@@ -630,6 +808,17 @@
                 max-height: 80vh;
                 padding: 24px 16px 16px 16px;
             }
+            .share-modal-content {
+                width: 95vw;
+                padding: 30px 20px;
+            }
+            .share-options {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .share-option {
+                padding: 25px 20px;
+            }
         }
 
         /* Custom scrollbar for modal content */
@@ -672,7 +861,6 @@
             </button>
         </div>
 
-
         <div class="celebration-people">
             <img src="images/celebration/Celebration%20Banner.png" alt="Celebration Image">
             <div class="image-placeholder" data-translate="header.celebration_banner">Celebration Banner</div>
@@ -695,6 +883,45 @@
     </div>
 </div>
 
+<!-- Share Modal -->
+<div id="share-modal" class="share-modal">
+    <div class="share-modal-content">
+        <span class="share-modal-close" onclick="closeShareModal()">&times;</span>
+        <h2 class="share-modal-title">Share Your Results!</h2>
+        <div class="share-options">
+            <div class="share-option" onclick="shareToInstagram()">
+                <div class="share-option-icon instagram-icon">
+                    <img src="images/Instagram.png" alt="Instagram" style="width: 50px; height: 50px;">
+                </div>
+                <span class="share-option-text"></span>
+            </div>
+            <div class="share-option" onclick="shareToFacebook()">
+                <div class="share-option-icon facebook-icon">
+                    <img src="images/facebook.png" alt="Instagram" style="width: 50px; height: 50px;">
+                </div>
+                <span class="share-option-text"></span>
+            </div>
+            <div class="share-option" onclick="shareToTwitter()">
+                <div class="share-option-icon twitter-icon">
+                    <img src="images/X(twitter).png" alt="Instagram" style="width: 50px; height: 50px;">
+                </div>
+                <span class="share-option-text"></span>
+            </div>
+            <div class="share-option" onclick="shareToLine()">
+                <div class="share-option-icon line-icon">
+                    <img src="images/Line.png" alt="Instagram" style="width: 50px; height: 50px;">
+                </div>
+                <span class="share-option-text"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Message -->
+<div id="success-message" class="success-message">
+    Copied to clipboard! 📋
+</div>
+
 <!-- Confetti Container -->
 <div class="confetti-container" id="confettiContainer"></div>
 
@@ -715,9 +942,6 @@
 </div>
 
 <div style="height: 60px;"></div>
-
-<!-- Include scripts in the correct order -->
-<script src="/js/game-results.js"></script>
 
 <!-- Confetti Animation Script -->
 <script>
@@ -758,6 +982,7 @@
             document.body.classList.remove('confetti-active');
         }, 4000);
     }
+
     function createBurstConfetti(colors, shapes, originX, originY, container) {
         const confetti = document.createElement('div');
         const shape = shapes[Math.floor(Math.random() * shapes.length)];
@@ -802,16 +1027,103 @@
             }
         }, 4000);
     }
+
     // Add celebration sound effect simulation
     function playSound() {
         console.log('🎉 BOOM! Confetti explosion! 🎉');
     }
+
     // Call playSound when confetti launches
     document.querySelector('.celebration-button').addEventListener('click', () => {
         playSound();
     });
+
+    // Share functionality
+    function shareResults() {
+        const shareModal = document.getElementById('share-modal');
+        shareModal.classList.add('show');
+    }
+
+    function closeShareModal() {
+        const shareModal = document.getElementById('share-modal');
+        shareModal.classList.remove('show');
+    }
+
+    function showSuccessMessage() {
+        const successMessage = document.getElementById('success-message');
+        successMessage.classList.add('show');
+        setTimeout(() => {
+            successMessage.classList.remove('show');
+        }, 2000);
+    }
+
+    // Social media sharing functions
+    function shareToInstagram() {
+        // Instagram doesn't allow direct web sharing, so we'll copy text to clipboard
+        const shareText = "🍽️ Check out my amazing dishes and medals from the cooking game! #CookingGame #YourDishes";
+
+        navigator.clipboard.writeText(shareText).then(() => {
+            showSuccessMessage();
+            closeShareModal();
+            // Optional: Open Instagram app or website
+            setTimeout(() => {
+                if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    window.open('instagram://app', '_blank');
+                } else {
+                    window.open('https://www.instagram.com/', '_blank');
+                }
+            }, 500);
+        }).catch(() => {
+            alert('Unable to copy to clipboard. Please copy this text manually: ' + shareText);
+        });
+    }
+
+    function shareToFacebook() {
+        const currentUrl = window.location.href;
+        const shareText = "Check out my amazing dishes and medals from the cooking game!";
+
+        const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(shareText)}`;
+
+        window.open(facebookUrl, '_blank', 'width=600,height=400');
+        closeShareModal();
+    }
+
+    function shareToTwitter() {
+        const currentUrl = window.location.href;
+        const shareText = "🍽️ Check out my amazing dishes and medals from the cooking game! #CookingGame #YourDishes";
+
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(currentUrl)}`;
+
+        window.open(twitterUrl, '_blank', 'width=600,height=400');
+        closeShareModal();
+    }
+
+    function shareToLine() {
+        const currentUrl = window.location.href;
+        const shareText = "🍽️ Check out my amazing dishes and medals from the cooking game!";
+
+        const lineUrl = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareText)}`;
+
+        window.open(lineUrl, '_blank', 'width=600,height=400');
+        closeShareModal();
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('share-modal').addEventListener('click', (e) => {
+        if (e.target.id === 'share-modal') {
+            closeShareModal();
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeShareModal();
+        }
+    });
 </script>
 
+<!-- Include scripts in the correct order -->
 <script src="/js/game-results.js"></script>
 
 </body>
