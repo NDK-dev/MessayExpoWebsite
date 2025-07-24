@@ -13,6 +13,9 @@
     <meta name="twitter:title" content="Your Dishes - Cooking Game Results">
     <meta name="twitter:description" content="Check out my amazing dishes and medals from the cooking game!">
 
+    <!-- Add html2canvas library for image generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -231,6 +234,47 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
+        /* Image preview and download section */
+        #image-fallback {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #generated-image-preview {
+            max-width: 100%;
+            max-height: 280px;
+            border: 2px solid #000;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 8px 8px 0px 0px rgb(0, 0, 0);
+        }
+
+        @media (max-width: 768px) {
+            #generated-image-preview {
+                max-height: 200px;
+            }
+        }
+
+        #download-image-button {
+            background: #4ecdc4;
+            border: 3px solid #000;
+            border-radius: 15px;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3436;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 8px 8px 0px 0px rgb(0, 0, 0);
+        }
+
+        #download-image-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 12px 12px 0px 0px rgb(0, 0, 0);
+        }
+
         .share-options {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -349,6 +393,176 @@
         .success-message.show {
             opacity: 1;
             pointer-events: auto;
+        }
+
+        /* UPDATED SQUARE SHARE CARD STYLES */
+        #share-card {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            width: 800px;
+            height: 800px;
+            background: #FCF6F0;
+            padding: 35px;
+            border: 3px solid #000;
+            box-shadow: 12px 12px 0px 0px rgb(0, 0, 0);
+            display: flex;
+            flex-direction: column;
+            z-index: -1000;
+            font-family: "google", Arial, sans-serif;
+        }
+
+        .share-card-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .share-card-title {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #2d3436;
+            margin-bottom: 8px;
+        }
+
+        .share-card-user-id {
+            font-size: 1.2rem;
+            color: #636e72;
+            font-weight: normal;
+        }
+
+        .share-card-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            gap: 25px;
+        }
+
+        .share-card-dishes-section {
+            text-align: center;
+        }
+
+        .share-card-section-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #2d3436;
+            font-weight: bold;
+        }
+
+        #share-card-dishes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            justify-items: center;
+        }
+
+        .share-card-medals-section {
+            text-align: center;
+        }
+
+        #share-card-medals {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            justify-items: center;
+            margin-bottom: 15px;
+        }
+
+        .share-card-item {
+            text-align: center;
+        }
+
+        #share-card-dishes         .share-card-image {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border: 3px solid #000;
+            border-radius: 15px;
+            margin: 0 auto 8px;
+            overflow: hidden;
+            text-indent: -9999px; /* Hides any alt text */
+        }
+
+        #share-card-medals .share-card-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border: 3px solid #000;
+            border-radius: 15px;
+            margin: 0 auto 6px;
+            overflow: hidden;
+            text-indent: -9999px; /* Hides any alt text */
+        }
+
+        .share-card-name {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #2d3436;
+            line-height: 1.2;
+        }
+
+        #share-card-medals .share-card-name {
+            font-size: 0.9rem;
+        }
+
+        .share-card-view-more {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 10px auto 0;
+            padding: 10px 16px;
+            background: #c1e4c3;
+            border: 2px solid #000;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2d3436;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: fit-content;
+        }
+
+        .share-card-view-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 5px 5px 0px 0px rgb(0, 0, 0);
+        }
+
+        .share-card-footer {
+            text-align: center;
+            margin-top: auto;
+            padding-top: 15px;
+        }
+
+        .share-card-link {
+            font-size: 1rem;
+            color: #636e72;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .share-card-link:hover {
+            color: #2d3436;
+            text-decoration: underline;
+        }
+        .share-card-link {
+            font-size: 1rem;
+            color: #636e72;
+            text-decoration: none;
+            font-weight: 500;
+            word-break: break-all;
+            padding: 0 10px;
+        }
+
+        .share-card-link:hover {
+            color: #2d3436;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .share-card-link {
+                font-size: 0.7rem;
+            }
         }
 
         /* Hide placeholder text when image loads successfully */
@@ -852,6 +1066,207 @@
                 padding: 20px;
                 margin-top: 40px;
             }
+            .share-button {
+                padding: 15px 30px;
+            }
+            .share-text {
+                font-size: 1.2rem;
+            }
+            /* Share card responsive adjustments */
+            #share-card {
+                width: 350px;
+                height: 350px;
+                padding: 15px;
+            }
+            .share-card-header {
+                margin-bottom: 15px;
+            }
+            .share-card-title {
+                font-size: 1.4rem;
+                margin-bottom: 4px;
+            }
+            .share-card-user-id {
+                font-size: 0.8rem;
+            }
+            .share-card-content {
+                gap: 12px;
+            }
+            .share-card-section-title {
+                font-size: 1.1rem;
+                margin-bottom: 8px;
+            }
+            #share-card-dishes {
+                gap: 8px;
+            }
+            #share-card-dishes .share-card-image {
+                width: 60px;
+                height: 60px;
+                overflow: hidden;
+                text-indent: -9999px;
+            }
+            #share-card-medals {
+                gap: 6px;
+            }
+            #share-card-medals .share-card-image {
+                width: 45px;
+                height: 45px;
+                overflow: hidden;
+                text-indent: -9999px;
+            }
+            .share-card-name {
+                font-size: 0.65rem;
+                line-height: 1;
+            }
+            #share-card-medals .share-card-name {
+                font-size: 0.6rem;
+            }
+            .share-card-view-more {
+                font-size: 0.65rem;
+                padding: 5px 8px;
+                margin: 6px auto 0;
+            }
+            .share-card-footer {
+                padding-top: 8px;
+            }
+            .share-card-link {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* iPhone and small mobile screens */
+        @media (max-width: 480px) {
+            .share-button {
+                padding: 12px 25px;
+            }
+            .share-text {
+                font-size: 1.1rem;
+            }
+            #share-card {
+                width: 300px;
+                height: 300px;
+                padding: 12px;
+            }
+            .share-card-header {
+                margin-bottom: 10px;
+            }
+            .share-card-title {
+                font-size: 1.2rem;
+                margin-bottom: 3px;
+            }
+            .share-card-user-id {
+                font-size: 0.7rem;
+            }
+            .share-card-content {
+                gap: 10px;
+            }
+            .share-card-section-title {
+                font-size: 1rem;
+                margin-bottom: 6px;
+            }
+            #share-card-dishes {
+                gap: 6px;
+            }
+            #share-card-dishes .share-card-image {
+                width: 50px;
+                height: 50px;
+                overflow: hidden;
+                text-indent: -9999px;
+            }
+            #share-card-medals {
+                gap: 4px;
+            }
+            #share-card-medals .share-card-image {
+                width: 35px;
+                height: 35px;
+                overflow: hidden;
+                text-indent: -9999px;
+            }
+            .share-card-name {
+                font-size: 0.55rem;
+                line-height: 0.9;
+            }
+            #share-card-medals .share-card-name {
+                font-size: 0.5rem;
+            }
+            .share-card-view-more {
+                font-size: 0.55rem;
+                padding: 4px 6px;
+                margin: 4px auto 0;
+            }
+            .share-card-footer {
+                padding-top: 6px;
+            }
+            .share-card-link {
+                font-size: 0.6rem;
+            }
+        }
+
+        /* Very small screens (iPhone SE, etc.) */
+        @media (max-width: 375px) {
+            .share-button {
+                padding: 10px 20px;
+            }
+            .share-text {
+                font-size: 1rem;
+            }
+            #share-card {
+                width: 280px;
+                height: 280px;
+                padding: 10px;
+            }
+            .share-card-header {
+                margin-bottom: 8px;
+            }
+            .share-card-title {
+                font-size: 1.1rem;
+                margin-bottom: 2px;
+            }
+            .share-card-user-id {
+                font-size: 0.65rem;
+            }
+            .share-card-content {
+                gap: 8px;
+            }
+            .share-card-section-title {
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+            }
+            #share-card-dishes {
+                gap: 5px;
+            }
+            #share-card-dishes .share-card-image {
+                width: 45px;
+                height: 45px;
+                overflow: hidden;
+                text-indent: -9999px;
+            }
+            #share-card-medals {
+                gap: 3px;
+            }
+            #share-card-medals .share-card-image {
+                width: 30px;
+                height: 30px;
+                overflow: hidden;
+                text-indent: -9999px;
+            }
+            .share-card-name {
+                font-size: 0.5rem;
+                line-height: 0.8;
+            }
+            #share-card-medals .share-card-name {
+                font-size: 0.45rem;
+            }
+            .share-card-view-more {
+                font-size: 0.5rem;
+                padding: 3px 5px;
+                margin: 3px auto 0;
+            }
+            .share-card-footer {
+                padding-top: 5px;
+            }
+            .share-card-link {
+                font-size: 0.55rem;
+            }
         }
 
         /* Custom scrollbar for modal content */
@@ -924,11 +1339,50 @@
     </footer>
 </div>
 
+<!-- UPDATED SQUARE SHARE CARD CONTAINER -->
+<div id="share-card">
+    <div class="share-card-header">
+        <h2 class="share-card-title" id="share-card-title">Your Achievements</h2>
+        <p class="share-card-user-id" id="share-card-user-id">ID: 12345678</p>
+    </div>
+    <div class="share-card-content">
+        <div class="share-card-dishes-section">
+            <h3 class="share-card-section-title" id="share-card-dishes-title">My Dishes</h3>
+            <div id="share-card-dishes"></div>
+        </div>
+        <div class="share-card-medals-section">
+            <h3 class="share-card-section-title" id="share-card-medals-title">My Medals</h3>
+            <div id="share-card-medals"></div>
+        </div>
+    </div>
+    <div class="share-card-footer">
+        <div class="share-card-link-container">
+            <a href="#" class="share-card-view-more" id="share-card-view-more">
+                <span>👁️</span>
+                <span id="view-more-text">View All Medals</span>
+            </a>
+            <a href="https://expo.messay.ndk-group.co.jp" class="share-card-link">
+                https://expo.messay.ndk-group.co.jp
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+
 <!-- Share Modal -->
 <div id="share-modal" class="share-modal">
     <div class="share-modal-content">
         <span class="share-modal-close" onclick="closeShareModal()">&times;</span>
         <h2 class="share-modal-title" data-translate="share.modal_title">Share Your Results!</h2>
+
+        <!-- Image preview and download section -->
+        <div id="image-fallback" style="display: none;">
+            <img id="generated-image-preview" src="" alt="Shareable image">
+            <button id="download-image-button">
+                📥 Download Image
+            </button>
+        </div>
+
         <div class="share-options">
             <div class="share-option" onclick="shareToInstagram()">
                 <div class="share-option-icon instagram-icon">
