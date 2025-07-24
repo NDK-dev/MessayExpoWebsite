@@ -1,4 +1,4 @@
-// game-results.js - Main logic with integrated translations and fixed Instagram sharing
+// game-results.js - Main logic with integrated translations and enhanced square share functionality
 
 class GameResults {
     constructor() {
@@ -54,7 +54,14 @@ class GameResults {
                     share_text: "🍽️ Check out my dishes and medals that I achieved in the #EyeTracking Shopping Game at the Reborn Challenge Booth of the Osaka Healthcare Pavilion! #Expo2025 ",
                     instagram_copy_text: "🍽️ Check out my dishes and medals that I achieved in the #EyeTracking Shopping Game at the Reborn Challenge Booth of the Osaka Healthcare Pavilion! #Expo2025 ",
                     instagram_instruction_mobile: "Text copied to clipboard!\n\n📱 Open Instagram app:\n1. Create a new post\n2. Paste the text in caption\n3. Add a screenshot of this results page",
-                    instagram_instruction_desktop: "Text copied to clipboard!\n\n📱 Please open Instagram on your mobile device:\n1. Create a new post\n2. Paste the copied text\n3. Add a screenshot of this page"
+                    instagram_instruction_desktop: "Text copied to clipboard!\n\n📱 Please open Instagram on your mobile device:\n1. Create a new post\n2. Paste the copied text\n3. Add a screenshot of this page",
+                    card_title: "Your Achievements",
+                    card_id_prefix: "ID: ",
+                    card_dishes_title: "My Dishes",
+                    card_medals_title: "My Medals",
+                    card_view_more: "View All Medals",
+                    card_no_dish: "No Dish",
+                    card_no_medals: "No Medals"
                 },
                 recipes: {
                     0: { name: "Pasta Carbonara", description: "A rich, creamy pasta dish with bacon, eggs, and cheese." },
@@ -143,7 +150,14 @@ class GameResults {
                         "私のつくった料理はこちら",
                     instagram_copy_text: "🍽️ 大阪ヘルスケアパビリオンのリボーンチャレンジブースで、「視線でお買い物ゲーム」を体験しました #Expo2025 #eyetracking 私のつくった料理はこちら",
                     instagram_instruction_mobile: "テキストをコピーしました！\n\n📱 Instagramアプリを開いて:\n1. 新しい投稿を作成\n2. キャプションにペースト\n3. この結果画面のスクリーンショットを追加",
-                    instagram_instruction_desktop: "テキストをコピーしました！\n\n📱 モバイルデバイスでInstagramアプリを開き:\n1. 新しい投稿を作成\n2. コピーしたテキストを貼り付け\n3. この画面のスクリーンショットを追加"
+                    instagram_instruction_desktop: "テキストをコピーしました！\n\n📱 モバイルデバイスでInstagramアプリを開き:\n1. 新しい投稿を作成\n2. コピーしたテキストを貼り付け\n3. この画面のスクリーンショットを追加",
+                    card_title: "あなたの成果",
+                    card_id_prefix: "ID: ",
+                    card_dishes_title: "私の料理",
+                    card_medals_title: "私のメダル",
+                    card_view_more: "すべてのメダルを見る",
+                    card_no_dish: "料理なし",
+                    card_no_medals: "メダルなし"
                 },
                 recipes: {
                     0: { name: "カルボナーラパスタ", description: "卵とチーズ、ベーコンがからむ濃厚パスタ" },
@@ -215,6 +229,27 @@ class GameResults {
         return value.replace(/\{(\w+)\}/g, (match, param) => {
             return params[param] !== undefined ? params[param] : match;
         });
+    }
+
+    // Generate 8-digit ID from userId
+    generateEightDigitId(userId) {
+        if (!userId || userId === 'Unknown') {
+            // Generate a random 8-digit ID if no userId
+            return Math.floor(10000000 + Math.random() * 90000000).toString();
+        }
+
+        // Create a hash from the userId and convert to 8 digits
+        let hash = 0;
+        for (let i = 0; i < userId.length; i++) {
+            const char = userId.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Convert to 32-bit integer
+        }
+
+        // Ensure positive and convert to 8 digits
+        const positiveHash = Math.abs(hash);
+        const eightDigitId = (positiveHash % 90000000) + 10000000;
+        return eightDigitId.toString();
     }
 
     // Switch language
@@ -323,15 +358,237 @@ class GameResults {
         });
     }
 
-    // Share functionality methods
-    shareResults() {
+    // ENHANCED SQUARE SHARE FUNCTIONALITY WITH IMAGE GENERATION
+    async shareResults() {
+        try {
+            // Save original button state
+            const shareBtn = document.querySelector('.share-button');
+            const originalHTML = shareBtn.innerHTML;
+            shareBtn.innerHTML = '<span>🖼️ Generating image...</span>';
+            shareBtn.disabled = true;
+
+            // Update share card with user data
+            this.populateShareCard();
+
+            // Generate image with html2canvas
+            const shareCard = document.getElementById('share-card');
+            const canvas = await html2canvas(shareCard, {
+                scale: 2,
+                backgroundColor: "#FCF6F0",
+                logging: false,
+                useCORS: true,
+                allowTaint: true,
+                height: shareCard.offsetHeight,
+                width: shareCard.offsetWidth
+            });
+
+            // Convert to image data
+            const imageData = canvas.toDataURL('image/jpeg', 0.95);
+
+            // Try to use Web Share API first (mobile devices)
+            if (navigator.share && navigator.canShare) {
+                try {
+                    const blob = await (await fetch(imageData)).blob();
+                    const file = new File([blob], 'cooking-achievements.jpg', {type: 'image/jpeg'});
+
+                    if (navigator.canShare({files: [file]})) {
+                        await navigator.share({
+                            title: 'My Cooking Achievements',
+                            text: this.t('share.share_text'),
+                            files: [file]
+                        });
+                        return; // Successfully shared, exit early
+                    }
+                } catch (webShareError) {
+                    console.log('Web Share API failed, falling back to modal:', webShareError);
+                }
+            }
+
+            // Fallback: Open share modal with image preview and download option
+            this.showShareModal(imageData);
+
+        } catch (error) {
+            console.error('Sharing failed:', error);
+            this.showCustomMessage('⚠️ Sharing failed. Please try again.');
+        } finally {
+            // Restore button state
+            const shareBtn = document.querySelector('.share-button');
+            shareBtn.innerHTML = originalHTML;
+            shareBtn.disabled = false;
+        }
+    }
+
+    // Populate square share card with user data
+    populateShareCard() {
+        // Generate 8-digit ID
+        const eightDigitId = this.generateEightDigitId(this.currentResults.userId);
+
+        // Update title and ID
+        const titleElement = document.getElementById('share-card-title');
+        const userIdElement = document.getElementById('share-card-user-id');
+
+        if (titleElement) {
+            titleElement.textContent = this.t('share.card_title');
+        }
+        if (userIdElement) {
+            userIdElement.textContent = this.t('share.card_id_prefix') + eightDigitId;
+        }
+
+        // Update section titles and view more button
+        const dishesTitle = document.getElementById('share-card-dishes-title');
+        const medalsTitle = document.getElementById('share-card-medals-title');
+        const viewMoreButton = document.getElementById('view-more-text');
+        const viewMoreLink = document.getElementById('share-card-view-more');
+        const shareCardLink = document.querySelector('.share-card-link');
+
+        if (dishesTitle) {
+            dishesTitle.textContent = this.t('share.card_dishes_title');
+        }
+        if (medalsTitle) {
+            medalsTitle.textContent = this.t('share.card_medals_title');
+        }
+        if (viewMoreButton) {
+            viewMoreButton.textContent = this.t('share.card_view_more');
+        }
+        if (viewMoreLink) {
+            viewMoreLink.href = window.location.href;
+        }
+        if (shareCardLink) {
+            shareCardLink.href = window.location.origin;
+            shareCardLink.textContent = window.location.hostname;
+        }
+
+        // Populate exactly 3 dishes (fill with placeholders if needed)
+        const dishesContainer = document.getElementById('share-card-dishes');
+        dishesContainer.innerHTML = '';
+        const dishItems = document.querySelectorAll('.dish-item');
+
+        for (let i = 0; i < 3; i++) {
+            let imgSrc, dishName;
+
+            if (i < dishItems.length) {
+                const dish = dishItems[i];
+                const imgElement = dish.querySelector('.dish-circle img');
+                imgSrc = imgElement ? imgElement.src : null;
+                dishName = dish.querySelector('.dish-name').textContent.trim();
+            } else {
+                // Fill empty slots with placeholder
+                imgSrc = null;
+                dishName = this.t('share.card_no_dish');
+            }
+
+            // Create clean placeholder SVG without emojis (responsive sizes)
+            const getResponsiveDishSize = () => {
+                if (window.innerWidth <= 375) return 45;
+                if (window.innerWidth <= 480) return 50;
+                if (window.innerWidth <= 768) return 60;
+                return 130;
+            };
+
+            dishesContainer.innerHTML += `
+                <div class="share-card-item">
+                    <img src="${imgSrc}" alt="" class="share-card-image">
+                    <p class="share-card-name">${dishName}</p>
+                </div>
+            `;
+        }
+
+        // Populate exactly 4 medals in a horizontal row (first 4 medals earned)
+        const medalsContainer = document.getElementById('share-card-medals');
+        medalsContainer.innerHTML = '';
+        const medalItems = document.querySelectorAll('.medal-item');
+        const medalsToShow = Math.min(4, medalItems.length);
+
+        // Create clean placeholder SVG for medals without emojis (responsive sizes)
+        const getResponsiveMedalSize = () => {
+            if (window.innerWidth <= 375) return 30;
+            if (window.innerWidth <= 480) return 35;
+            if (window.innerWidth <= 768) return 45;
+            return 100;
+        };
+        const medalPlaceholderSize = getResponsiveMedalSize();
+        const medalPlaceholderSvg = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="${medalPlaceholderSize}" height="${medalPlaceholderSize}" viewBox="0 0 ${medalPlaceholderSize} ${medalPlaceholderSize}"><rect width="${medalPlaceholderSize}" height="${medalPlaceholderSize}" fill="%23f0f0f0" stroke="%23ddd" stroke-width="2" rx="15"/></svg>`;
+
+        if (medalsToShow === 0) {
+            // Show 4 placeholder medals if no medals earned
+            for (let i = 0; i < 4; i++) {
+                medalsContainer.innerHTML += `
+                    <div class="share-card-item">
+                        <img src=" " alt="" class="share-card-image">
+                        <p class="share-card-name">${this.t('share.card_no_medals')}</p>
+                    </div>
+                `;
+            }
+        } else {
+            // Show earned medals + placeholders to make exactly 4
+            for (let i = 0; i < 4; i++) {
+                if (i < medalsToShow) {
+                    const medal = medalItems[i];
+                    const imgElement = medal.querySelector('.medal-circle img');
+                    const imgSrc = imgElement ? imgElement.src : medalPlaceholderSvg;
+                    const medalName = medal.querySelector('.medal-name').textContent.trim();
+
+                    medalsContainer.innerHTML += `
+                        <div class="share-card-item">
+                            <img src="${imgSrc}" alt="" class="share-card-image">
+                            <p class="share-card-name">${medalName}</p>
+                        </div>
+                    `;
+                } else {
+                    // Fill remaining slots with placeholders
+                    medalsContainer.innerHTML += `
+                        <div class="share-card-item">
+                            <img src=" " alt="" class="share-card-image">
+                            <p class="share-card-name">${this.t('share.card_no_medals')}</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+    }
+
+    // Show share modal with image preview
+    showShareModal(imageData) {
         const shareModal = document.getElementById('share-modal');
+        const imagePreview = document.getElementById('generated-image-preview');
+        const imageFallback = document.getElementById('image-fallback');
+        const downloadButton = document.getElementById('download-image-button');
+
+        // Show image preview
+        imagePreview.src = imageData;
+        imageFallback.style.display = 'block';
+
+        // Set up download functionality
+        downloadButton.onclick = () => this.downloadImage(imageData);
+
+        // Show modal
         shareModal.classList.add('show');
+    }
+
+    // Download image function
+    downloadImage(imageData) {
+        try {
+            const eightDigitId = this.generateEightDigitId(this.currentResults.userId);
+            const link = document.createElement('a');
+            link.href = imageData;
+            link.download = `cooking-achievements-${eightDigitId}.jpg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            this.showSuccessMessage();
+        } catch (error) {
+            console.error('Download failed:', error);
+            this.showCustomMessage('⚠️ Download failed. Please try right-clicking the image to save.');
+        }
     }
 
     closeShareModal() {
         const shareModal = document.getElementById('share-modal');
         shareModal.classList.remove('show');
+
+        // Hide image preview for next time
+        const imageFallback = document.getElementById('image-fallback');
+        imageFallback.style.display = 'none';
     }
 
     showSuccessMessage() {
