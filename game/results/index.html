@@ -17,26 +17,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
-        /* Font Face Declaration - Enhanced for mobile compatibility */
+        /* Font Face Declaration */
         @font-face {
             font-family: 'Caviardreams';
-            src: url('fonts/CaviarDreams.eot'); /* IE9 Compat Modes */
-            src: url('fonts/CaviarDreams.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-            url('fonts/CaviarDreams.woff2') format('woff2'), /* Super Modern Browsers */
-            url('fonts/CaviarDreams.woff') format('woff'), /* Pretty Modern Browsers */
-            url('fonts/CaviarDreams.ttf') format('truetype'); /* Safari, Android, iOS */
+            src: url('fonts/CaviarDreams.woff2') format('woff2'),
+            url('fonts/CaviarDreams.woff') format('woff'),
+            url('fonts/CaviarDreams.ttf') format('truetype'),
+            url('fonts/CaviarDreams.eot') format('embedded-opentype');
             font-weight: normal;
             font-style: normal;
-            font-display: block; /* Changed from swap to block for better loading */
-        }
-
-        /* Fallback font loading detection */
-        .font-loading {
-            font-family: Arial, sans-serif;
-        }
-
-        .font-loaded {
-            font-family: 'Caviardreams', Arial, sans-serif;
+            font-display: swap;
         }
 
         * {
@@ -53,16 +43,12 @@
             user-select: none;
         }
         body {
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: "Caviardreams", Arial, sans-serif;
             background: #FCF6F0;
             min-height: 100vh;
             padding: 20px;
             position: relative;
             overflow-x: hidden;
-            /* Enhanced font rendering for mobile */
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
         }
         /* Add this class to prevent scrolling during confetti */
         body.confetti-active {
@@ -91,7 +77,7 @@
             background-color: #fff;
             font-size: 1rem;
             cursor: pointer;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: "Caviardreams", Arial, sans-serif;
         }
         .title {
             font-size: 3.5rem;
@@ -99,13 +85,11 @@
             color: #2d3436;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         .user-id {
             font-size: 1.2rem;
             color: #636e72;
             margin-bottom: 40px;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         .celebration-people {
             display: flex;
@@ -162,7 +146,6 @@
             position: relative;
             overflow: hidden;
             transform-style: preserve-3d;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .share-button:hover {
@@ -202,7 +185,8 @@
             font-weight: bold;
             color: black;
             letter-spacing: 0.5px;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: Caviardreams;
+
         }
 
         /* Share Modal Styles */
@@ -244,7 +228,6 @@
             text-align: center;
             position: relative;
             animation: slideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         @keyframes slideIn {
@@ -264,7 +247,6 @@
             color: #2d3436;
             margin-bottom: 30px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         /* Step indicator styles */
@@ -284,15 +266,12 @@
             font-size: 1.1rem;
             font-weight: bold;
             color: #2d3436;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .step-description {
             font-size: 0.9rem;
             color: #636e72;
             margin-bottom: 10px;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
-            font-weight: bolder;
         }
 
         /* Arrow between steps */
@@ -336,7 +315,7 @@
             width: 100%;
             transition: all 0.3s ease;
             box-shadow: 8px 8px 0px 0px rgb(0, 0, 0);
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: "Caviardreams", Arial, sans-serif;
         }
 
         #download-image-button:hover {
@@ -411,7 +390,6 @@
             font-size: 1rem;
             font-weight: 600;
             color: #2d3436;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .share-modal-close {
@@ -421,7 +399,7 @@
             width: 35px;
             height: 35px;
             font-size: 20px;
-            font-weight: bolder;
+            font-weight: bold;
             color: #666;
             cursor: pointer;
             display: flex;
@@ -431,7 +409,7 @@
             background: rgba(255, 255, 255, 0.8);
             border: 2px solid #000;
             transition: all 0.2s ease;
-            font-family: 'google', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: "Google Sans", sans-serif;
         }
 
         .share-modal-close:hover {
@@ -458,7 +436,6 @@
             opacity: 0;
             pointer-events: none;
             transition: all 0.3s ease;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .success-message.show {
@@ -480,7 +457,7 @@
             display: flex;
             flex-direction: column;
             z-index: -1000;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: "Caviardreams", Arial, sans-serif;
         }
 
         .share-card-header {
@@ -493,14 +470,12 @@
             font-weight: bold;
             color: #2d3436;
             margin-bottom: 8px;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .share-card-user-id {
             font-size: 1.2rem;
             color: #636e72;
             font-weight: normal;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .share-card-content {
@@ -519,7 +494,6 @@
             margin-bottom: 15px;
             color: #2d3436;
             font-weight: bold;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         #share-card-dishes {
@@ -573,7 +547,6 @@
             font-weight: bold;
             color: #2d3436;
             line-height: 1.2;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         #share-card-medals .share-card-name {
@@ -593,7 +566,6 @@
             font-weight: 500;
             word-break: break-all;
             padding: 0 10px;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .share-card-link:hover {
@@ -621,7 +593,6 @@
             height: 200px;
             font-size: 1.2rem;
             color: #636e72;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         .loading::after {
             content: '';
@@ -692,7 +663,7 @@
             font-size: 1.3rem;
             font-weight: bold;
             color: #2d3436;
-            font-family: 'google', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: Google Sans, sans-serif;
         }
 
         .modal {
@@ -750,7 +721,6 @@
             align-items: center;
             overflow-y: auto;
             animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         @keyframes modalSlideIn {
@@ -771,7 +741,6 @@
             width: 32px;
             height: 32px;
             font-size: 20px;
-            font-weight: bold;
             color: rgba(0, 0, 0, 0.7);
             cursor: pointer;
             display: flex;
@@ -783,7 +752,7 @@
             -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.5);
             transition: all 0.2s ease;
-            font-family: 'google', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: "Google Sans", sans-serif;
         }
 
         .close-btn:hover {
@@ -811,7 +780,7 @@
             font-weight: bold;
             color: rgba(0, 0, 0, 0.9);
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
-            font-family: 'google', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: "Google Sans", sans-serif;
         }
 
         #modal-description {
@@ -820,7 +789,7 @@
             color: rgba(0, 0, 0, 0.8);
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
             line-height: 1.5;
-            font-family: 'google', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: "Google Sans", sans-serif;
         }
 
         /* Ingredients section in modal */
@@ -866,14 +835,14 @@
             text-transform: capitalize;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
             font-weight: 500;
-            font-family: 'google', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: "Google Sans", sans-serif;
         }
         .plus-icon {
             font-size: 1.5em;
             color: rgba(0, 0, 0, 0.6);
             margin: 0 5px;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: "Google Sans", sans-serif;
         }
 
         /* Medals Section */
@@ -886,7 +855,6 @@
             color: #2d3436;
             margin-bottom: 40px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         .medals-grid {
             display: grid;
@@ -941,7 +909,7 @@
             font-weight: normal;
             color: #2d3436;
             line-height: 1.4;
-            font-family: 'google', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: "Google Sans", sans-serif;
         }
 
         /* Footer Section */
@@ -965,7 +933,6 @@
             gap: 10px;
             transition: all 0.3s ease;
             box-shadow: 8px 8px 0px 0px rgb(0, 0, 0);
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .home-button:hover {
@@ -982,7 +949,6 @@
             border-radius: 20px;
             margin: 20px 0;
             border: 3px solid #e74c3c;
-            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         .error-message h2 {
             margin-bottom: 20px;
@@ -1084,7 +1050,7 @@
             .title {
                 font-size: 2.5rem;
                 padding-top: 60px;
-                font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
+                font-family: Caviardreams;
             }
             .dishes-section {
                 padding: 20px;
@@ -1372,80 +1338,6 @@
             background: rgba(255, 255, 255, 0.5);
         }
     </style>
-
-    <!-- Font Loading Detection Script -->
-    <script>
-        // Enhanced font loading detection for mobile
-        (function() {
-            // Set initial state
-            document.body.classList.add('font-loading');
-
-            // Method 1: Font Loading API (modern browsers)
-            if ('fonts' in document) {
-                document.fonts.ready.then(function() {
-                    console.log('Fonts loaded via Font Loading API');
-                    document.body.classList.remove('font-loading');
-                    document.body.classList.add('font-loaded');
-                }).catch(function(error) {
-                    console.warn('Font Loading API failed:', error);
-                    fallbackFontDetection();
-                });
-
-                // Also try to load specific font
-                document.fonts.load('16px Caviardreams').then(function() {
-                    console.log('Caviardreams font specifically loaded');
-                }).catch(function(error) {
-                    console.warn('Failed to load Caviardreams font:', error);
-                });
-            } else {
-                // Fallback for older browsers
-                fallbackFontDetection();
-            }
-
-            // Method 2: Fallback detection
-            function fallbackFontDetection() {
-                const testElement = document.createElement('div');
-                testElement.style.fontFamily = 'Caviardreams, monospace';
-                testElement.style.position = 'absolute';
-                testElement.style.visibility = 'hidden';
-                testElement.style.fontSize = '100px';
-                testElement.textContent = 'test';
-                document.body.appendChild(testElement);
-
-                const fallbackWidth = testElement.offsetWidth;
-
-                // Wait for font to potentially load
-                setTimeout(function() {
-                    testElement.style.fontFamily = 'Caviardreams, serif';
-                    const currentWidth = testElement.offsetWidth;
-
-                    if (currentWidth !== fallbackWidth) {
-                        console.log('Font loaded via fallback detection');
-                        document.body.classList.remove('font-loading');
-                        document.body.classList.add('font-loaded');
-                    } else {
-                        console.warn('Font may not have loaded properly');
-                        // Keep trying for a few more seconds
-                        setTimeout(function() {
-                            document.body.classList.remove('font-loading');
-                            document.body.classList.add('font-loaded');
-                        }, 2000);
-                    }
-
-                    document.body.removeChild(testElement);
-                }, 100);
-            }
-
-            // Force font application after 3 seconds regardless
-            setTimeout(function() {
-                if (document.body.classList.contains('font-loading')) {
-                    console.log('Force applying font after timeout');
-                    document.body.classList.remove('font-loading');
-                    document.body.classList.add('font-loaded');
-                }
-            }, 3000);
-        })();
-    </script>
 </head>
 <body>
 <div class="container">
