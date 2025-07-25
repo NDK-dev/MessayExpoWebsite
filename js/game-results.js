@@ -416,7 +416,7 @@ class GameResults {
         }
     }
 
-    // Populate square share card with user data
+    // Populate square share card with user data - UPDATED WITH EXPO 2025 HANDLING
     populateShareCard() {
         // Generate 8-digit ID
         const eightDigitId = this.generateEightDigitId(this.currentResults.userId);
@@ -489,6 +489,26 @@ class GameResults {
                     </div>
                 `;
             });
+        }
+
+        // Handle EXPO 2025 image loading with error fallback
+        const expoImage = document.querySelector('.share-card-expo-logo img');
+        if (expoImage) {
+            // Set up error handling for the EXPO 2025 image
+            expoImage.onerror = function() {
+                console.warn('EXPO 2025 image failed to load:', this.src);
+                // You could replace with a fallback image or hide the image container
+                this.style.display = 'none';
+                // Or set a fallback image:
+                // this.src = 'images/fallback-expo-logo.png';
+            };
+
+            // Ensure the image loads properly
+            if (expoImage.src && !expoImage.complete) {
+                expoImage.onload = function() {
+                    console.log('EXPO 2025 image loaded successfully');
+                };
+            }
         }
     }
 
