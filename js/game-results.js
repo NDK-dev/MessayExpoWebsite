@@ -151,10 +151,10 @@ class GameResults {
                     step_2: "ステップ 2",
                     download_instruction: "成果画像をダウンロード",
                     share_instruction: "保存した画像は、投稿にご自身でアップロードする必要があります。",
-                    instagram: "インスタグラム",
-                    facebook: "フェイスブック",
-                    twitter: "ツイッター",
-                    line: "ライン",
+                    instagram: "Instagram",
+                    facebook: "Facebook",
+                    twitter: "Twitter",
+                    line: "Line",
                     success_message: "クリップボードにコピーしました！📋",
                     download_success: "画像をダウンロードしました！📥",
                     share_text: "🍽️ 大阪ヘルスケアパビリオンのリボーンチャレンジブースで、「視線でお買い物ゲーム」を体験しました！ \n" +
@@ -305,6 +305,9 @@ class GameResults {
         console.log('Starting game results initialization');
 
         try {
+            // Wait for font loading before proceeding
+            await this.waitForFontLoad();
+
             // Load data
             await this.loadData();
             console.log('Data loaded successfully');
@@ -327,6 +330,86 @@ class GameResults {
             console.error('Error initializing game results:', error);
             this.showError('Failed to load game results. Please try again.');
         }
+    }
+
+    // Enhanced font loading detection for mobile
+    async waitForFontLoad() {
+        return new Promise((resolve) => {
+            // If Font Loading API is available
+            if ('fonts' in document) {
+                // Try to load the specific font
+                Promise.all([
+                    document.fonts.load('16px Caviardreams'),
+                    document.fonts.ready
+                ]).then(() => {
+                    console.log('✅ Fonts loaded successfully via Font Loading API');
+                    resolve();
+                }).catch((error) => {
+                    console.warn('⚠️ Font Loading API failed:', error);
+                    this.fallbackFontDetection(resolve);
+                });
+            } else {
+                // Fallback for older browsers
+                this.fallbackFontDetection(resolve);
+            }
+
+            // Timeout fallback - don't wait more than 3 seconds
+            setTimeout(() => {
+                console.log('🕐 Font loading timeout reached, proceeding anyway');
+                resolve();
+            }, 3000);
+        });
+    }
+
+    // Fallback font detection method
+    fallbackFontDetection(resolve) {
+        const testText = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        const testElement = document.createElement('div');
+
+        // Set up test element
+        testElement.style.cssText = `
+            position: absolute;
+            visibility: hidden;
+            font-size: 100px;
+            width: auto;
+            height: auto;
+            line-height: normal;
+            margin: 0;
+            padding: 0;
+            white-space: nowrap;
+        `;
+        testElement.textContent = testText;
+        document.body.appendChild(testElement);
+
+        // Test with fallback font first
+        testElement.style.fontFamily = 'monospace';
+        const fallbackWidth = testElement.offsetWidth;
+
+        // Test with our custom font
+        testElement.style.fontFamily = 'Caviardreams, monospace';
+
+        let attempts = 0;
+        const maxAttempts = 30; // 3 seconds with 100ms intervals
+
+        const checkFont = () => {
+            attempts++;
+            const currentWidth = testElement.offsetWidth;
+
+            if (currentWidth !== fallbackWidth) {
+                console.log('✅ Font loaded via fallback detection');
+                document.body.removeChild(testElement);
+                resolve();
+            } else if (attempts >= maxAttempts) {
+                console.log('⚠️ Font detection timeout, proceeding with fallback');
+                document.body.removeChild(testElement);
+                resolve();
+            } else {
+                setTimeout(checkFont, 100);
+            }
+        };
+
+        // Start checking after a small delay
+        setTimeout(checkFont, 100);
     }
 
     // Setup language selector
@@ -387,7 +470,7 @@ class GameResults {
             const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             const scale = isMobile ? 3 : 2; // Higher scale for mobile devices
 
-            // Generate image with html2canvas
+            // Enhanced html2canvas options for better font rendering
             const shareCard = document.getElementById('share-card');
             const canvas = await html2canvas(shareCard, {
                 scale: scale, // Higher resolution for mobile
@@ -396,7 +479,18 @@ class GameResults {
                 useCORS: true,
                 allowTaint: true,
                 height: shareCard.offsetHeight,
-                width: shareCard.offsetWidth
+                width: shareCard.offsetWidth,
+                // Enhanced font rendering options
+                fontStyle: 'normal',
+                fontWeight: 'normal',
+                fontFamily: 'Caviardreams, -apple-system, BlinkMacSystemFont, sans-serif',
+                // Wait for fonts to render
+                onrendered: function(canvas) {
+                    console.log('Canvas rendered successfully');
+                },
+                // Better quality settings
+                foreignObjectRendering: true,
+                removeContainer: false
             });
 
             // Convert to image data and store it
@@ -686,7 +780,7 @@ class GameResults {
             line-height: 1.6;
             white-space: pre-line;
             animation: slideInScale 0.3s ease-out;
-            font-family: "Caviardreams", Arial, sans-serif;
+            font-family: 'Caviardreams', -apple-system, BlinkMacSystemFont, sans-serif;
         `;
 
         // Add animation styles if not already present
