@@ -49,10 +49,10 @@ class GameResults {
                 share: {
                     button_text: "Share My Results",
                     modal_title: "Share Your Results!",
-                    step1_text: " Step 1",
-                    step2_text: "Step 2",
-                    step2_support_text: "Please upload the saved image to your post manually",
-                    download_button_text: "Download Image",
+                    step_1: "Step 1",
+                    step_2: "Step 2",
+                    download_instruction: "Download your achievement image",
+                    share_instruction: "Please upload the saved image to your post manually.",
                     instagram: "Instagram",
                     facebook: "Facebook",
                     twitter: "Twitter",
@@ -147,14 +147,14 @@ class GameResults {
                 share: {
                     button_text: "結果をシェア",
                     modal_title: "結果をシェアしよう！",
-                    step1_text: "Step 1",
-                    step2_text: "Step 2",
-                    step2_support_text: "保存した画像は、投稿にご自身でアップロードする必要があります。",
-                    download_button_text: "画像をダウンロード",
-                    instagram: "Instagram",
-                    facebook: "Facebook",
-                    twitter: "Twitter",
-                    line: "Line",
+                    step_1: "ステップ 1",
+                    step_2: "ステップ 2",
+                    download_instruction: "成果画像をダウンロード",
+                    share_instruction: "保存した画像は、投稿にご自身でアップロードする必要があります。",
+                    instagram: "インスタグラム",
+                    facebook: "フェイスブック",
+                    twitter: "ツイッター",
+                    line: "ライン",
                     success_message: "クリップボードにコピーしました！📋",
                     download_success: "画像をダウンロードしました！📥",
                     share_text: "🍽️ 大阪ヘルスケアパビリオンのリボーンチャレンジブースで、「視線でお買い物ゲーム」を体験しました！ \n" +
@@ -383,10 +383,14 @@ class GameResults {
             // Update share card with user data
             this.populateShareCard();
 
+            // Check if mobile device for higher resolution
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const scale = isMobile ? 3 : 2; // Higher scale for mobile devices
+
             // Generate image with html2canvas
             const shareCard = document.getElementById('share-card');
             const canvas = await html2canvas(shareCard, {
-                scale: 2,
+                scale: scale, // Higher resolution for mobile
                 backgroundColor: "#FCF6F0",
                 logging: false,
                 useCORS: true,
