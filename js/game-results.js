@@ -15,6 +15,9 @@ class GameResults {
         this.currentLanguage = 'en';
         this.translations = this.getEmbeddedTranslations();
 
+        // Store generated image data for download
+        this.generatedImageData = null;
+
         this.init();
     }
 
@@ -46,11 +49,16 @@ class GameResults {
                 share: {
                     button_text: "Share My Results",
                     modal_title: "Share Your Results!",
+                    step1_text: " Step 1",
+                    step2_text: "Step 2",
+                    step2_support_text: "Please upload the saved image to your post manually",
+                    download_button_text: "Download Image",
                     instagram: "Instagram",
                     facebook: "Facebook",
                     twitter: "Twitter",
                     line: "Line",
                     success_message: "Copied to clipboard! 📋",
+                    download_success: "Image downloaded! 📥",
                     share_text: "🍽️ Check out my dishes and medals that I achieved in the #EyeTracking Shopping Game at the Reborn Challenge Booth of the Osaka Healthcare Pavilion! #Expo2025 ",
                     instagram_copy_text: "🍽️ Check out my dishes and medals that I achieved in the #EyeTracking Shopping Game at the Reborn Challenge Booth of the Osaka Healthcare Pavilion! #Expo2025 ",
                     instagram_instruction_mobile: "Text copied to clipboard!\n\n📱 Open Instagram app:\n1. Create a new post\n2. Paste the text in caption\n3. Add a screenshot of this results page",
@@ -139,11 +147,16 @@ class GameResults {
                 share: {
                     button_text: "結果をシェア",
                     modal_title: "結果をシェアしよう！",
-                    instagram: "インスタグラム",
-                    facebook: "フェイスブック",
-                    twitter: "ツイッター",
-                    line: "ライン",
+                    step1_text: "Step 1",
+                    step2_text: "Step 2",
+                    step2_support_text: "保存した画像は、投稿にご自身でアップロードする必要があります。",
+                    download_button_text: "画像をダウンロード",
+                    instagram: "Instagram",
+                    facebook: "Facebook",
+                    twitter: "Twitter",
+                    line: "Line",
                     success_message: "クリップボードにコピーしました！📋",
+                    download_success: "画像をダウンロードしました！📥",
                     share_text: "🍽️ 大阪ヘルスケアパビリオンのリボーンチャレンジブースで、「視線でお買い物ゲーム」を体験しました！ \n" +
                         "#Expo2025 #eyetracking\n" +
                         "\n" +
@@ -358,7 +371,7 @@ class GameResults {
         });
     }
 
-    // ENHANCED SQUARE SHARE FUNCTIONALITY WITH IMAGE GENERATION
+    // MODIFIED SHARE FUNCTIONALITY - ALWAYS SHOW CUSTOM MODAL
     async shareResults() {
         try {
             // Save original button state
@@ -382,30 +395,11 @@ class GameResults {
                 width: shareCard.offsetWidth
             });
 
-            // Convert to image data
-            const imageData = canvas.toDataURL('image/jpeg', 0.95);
+            // Convert to image data and store it
+            this.generatedImageData = canvas.toDataURL('image/jpeg', 0.95);
 
-            // Try to use Web Share API first (mobile devices)
-            if (navigator.share && navigator.canShare) {
-                try {
-                    const blob = await (await fetch(imageData)).blob();
-                    const file = new File([blob], 'cooking-achievements.jpg', {type: 'image/jpeg'});
-
-                    if (navigator.canShare({files: [file]})) {
-                        await navigator.share({
-                            title: 'My Cooking Achievements',
-                            text: this.t('share.share_text'),
-                            files: [file]
-                        });
-                        return; // Successfully shared, exit early
-                    }
-                } catch (webShareError) {
-                    console.log('Web Share API failed, falling back to modal:', webShareError);
-                }
-            }
-
-            // Fallback: Open share modal with image preview and download option
-            this.showShareModal(imageData);
+            // Always show our custom modal instead of native share
+            this.showShareModal();
 
         } catch (error) {
             console.error('Sharing failed:', error);
@@ -434,12 +428,9 @@ class GameResults {
             userIdElement.textContent = this.t('share.card_id_prefix') + eightDigitId;
         }
 
-        // Update section titles and view more button
+        // Update section titles
         const dishesTitle = document.getElementById('share-card-dishes-title');
         const medalsTitle = document.getElementById('share-card-medals-title');
-        const viewMoreButton = document.getElementById('view-more-text');
-        const viewMoreLink = document.getElementById('share-card-view-more');
-        const shareCardLink = document.querySelector('.share-card-link');
 
         if (dishesTitle) {
             dishesTitle.textContent = this.t('share.card_dishes_title');
@@ -447,148 +438,95 @@ class GameResults {
         if (medalsTitle) {
             medalsTitle.textContent = this.t('share.card_medals_title');
         }
-        if (viewMoreButton) {
-            viewMoreButton.textContent = this.t('share.card_view_more');
-        }
-        if (viewMoreLink) {
-            viewMoreLink.href = window.location.href;
-        }
-        if (shareCardLink) {
-            shareCardLink.href = window.location.origin;
-            shareCardLink.textContent = window.location.hostname;
-        }
 
-        // Populate exactly 3 dishes (fill with placeholders if needed)
+        // Populate all dishes (no limit, no placeholders)
         const dishesContainer = document.getElementById('share-card-dishes');
         dishesContainer.innerHTML = '';
         const dishItems = document.querySelectorAll('.dish-item');
 
-        for (let i = 0; i < 3; i++) {
-            let imgSrc, dishName;
-
-            if (i < dishItems.length) {
-                const dish = dishItems[i];
+        if (dishItems.length === 0) {
+            // If no dishes, leave the container empty
+            dishesContainer.innerHTML = '';
+        } else {
+            // Show all dishes
+            dishItems.forEach(dish => {
                 const imgElement = dish.querySelector('.dish-circle img');
-                imgSrc = imgElement ? imgElement.src : null;
-                dishName = dish.querySelector('.dish-name').textContent.trim();
-            } else {
-                // Fill empty slots with placeholder
-                imgSrc = null;
-                dishName = this.t('share.card_no_dish');
-            }
+                const imgSrc = imgElement ? imgElement.src : '';
+                const dishName = dish.querySelector('.dish-name').textContent.trim();
 
-            // Create clean placeholder SVG without emojis (responsive sizes)
-            const getResponsiveDishSize = () => {
-                if (window.innerWidth <= 375) return 45;
-                if (window.innerWidth <= 480) return 50;
-                if (window.innerWidth <= 768) return 60;
-                return 130;
-            };
-
-            dishesContainer.innerHTML += `
-                <div class="share-card-item">
-                    <img src="${imgSrc}" alt="" class="share-card-image">
-                    <p class="share-card-name">${dishName}</p>
-                </div>
-            `;
+                dishesContainer.innerHTML += `
+                    <div class="share-card-item">
+                        <img src="${imgSrc}" alt="" class="share-card-image">
+                        <p class="share-card-name">${dishName}</p>
+                    </div>
+                `;
+            });
         }
 
-        // Populate exactly 4 medals in a horizontal row (first 4 medals earned)
+        // Populate all earned medals (no limit, no placeholders)
         const medalsContainer = document.getElementById('share-card-medals');
         medalsContainer.innerHTML = '';
         const medalItems = document.querySelectorAll('.medal-item');
-        const medalsToShow = Math.min(4, medalItems.length);
 
-        // Create clean placeholder SVG for medals without emojis (responsive sizes)
-        const getResponsiveMedalSize = () => {
-            if (window.innerWidth <= 375) return 30;
-            if (window.innerWidth <= 480) return 35;
-            if (window.innerWidth <= 768) return 45;
-            return 100;
-        };
-        const medalPlaceholderSize = getResponsiveMedalSize();
-        const medalPlaceholderSvg = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="${medalPlaceholderSize}" height="${medalPlaceholderSize}" viewBox="0 0 ${medalPlaceholderSize} ${medalPlaceholderSize}"><rect width="${medalPlaceholderSize}" height="${medalPlaceholderSize}" fill="%23f0f0f0" stroke="%23ddd" stroke-width="2" rx="15"/></svg>`;
+        if (medalItems.length === 0) {
+            // If no medals, leave the container empty (just show empty space)
+            medalsContainer.innerHTML = '';
+        } else {
+            // Show all earned medals
+            medalItems.forEach(medal => {
+                const imgElement = medal.querySelector('.medal-circle img');
+                const imgSrc = imgElement ? imgElement.src : '';
+                const medalName = medal.querySelector('.medal-name').textContent.trim();
 
-        if (medalsToShow === 0) {
-            // Show 4 placeholder medals if no medals earned
-            for (let i = 0; i < 4; i++) {
                 medalsContainer.innerHTML += `
                     <div class="share-card-item">
-                        <img src=" " alt="" class="share-card-image">
-                        <p class="share-card-name">${this.t('share.card_no_medals')}</p>
+                        <img src="${imgSrc}" alt="" class="share-card-image">
+                        <p class="share-card-name">${medalName}</p>
                     </div>
                 `;
-            }
-        } else {
-            // Show earned medals + placeholders to make exactly 4
-            for (let i = 0; i < 4; i++) {
-                if (i < medalsToShow) {
-                    const medal = medalItems[i];
-                    const imgElement = medal.querySelector('.medal-circle img');
-                    const imgSrc = imgElement ? imgElement.src : medalPlaceholderSvg;
-                    const medalName = medal.querySelector('.medal-name').textContent.trim();
-
-                    medalsContainer.innerHTML += `
-                        <div class="share-card-item">
-                            <img src="${imgSrc}" alt="" class="share-card-image">
-                            <p class="share-card-name">${medalName}</p>
-                        </div>
-                    `;
-                } else {
-                    // Fill remaining slots with placeholders
-                    medalsContainer.innerHTML += `
-                        <div class="share-card-item">
-                            <img src=" " alt="" class="share-card-image">
-                            <p class="share-card-name">${this.t('share.card_no_medals')}</p>
-                        </div>
-                    `;
-                }
-            }
+            });
         }
     }
 
-    // Show share modal with image preview
-    showShareModal(imageData) {
+    // Show share modal without image preview
+    showShareModal() {
         const shareModal = document.getElementById('share-modal');
-        const imagePreview = document.getElementById('generated-image-preview');
-        const imageFallback = document.getElementById('image-fallback');
         const downloadButton = document.getElementById('download-image-button');
 
-        // Show image preview
-        imagePreview.src = imageData;
-        imageFallback.style.display = 'block';
-
         // Set up download functionality
-        downloadButton.onclick = () => this.downloadImage(imageData);
+        downloadButton.onclick = () => this.downloadImage();
 
         // Show modal
         shareModal.classList.add('show');
     }
 
     // Download image function
-    downloadImage(imageData) {
+    downloadImage() {
         try {
+            if (!this.generatedImageData) {
+                this.showCustomMessage('⚠️ Please generate the image first by clicking share.');
+                return;
+            }
+
             const eightDigitId = this.generateEightDigitId(this.currentResults.userId);
             const link = document.createElement('a');
-            link.href = imageData;
+            link.href = this.generatedImageData;
             link.download = `cooking-achievements-${eightDigitId}.jpg`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            this.showSuccessMessage();
+
+            // Show download success message
+            this.showCustomMessage(this.t('share.download_success'));
         } catch (error) {
             console.error('Download failed:', error);
-            this.showCustomMessage('⚠️ Download failed. Please try right-clicking the image to save.');
+            this.showCustomMessage('⚠️ Download failed. Please try again.');
         }
     }
 
     closeShareModal() {
         const shareModal = document.getElementById('share-modal');
         shareModal.classList.remove('show');
-
-        // Hide image preview for next time
-        const imageFallback = document.getElementById('image-fallback');
-        imageFallback.style.display = 'none';
     }
 
     showSuccessMessage() {
@@ -744,6 +682,7 @@ class GameResults {
             line-height: 1.6;
             white-space: pre-line;
             animation: slideInScale 0.3s ease-out;
+            font-family: "Caviardreams", Arial, sans-serif;
         `;
 
         // Add animation styles if not already present
