@@ -19,7 +19,11 @@
     <style>
         /* Font Face Declaration */
         @font-face {
-            font-family: Caviardreams;
+            font-family: 'Caviardreams';
+            src: url('fonts/CaviarDreams.woff2') format('woff2'),
+            url('fonts/CaviarDreams.woff') format('woff'),
+            url('fonts/CaviarDreams.ttf') format('truetype'),
+            url('fonts/CaviarDreams.eot') format('embedded-opentype');
             font-weight: normal;
             font-style: normal;
             font-display: swap;
@@ -178,9 +182,11 @@
 
         .share-text {
             font-size: 1.4rem;
-            font-weight: 400;
+            font-weight: bold;
             color: black;
             letter-spacing: 0.5px;
+            font-family: Caviardreams;
+
         }
 
         /* Share Modal Styles */
@@ -403,6 +409,7 @@
             background: rgba(255, 255, 255, 0.8);
             border: 2px solid #000;
             transition: all 0.2s ease;
+            font-family: "Google Sans", sans-serif;
         }
 
         .share-modal-close:hover {
@@ -656,6 +663,7 @@
             font-size: 1.3rem;
             font-weight: bold;
             color: #2d3436;
+            font-family: Google Sans, sans-serif;
         }
 
         .modal {
@@ -732,7 +740,7 @@
             top: 12px;
             width: 32px;
             height: 32px;
-            font-size: 18px;
+            font-size: 20px;
             color: rgba(0, 0, 0, 0.7);
             cursor: pointer;
             display: flex;
@@ -744,6 +752,7 @@
             -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.5);
             transition: all 0.2s ease;
+            font-family: "Google Sans", sans-serif;
         }
 
         .close-btn:hover {
@@ -771,6 +780,7 @@
             font-weight: bold;
             color: rgba(0, 0, 0, 0.9);
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+            font-family: "Google Sans", sans-serif;
         }
 
         #modal-description {
@@ -779,6 +789,7 @@
             color: rgba(0, 0, 0, 0.8);
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
             line-height: 1.5;
+            font-family: "Google Sans", sans-serif;
         }
 
         /* Ingredients section in modal */
@@ -824,12 +835,14 @@
             text-transform: capitalize;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
             font-weight: 500;
+            font-family: "Google Sans", sans-serif;
         }
         .plus-icon {
             font-size: 1.5em;
             color: rgba(0, 0, 0, 0.6);
             margin: 0 5px;
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+            font-family: "Google Sans", sans-serif;
         }
 
         /* Medals Section */
@@ -896,6 +909,7 @@
             font-weight: normal;
             color: #2d3436;
             line-height: 1.4;
+            font-family: "Google Sans", sans-serif;
         }
 
         /* Footer Section */
