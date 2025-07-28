@@ -282,6 +282,36 @@ class GameResults {
         this.displayResults();
     }
 
+    // NEW METHOD: Update URL with language parameter
+    updateURLWithLanguage(lang) {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Set or update the language parameter
+        urlParams.set('lang', lang);
+
+        // Manually construct the URL to avoid encoding existing parameters
+        const baseUrl = window.location.origin + window.location.pathname;
+        let newUrl = baseUrl + '?';
+
+        // Manually add each parameter to preserve original format
+        const params = [];
+        for (let [key, value] of urlParams.entries()) {
+            if (key === 'dishes') {
+                // Keep dishes parameter unencoded (with commas)
+                params.push(`${key}=${value}`);
+            } else {
+                // Encode other parameters normally
+                params.push(`${key}=${encodeURIComponent(value)}`);
+            }
+        }
+
+        newUrl += params.join('&');
+
+        // Update URL without reloading the page
+        window.history.replaceState({}, '', newUrl);
+        console.log('🌐 URL updated with language (preserving format):', newUrl);
+    }
+
     // Apply translations to static elements
     applyTranslations() {
         const elements = document.querySelectorAll('[data-translate]');
@@ -309,9 +339,10 @@ class GameResults {
             await this.loadData();
             console.log('Data loaded successfully');
 
-            // Parse URL parameters
+            // Parse URL parameters (including language)
             this.parseURLParameters();
             console.log('URL parameters parsed:', this.currentResults);
+            console.log('Language set to:', this.currentLanguage);
 
             // Set up language selector
             this.setupLanguageSelector();
@@ -329,16 +360,19 @@ class GameResults {
         }
     }
 
-    // Setup language selector
+    // UPDATED: Setup language selector with URL sync
     setupLanguageSelector() {
         const languageSelect = document.getElementById('language-select');
         if (languageSelect) {
-            languageSelect.addEventListener('change', (e) => {
-                this.switchLanguage(e.target.value);
-            });
+            // Set the dropdown to match the current language (from URL or default)
+            languageSelect.value = this.currentLanguage;
 
-            // Set initial language
-            this.currentLanguage = languageSelect.value || 'en';
+            languageSelect.addEventListener('change', (e) => {
+                const newLang = e.target.value;
+                this.switchLanguage(newLang);
+                // Update URL with new language parameter
+                this.updateURLWithLanguage(newLang);
+            });
         }
     }
 
@@ -873,7 +907,7 @@ class GameResults {
         }
     }
 
-    // Parse URL parameters to extract game results
+    // UPDATED: Parse URL parameters to extract game results AND language
     parseURLParameters() {
         console.log('🔍 DETAILED URL PARSING DEBUG');
         console.log('window.location.href:', window.location.href);
@@ -888,7 +922,7 @@ class GameResults {
         if (searchString.length === 0) {
             console.error('❌ NO SEARCH PARAMETERS FOUND!');
             console.log('Current full URL:', window.location.href);
-            console.log('Expected format: yourpage.html?id=TestUser&dishes=0,4,16&time=45&count=1');
+            console.log('Expected format: yourpage.html?id=TestUser&dishes=0,4,16&time=45&count=1&lang=en');
         }
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -909,6 +943,10 @@ class GameResults {
 
         const countParam = urlParams.get('count');
         console.log('  count parameter:', JSON.stringify(countParam));
+
+        // NEW: Extract language parameter
+        const langParam = urlParams.get('lang');
+        console.log('  lang parameter:', JSON.stringify(langParam));
 
         // Show all available parameters
         console.log('🗂️ All available parameters:');
@@ -932,7 +970,7 @@ class GameResults {
             console.log('Manual regex match for id:', match ? match[1] : 'no match');
         }
 
-        // Extract parameters
+        // Extract existing parameters
         this.currentResults.userId = idParam || 'Unknown';
         console.log('🎯 FINAL userId set to:', this.currentResults.userId);
 
@@ -943,7 +981,24 @@ class GameResults {
         this.currentResults.remainingTime = parseInt(timeParam) || 0;
         this.currentResults.errorCount = parseInt(countParam) || 0;
 
+        // NEW: Set language from URL parameter with fallback
+        if (langParam && (langParam === 'en' || langParam === 'ja')) {
+            this.currentLanguage = langParam;
+            console.log('🌐 Language set from URL parameter:', this.currentLanguage);
+        } else {
+            // Try to detect browser language as fallback
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang && browserLang.startsWith('ja')) {
+                this.currentLanguage = 'ja';
+                console.log('🌐 Language detected from browser (Japanese):', this.currentLanguage);
+            } else {
+                this.currentLanguage = 'en';
+                console.log('🌐 Using default language (English):', this.currentLanguage);
+            }
+        }
+
         console.log('🏁 FINAL RESULTS:', this.currentResults);
+        console.log('🌐 FINAL LANGUAGE:', this.currentLanguage);
         console.log('=== END URL PARSING DEBUG ===');
 
         if (this.currentResults.dishIds.length === 0) {
@@ -951,9 +1006,15 @@ class GameResults {
         }
     }
 
-    // Display the game results
+    // UPDATED: Display the game results
     displayResults() {
         console.log('Displaying results for dishes:', this.currentResults.dishIds);
+
+        // Update language selector to match current language
+        const languageSelect = document.getElementById('language-select');
+        if (languageSelect) {
+            languageSelect.value = this.currentLanguage;
+        }
 
         // Apply translations to static elements
         this.applyTranslations();
@@ -1320,7 +1381,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Debug function to test with sample data
 function testWithSampleData() {
     console.log('🎮 Setting up test data...');
-    window.history.replaceState({}, '', `${window.location.pathname}?id=TestUser&dishes=0,4,16&time=45&count=1`);
+    window.history.replaceState({}, '', `${window.location.pathname}?id=TestUser&dishes=0,4,16&time=45&count=1&lang=en`);
     console.log('✅ URL updated to:', window.location.href);
     console.log('🔄 Reloading page...');
     location.reload();
