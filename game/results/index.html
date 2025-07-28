@@ -442,13 +442,13 @@
             pointer-events: auto;
         }
 
-        /* UPDATED SQUARE SHARE CARD STYLES - INCREASED HEIGHT FOR EXPO 2025 SECTION */
+        /* FINAL FIXED SQUARE SHARE CARD STYLES - ALL ISSUES RESOLVED */
         #share-card {
             position: absolute;
             left: -9999px;
             top: -9999px;
             width: 800px;
-            height: 1000px; /* Increased from 720px to 900px to accommodate EXPO 2025 section */
+            height: auto;
             background: #FCF6F0;
             padding: 35px;
             border: 3px solid #000;
@@ -462,6 +462,7 @@
         .share-card-header {
             text-align: center;
             margin-bottom: 25px;
+            flex-shrink: 0;
         }
 
         .share-card-title {
@@ -480,11 +481,15 @@
         .share-card-content {
             display: flex;
             flex-direction: column;
-            flex: 1;
-            gap: 25px;
+            gap: 30px;
+            flex-shrink: 0;
         }
 
         .share-card-dishes-section {
+            text-align: center;
+        }
+
+        .share-card-medals-section {
             text-align: center;
         }
 
@@ -502,31 +507,29 @@
             justify-items: center;
         }
 
-        .share-card-medals-section {
-            text-align: center;
-        }
-
+        /* FIXED MEDALS GRID - SPREADS EVENLY WITH ANY NUMBER */
         #share-card-medals {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(80px, 120px));
             gap: 12px;
             justify-items: center;
-            margin-bottom: 15px;
+            justify-content: center;
             max-width: 100%;
         }
 
-        /* NEW EXPO 2025 SECTION STYLES */
+        /* UPDATED EXPO 2025 SECTION - FIXED POSITIONING WITHOUT GAPS */
         .share-card-expo-section {
             text-align: center;
-            margin: 25px 0 15px 0; /* Reduced bottom margin */
-            padding: 15px 0 8px 0; /* Reduced padding */
+            margin-top: 40px;
+            padding: 20px 0;
+            flex-shrink: 0;
         }
 
         .share-card-expo-title {
             font-size: 3.5rem;
             font-weight: bold;
             color: #2d3436;
-            margin-bottom: 18px; /* Slightly reduced */
+            margin-bottom: 18px;
             letter-spacing: 2px;
         }
 
@@ -543,6 +546,13 @@
             object-fit: contain;
         }
 
+        .share-card-footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            flex-shrink: 0;
+        }
+
         .share-card-item {
             text-align: center;
         }
@@ -555,7 +565,7 @@
             border-radius: 15px;
             margin: 0 auto 8px;
             overflow: hidden;
-            text-indent: -9999px; /* Hides any alt text */
+            text-indent: -9999px;
         }
 
         #share-card-medals .share-card-image {
@@ -566,7 +576,7 @@
             border-radius: 15px;
             margin: 0 auto 6px;
             overflow: hidden;
-            text-indent: -9999px; /* Hides any alt text */
+            text-indent: -9999px;
         }
 
         .share-card-name {
@@ -578,12 +588,6 @@
 
         #share-card-medals .share-card-name {
             font-size: 0.9rem;
-        }
-
-        .share-card-footer {
-            text-align: center;
-            margin-top: auto;
-            padding-top: 12px; /* Reduced from 15px */
         }
 
         .share-card-link {
@@ -598,12 +602,6 @@
         .share-card-link:hover {
             color: #2d3436;
             text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .share-card-link {
-                font-size: 0.7rem;
-            }
         }
 
         /* Hide placeholder text when image loads successfully */
@@ -1117,30 +1115,36 @@
             .share-text {
                 font-size: 1.2rem;
             }
-            /* Enhanced Mobile Share Card - Higher Resolution */
+            /* MOBILE SHARE CARD - FIXED SPACING AND MEDALS GRID */
             #share-card {
-                width: 600px;  /* Increased for higher resolution */
-                height: 1000px; /* Increased height for EXPO 2025 section */
+                width: 600px;
+                height: auto;
                 padding: 25px;
             }
-            .share-card-header {
-                margin-bottom: 20px;
-            }
-            .share-card-title {
-                font-size: 2.2rem;
-                margin-bottom: 8px;
-            }
-            .share-card-user-id {
-                font-size: 1.1rem;
-            }
+
             .share-card-content {
                 gap: 25px;
             }
-            .share-card-section-title {
-                font-size: 1.6rem;
+
+            .share-card-expo-section {
+                margin-top: 30px;
+                padding: 15px 0;
+            }
+
+            .share-card-expo-title {
+                font-size: 2.8rem;
                 margin-bottom: 15px;
             }
-            /* Dishes in horizontal row */
+
+            .share-card-expo-logo img {
+                max-width: 160px;
+                max-height: 100px;
+            }
+
+            .share-card-footer {
+                margin-top: 15px;
+            }
+
             #share-card-dishes {
                 display: flex;
                 flex-direction: row;
@@ -1148,54 +1152,43 @@
                 gap: 8px;
                 justify-content: center;
             }
+
             #share-card-dishes .share-card-image {
                 width: 110px;
                 height: 110px;
-                border: 1px solid #000; /* Very thin border */
+                border: 1px solid #000;
                 border-radius: 8px;
-                overflow: hidden;
-                text-indent: -9999px;
             }
-            /* Medals in rows of 4 */
+
+            /* FIXED MEDALS GRID FOR MOBILE - SPREADS EVENLY */
             #share-card-medals {
                 display: grid;
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(90px, 110px));
                 gap: 8px;
                 justify-items: center;
-                margin-bottom: 15px;
+                justify-content: center;
                 max-width: 100%;
             }
+
             #share-card-medals .share-card-image {
                 width: 95px;
                 height: 95px;
-                border: 1px solid #000; /* Very thin border */
+                border: 1px solid #000;
                 border-radius: 8px;
                 overflow: hidden;
                 text-indent: -9999px;
             }
+
             .share-card-name {
                 font-size: 0.9rem;
                 line-height: 1.1;
                 margin-top: 4px;
             }
+
             #share-card-medals .share-card-name {
                 font-size: 0.8rem;
             }
-            .share-card-expo-section {
-                margin: 20px 0 10px 0; /* Reduced bottom margin for mobile */
-                padding: 15px 0 5px 0; /* Reduced padding for mobile */
-            }
-            .share-card-expo-title {
-                font-size: 2.8rem;
-                margin-bottom: 15px; /* Reduced margin */
-            }
-            .share-card-expo-logo img {
-                max-width: 160px;
-                max-height: 100px;
-            }
-            .share-card-footer {
-                padding-top: 8px; /* Reduced from 15px */
-            }
+
             .share-card-link {
                 font-size: 0.9rem;
             }
@@ -1209,85 +1202,72 @@
             .share-text {
                 font-size: 1.1rem;
             }
-            /* Enhanced Mobile Share Card - Higher Resolution */
             #share-card {
-                width: 580px; /* High resolution for mobile */
-                height: 850px; /* Increased height for EXPO 2025 section */
+                width: 580px;
+                height: auto;
                 padding: 22px;
             }
-            .share-card-header {
-                margin-bottom: 18px;
-            }
-            .share-card-title {
-                font-size: 2rem;
-                margin-bottom: 6px;
-            }
-            .share-card-user-id {
-                font-size: 1rem;
-            }
+
             .share-card-content {
                 gap: 22px;
             }
-            .share-card-section-title {
-                font-size: 1.5rem;
-                margin-bottom: 12px;
-            }
-            /* Dishes in horizontal row */
-            #share-card-dishes {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 6px;
-                justify-content: center;
-            }
-            #share-card-dishes .share-card-image {
-                width: 105px;
-                height: 105px;
-                border: 1px solid #000; /* Very thin border */
-                border-radius: 8px;
-                overflow: hidden;
-                text-indent: -9999px;
-            }
-            /* Medals in rows of 4 */
-            #share-card-medals {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 6px;
-                justify-items: center;
-                margin-bottom: 12px;
-                max-width: 100%;
-            }
-            #share-card-medals .share-card-image {
-                width: 90px;
-                height: 90px;
-                border: 1px solid #000; /* Very thin border */
-                border-radius: 8px;
-                overflow: hidden;
-                text-indent: -9999px;
-            }
-            .share-card-name {
-                font-size: 0.85rem;
-                line-height: 1.0;
-                margin-top: 4px;
-            }
-            #share-card-medals .share-card-name {
-                font-size: 0.75rem;
-            }
+
             .share-card-expo-section {
-                margin: 18px 0 8px 0; /* Further reduced for smaller mobile */
-                padding: 12px 0 4px 0;
+                margin-top: 25px;
+                padding: 12px 0;
             }
+
             .share-card-expo-title {
                 font-size: 2.5rem;
-                margin-bottom: 12px; /* Reduced margin */
+                margin-bottom: 12px;
             }
+
             .share-card-expo-logo img {
                 max-width: 140px;
                 max-height: 90px;
             }
+
             .share-card-footer {
-                padding-top: 6px; /* Reduced from 12px */
+                margin-top: 12px;
             }
+
+            #share-card-dishes {
+                gap: 6px;
+            }
+
+            #share-card-dishes .share-card-image {
+                width: 105px;
+                height: 105px;
+            }
+
+            /* FIXED MEDALS GRID FOR SMALL MOBILE */
+            #share-card-medals {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(85px, 105px));
+                gap: 6px;
+                justify-items: center;
+                justify-content: center;
+                max-width: 100%;
+            }
+
+            #share-card-medals .share-card-image {
+                width: 90px;
+                height: 90px;
+                border: 1px solid #000;
+                border-radius: 8px;
+                overflow: hidden;
+                text-indent: -9999px;
+            }
+
+            .share-card-name {
+                font-size: 0.85rem;
+                line-height: 1.0;
+            }
+
+            #share-card-medals .share-card-name {
+                font-size: 0.75rem;
+            }
+
             .share-card-link {
                 font-size: 0.85rem;
             }
@@ -1301,85 +1281,73 @@
             .share-text {
                 font-size: 1rem;
             }
-            /* Enhanced Mobile Share Card - High Resolution for Very Small Screens */
             #share-card {
-                width: 550px; /* High resolution even for very small screens */
-                height: 850px; /* Increased height for EXPO 2025 section */
+                width: 550px;
+                height: auto;
                 padding: 20px;
             }
-            .share-card-header {
-                margin-bottom: 16px;
-            }
-            .share-card-title {
-                font-size: 1.8rem;
-                margin-bottom: 5px;
-            }
-            .share-card-user-id {
-                font-size: 0.9rem;
-            }
+
             .share-card-content {
                 gap: 20px;
             }
-            .share-card-section-title {
-                font-size: 1.4rem;
+
+            .share-card-expo-section {
+                margin-top: 20px;
+                padding: 10px 0;
+            }
+
+            .share-card-expo-title {
+                font-size: 2.2rem;
                 margin-bottom: 10px;
             }
-            /* Dishes in horizontal row */
-            #share-card-dishes {
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 5px;
-                justify-content: center;
+
+            .share-card-expo-logo img {
+                max-width: 120px;
+                max-height: 80px;
             }
+
+            .share-card-footer {
+                margin-top: 10px;
+            }
+
+            #share-card-dishes {
+                gap: 5px;
+            }
+
             #share-card-dishes .share-card-image {
                 width: 100px;
                 height: 100px;
-                border: 1px solid #000; /* Very thin border */
-                border-radius: 8px;
-                overflow: hidden;
-                text-indent: -9999px;
             }
-            /* Medals in rows of 4 */
+
+            /* FIXED MEDALS GRID FOR VERY SMALL SCREENS */
             #share-card-medals {
                 display: grid;
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(auto-fit, minmax(80px, 100px));
                 gap: 5px;
                 justify-items: center;
-                margin-bottom: 10px;
+                justify-content: center;
                 max-width: 100%;
             }
+
             #share-card-medals .share-card-image {
                 width: 85px;
                 height: 85px;
-                border: 1px solid #000; /* Very thin border */
+                border: 1px solid #000;
                 border-radius: 8px;
                 overflow: hidden;
                 text-indent: -9999px;
             }
+
             .share-card-name {
                 font-size: 0.8rem;
                 line-height: 0.9;
                 margin-top: 3px;
             }
+
             #share-card-medals .share-card-name {
                 font-size: 0.7rem;
             }
-            .share-card-expo-section {
-                margin: 15px 0 5px 0; /* Minimal spacing for very small screens */
-                padding: 10px 0 3px 0;
-            }
-            .share-card-expo-title {
-                font-size: 2.2rem;
-                margin-bottom: 10px; /* Minimal margin */
-            }
-            .share-card-expo-logo img {
-                max-width: 120px;
-                max-height: 80px;
-            }
-            .share-card-footer {
-                padding-top: 5px; /* Minimal gap from 10px */
-            }
+
             .share-card-link {
                 font-size: 0.8rem;
             }
@@ -1455,7 +1423,7 @@
     </footer>
 </div>
 
-<!-- UPDATED SQUARE SHARE CARD CONTAINER WITH EXPO 2025 SECTION -->
+<!-- FINAL FIXED SHARE CARD CONTAINER - ALL ISSUES RESOLVED -->
 <div id="share-card">
     <div class="share-card-header">
         <h2 class="share-card-title" id="share-card-title">Your Achievements</h2>
@@ -1470,7 +1438,7 @@
             <h3 class="share-card-section-title" id="share-card-medals-title">My Medals</h3>
             <div id="share-card-medals"></div>
         </div>
-        <!-- NEW EXPO 2025 SECTION -->
+        <!-- FIXED EXPO 2025 SECTION -->
         <div class="share-card-expo-section">
             <h2 class="share-card-expo-title">EXPO 2025</h2>
             <div class="share-card-expo-logo">
